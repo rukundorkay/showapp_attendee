@@ -27,7 +27,7 @@ const ProfileModal = ({shown, toggleVisible}: any) => {
   return (
     <View>
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent
         visible={shown}
         onRequestClose={() => {

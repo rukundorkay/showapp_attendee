@@ -7,7 +7,7 @@ const NewCardModal = ({shown, toggleVisible}: any) => {
   return (
     <View>
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={shown}
         onRequestClose={() => {
