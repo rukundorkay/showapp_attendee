@@ -1,7 +1,8 @@
 export default {
+
     background:'#FFFFFF', // white
     primary:"#E04328", // orange
-    grey:"#717D96",
+   
     // Text
     mainText:"#000000", //100%
     lightText:"#292929", //80%
@@ -13,3 +14,4 @@ export default {
     blue: 'rgba(20, 70, 173, 1)',
     lightBlue: 'rgba(20, 70, 173, .3)',
 }
+
