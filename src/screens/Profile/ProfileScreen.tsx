@@ -13,6 +13,7 @@ import {Formik} from 'formik';
 import {useContextMode} from '../../context/useContext';
 import {User} from '../../../types';
 import {CardModal, IconHolder} from '../../components';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const ProfileScreen: React.FC = () => {
   const FormValidationSchema = Yup.object().shape({
@@ -44,7 +45,9 @@ const ProfileScreen: React.FC = () => {
   return (
     <SafeAreaView style={style.container}>
       <View style={style.header}>
-        <Text>Back button</Text>
+        <Pressable onPress={() => console.log('going back')}>
+          <AntDesign name="left" size={25} />
+        </Pressable>
       </View>
       <View style={style.profile}>
         <Image
