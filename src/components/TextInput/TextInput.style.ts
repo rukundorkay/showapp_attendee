@@ -29,7 +29,7 @@ export default StyleSheet.create({
   },
   container: {
     width: width * 0.8,
-    marginLeft: width * 0.1,
+    // marginLeft: width * 0.1,
     marginTop: width * 0.05,
   },
   flex: {
