@@ -13,4 +13,5 @@ export default {
   lightBlue: 'rgba(20, 70, 173, .3)',
   lightPrimary: 'rgba(224, 67, 40, 0.1)',
   inputAccent: 'rgba(20, 70, 173, 0.1)',
+  inputBgBlue: '#C9D3E690',
 };

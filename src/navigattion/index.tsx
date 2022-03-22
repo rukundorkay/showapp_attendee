@@ -14,7 +14,7 @@ const options = { headerShown: false }
 
 export default () => (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName='home' screenOptions={options}>
+        <Stack.Navigator initialRouteName='profile' screenOptions={options}>
             <Stack.Screen name="home" component={HomeScreen} />
             <Stack.Screen name="profile" component={ProfileScreen} />
         </Stack.Navigator>
