@@ -17,9 +17,8 @@ const options = { headerShown:false }
 export default () => (
         <NavigationContainer>
             <Stack.Navigator initialRouteName='home' screenOptions={options}>
-                {/* <Stack.Screen name="home" component={HomeScreen} /> */}
-                {/* <Stack.Screen name="login" component={LoginScreen} /> */}
-                {/* <Stack.Screen name="forgotPassword" component={ForgotPassword} /> */}
+                <Stack.Screen name="login" component={LoginScreen} />
+                <Stack.Screen name="forgotPassword" component={ForgotPassword} />
                 <Stack.Screen name="interest" component={InterestScreen} />
             </Stack.Navigator>
         </NavigationContainer>
