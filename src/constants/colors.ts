@@ -1,6 +1,7 @@
 export default {
     background:'#FFFFFF', // white
     primary:"#E04328", // orange
+    grey:"#717D96",
     // Text
     mainText:"#000000", //100%
     lightText:"#292929", //80%

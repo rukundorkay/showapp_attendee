@@ -1,5 +1,6 @@
 export type RootStackParamList = {
     home: undefined;
+    concert:undefined;
   };
 
 interface ContextParams {
