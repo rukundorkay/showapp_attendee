@@ -3,6 +3,14 @@ import {color} from 'react-native-reanimated';
 import {colors, fonts, height, Spacing, textSize, width} from '../../constants';
 
 export const styles = StyleSheet.create({
+  button:{
+    marginLeft:Spacing+20,
+    bottom:20,
+    position:'absolute',
+    zIndex:10
+    
+
+  },
   map: {
     borderRadius: 3,
     marginBottom: Spacing,
@@ -27,13 +35,10 @@ export const styles = StyleSheet.create({
   },
   aboutDate:{
     color:'#717D96',
-    // opacity:0.4,
-    fontFamily:fonts.Medium
-
+     fontFamily:fonts.Medium
   },
   aboutTime:{
     color:'#717D96',
-    // opacity:0.4,
     fontFamily:fonts.Medium
 
   },
@@ -99,6 +104,7 @@ export const styles = StyleSheet.create({
     width: width,
     zIndex:10
   },
+  
   // title: {
   // fontFamily: fonts.Bold,
   // fontSize: textSize.XL,
