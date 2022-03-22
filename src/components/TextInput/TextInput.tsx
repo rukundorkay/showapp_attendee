@@ -1,5 +1,5 @@
 import {View, Text, TextInput} from 'react-native';
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import styles from './TextInput.style';
 
 type TextInputProps = {
@@ -8,8 +8,9 @@ type TextInputProps = {
   label?: string;
   placeholder: string;
   value: string;
-  onChange: () => void;
+  onChange: (e: string | ChangeEvent<any>) => void;
   onBlur: () => void;
+  securedInput?: boolean
 };
 
 const CustomTextInput = ({
@@ -19,6 +20,7 @@ const CustomTextInput = ({
   value,
   onBlur,
   onChange,
+  securedInput,
   type,
 }: TextInputProps) => {
   return (
@@ -35,6 +37,7 @@ const CustomTextInput = ({
           value={value}
           onBlur={onBlur}
           onChange={onChange}
+          secureTextEntry={securedInput}
         />
       ) : (
         <TextInput
@@ -42,6 +45,7 @@ const CustomTextInput = ({
           placeholder={placeholder}
           value={value}
           onBlur={onBlur}
+          secureTextEntry={securedInput}
           onChange={onChange}
         />
       )}
