@@ -4,6 +4,7 @@ import {RootStackParamList} from '../../types';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ConcertScreen from '../screens/Concert';
+import ExploreScreen from '../screens/Explore/ExploreScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -14,9 +15,10 @@ const options = {headerShown: false};
 
 export default () => (
   <NavigationContainer>
-    <Stack.Navigator initialRouteName="concert" screenOptions={options}>
+    <Stack.Navigator initialRouteName="explore" screenOptions={options}>
+      <Stack.Screen name="home" component={HomeScreen} />
       <Stack.Screen name="concert" component={ConcertScreen} />
-      {/* <Stack.Screen name="home" component={HomeScreen} /> */}
+      <Stack.Screen name="explore" component={ExploreScreen} />
     </Stack.Navigator>
   </NavigationContainer>
 );
