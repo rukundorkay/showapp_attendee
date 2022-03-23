@@ -3,6 +3,7 @@ import {RootStackParamList} from '../../types';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TicketStatusScreen from '../screens/TicketStatus';
+import HomeScreen from '../screens/Home';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 /**
@@ -13,7 +14,8 @@ const options = {headerShown: false};
 export default () => (
   <NavigationContainer>
     <Stack.Navigator initialRouteName="home" screenOptions={options}>
-      <Stack.Screen name="home" component={TicketStatusScreen} />
+      <Stack.Screen name="home" component={HomeScreen} />
+      <Stack.Screen name="TicketStatus" component={TicketStatusScreen} />
     </Stack.Navigator>
   </NavigationContainer>
 );
