@@ -1,6 +1,11 @@
+import {boolean} from 'yup';
+
 export type RootStackParamList = {
   home: undefined;
   BuyTicket: undefined;
+  login: undefined;
+  interest: undefined;
+  forgotPassword: undefined;
 };
 
 interface ContextParams {
@@ -15,4 +20,10 @@ interface User {
   name: string;
   phone: number;
   email: string;
+}
+
+interface Interest {
+  image: ImageSourcePropType;
+  title: string;
+  status: boolean;
 }

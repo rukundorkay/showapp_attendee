@@ -11,7 +11,7 @@ export default StyleSheet.create({
   input: {
     backgroundColor: colors.lightPrimary,
     borderRadius: borderRadius.XS,
-    paddingLeft: Spacing * 0.5,
+    padding: Spacing * 0.5,
     color: colors.dimeText,
     fontFamily: fonts.Bold,
   },
@@ -29,7 +29,7 @@ export default StyleSheet.create({
   },
   container: {
     width: width * 0.8,
-    marginLeft: width * 0.1,
+    // marginLeft: width * 0.1,
     marginTop: width * 0.05,
   },
   flex: {

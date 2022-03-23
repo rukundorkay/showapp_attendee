@@ -1,4 +1,4 @@
-import {Text, Pressable, ViewStyle} from 'react-native';
+import {Text, Pressable, StyleProp, TextStyle} from 'react-native';
 import React from 'react';
 import styles from './Button.style';
 
@@ -6,7 +6,7 @@ type ButtonProps = {
   type: 'primary' | 'secondary';
   title: string;
   onPress: () => void;
-  style?: ViewStyle;
+  style?: StyleProp<TextStyle>;
 };
 
 const Button = (props: ButtonProps) => {
