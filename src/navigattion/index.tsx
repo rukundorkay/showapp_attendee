@@ -33,12 +33,10 @@ export default () => {
         ) : (
           <>
             <Stack.Screen name="login" component={LoginScreen} />
-            <Stack.Screen name="register" component={RegistrationScreen} />
-            <Stack.Screen name="home" component={WelcomeScreen} />
-            <Stack.Screen name="VerificationScreen" component={VerificationCodePage} />
-            <Stack.Screen name="forgotPassword" component={ForgotPassword} />
             <Stack.Screen name="interest" component={InterestScreen} />
+            <Stack.Screen name="forgotPassword" component={ForgotPassword} />
             <Stack.Screen name="RegistrationScreen" component={RegistrationScreen} />
+            <Stack.Screen name="VerificationScreen" component={VerificationCodePage} />
             <Stack.Screen name="VerificationScreen" component={VerificationCodePage} />
           </>
         )}
