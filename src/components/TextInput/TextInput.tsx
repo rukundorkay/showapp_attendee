@@ -1,7 +1,7 @@
 import {View, Text, TextInput} from 'react-native';
 import React, { ChangeEvent, ReactElement } from 'react';
 import styles from './TextInput.style';
-import { colors, globalStyles } from '../../constants';
+import {colors, globalStyles} from '../../constants';
 
 type TextInputProps = {
   type?: 'primary' | 'accent';

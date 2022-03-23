@@ -145,10 +145,14 @@ const ProfileScreen: React.FC = () => {
         <IconHolder type="AntDesign" name="setting" />
         <Text style={style.title}>Settings</Text>
       </View>
-      <View style={[style.flex, style.section]}>
-        <IconHolder type="AntDesign" name="logout" />
-        <Text style={style.title}>Log out</Text>
-      </View>
+      {/* <Pressable onPress={() => console.log('hello')}> */}
+      <Pressable
+        onPress={() => handlerUser('delete', {name: '', phone: '', email: ''})}>
+        <View style={[style.flex, style.section]}>
+          <IconHolder type="AntDesign" name="logout" />
+          <Text style={style.title}>Log out</Text>
+        </View>
+      </Pressable>
     </SafeAreaView>
   );
 };

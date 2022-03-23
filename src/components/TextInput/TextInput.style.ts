@@ -12,17 +12,17 @@ export default StyleSheet.create({
     backgroundColor: colors.lightPrimary,
     borderRadius: borderRadius.XS,
     padding: Spacing * 0.5,
-    flex:1,
+    flex: 1,
     color: colors.dimeText,
     fontFamily: fonts.Bold,
-  },  
-  inputWrapper:{
+  },
+  inputWrapper: {
     backgroundColor: colors.inputAccent,
     borderRadius: borderRadius.XS,
-    paddingHorizontal: Spacing/2
+    paddingHorizontal: Spacing / 2,
   },
   accent_input: {
-    flex:1,
+    flex: 1,
     color: colors.dimeText,
     fontFamily: fonts.Bold,
   },
