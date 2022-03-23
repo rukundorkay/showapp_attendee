@@ -5,20 +5,24 @@ import dimesions from '../../constants/dimesions';
 export default StyleSheet.create({
   label: {
     color: colors.blue,
-    fontFamily: fonts.ExtraBold,
+    fontFamily: fonts.Bold,
     marginBottom: dimesions.Spacing * 0.2,
   },
   input: {
-    backgroundColor: colors.lightPrimary,
+    // backgroundColor: colors.lightPrimary,
     borderRadius: borderRadius.XS,
-    paddingLeft: Spacing * 0.5,
+    padding: Spacing * 0.5,
+    flex: 1,
     color: colors.dimeText,
     fontFamily: fonts.Bold,
   },
-  accent_input: {
+  inputWrapper: {
     backgroundColor: colors.inputAccent,
     borderRadius: borderRadius.XS,
-    paddingLeft: Spacing * 0.5,
+    paddingHorizontal: Spacing / 2,
+  },
+  accent_input: {
+    flex: 1,
     color: colors.dimeText,
     fontFamily: fonts.Bold,
   },
@@ -29,7 +33,7 @@ export default StyleSheet.create({
   },
   container: {
     width: width * 0.8,
-    marginLeft: width * 0.1,
+    // marginLeft: width * 0.1,
     marginTop: width * 0.05,
   },
   flex: {
