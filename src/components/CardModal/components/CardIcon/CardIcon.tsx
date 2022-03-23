@@ -7,7 +7,7 @@ type CardIconType = {
   item: {
     id: string;
     title: string;
-    img: string;
+    img: any;
   };
 };
 
@@ -16,15 +16,11 @@ const CardIcon = (props: CardIconType) => {
   return (
     <Pressable onPress={() => setVisible(true)}>
       <View style={styles.container}>
-        <Image
-          style={styles.img}
-          source={{
-            uri: props.item.img,
-          }}
-        />
+        <Image style={styles.img} source={props.item.img} />
         {/* <Text>{props.item.title}</Text> */}
         <NewCardModal
           shown={visible}
+          card={props.item}
           toggleVisible={() => setVisible(!visible)}
         />
       </View>

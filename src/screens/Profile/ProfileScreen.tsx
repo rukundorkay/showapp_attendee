@@ -14,8 +14,10 @@ import {useContextMode} from '../../context/useContext';
 import {User} from '../../../types';
 import {CardModal, IconHolder} from '../../components';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {useNavigation} from '@react-navigation/native';
 
 const ProfileScreen: React.FC = () => {
+  const navigation = useNavigation();
   const FormValidationSchema = Yup.object().shape({
     name: Yup.string().required('List name is required'),
     email: Yup.string().required('Email is required'),
@@ -45,7 +47,7 @@ const ProfileScreen: React.FC = () => {
   return (
     <SafeAreaView style={style.container}>
       <View style={style.header}>
-        <Pressable onPress={() => console.log('going back')}>
+        <Pressable onPress={() => navigation.navigate('home')}>
           <AntDesign name="left" size={25} />
         </Pressable>
       </View>
@@ -60,7 +62,7 @@ const ProfileScreen: React.FC = () => {
       {edit ? (
         <View>
           <View style={[style.flex, style.name]}>
-            <Text style={style.nameText}>Isimbi R Paradis</Text>
+            <Text style={style.nameText}>{authInfo?.name}</Text>
             <Pressable onPress={() => setEdit(!edit)}>
               <Text style={style.red}>Edit</Text>
             </Pressable>
@@ -69,8 +71,8 @@ const ProfileScreen: React.FC = () => {
             <IconHolder type="AntDesign" name="appstore-o" />
             <View>
               <Text style={style.title}>About</Text>
-              <Text style={style.text}>IsimbiParadis@awesomity.rw</Text>
-              <Text style={style.text}>+250 786 078 496</Text>
+              <Text style={style.text}>{authInfo?.email}</Text>
+              <Text style={style.text}>{authInfo?.phone}</Text>
             </View>
           </View>
           <View style={[style.flex, style.section]}>
@@ -85,19 +87,27 @@ const ProfileScreen: React.FC = () => {
         </View>
       ) : (
         <Formik
-          initialValues={{email: '', phone: '', name: ''}}
+          initialValues={{
+            email: authInfo?.email,
+            phone: authInfo?.phone,
+            name: authInfo?.name,
+          }}
           onSubmit={values => console.log(values)}>
           {({handleChange, handleBlur, handleSubmit, values}) => (
             <View>
               <View style={[style.flex, style.name]}>
                 <TextInput
-                  placeholder="Isimbi R Paradis"
+                  placeholder="Your name"
                   onChangeText={handleChange('name')}
                   onBlur={handleBlur('name')}
                   value={values.name}
                   style={style.textInput}
                 />
-                <Pressable onPress={() => setEdit(!edit)}>
+                <Pressable
+                  onPress={() => {
+                    setEdit(!edit);
+                    handleSubmit();
+                  }}>
                   <Text style={style.done}>Done</Text>
                 </Pressable>
               </View>
