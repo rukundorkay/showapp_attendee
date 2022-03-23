@@ -52,7 +52,7 @@ const ProfileScreen: React.FC = () => {
       <View style={style.profile}>
         <Image
           style={style.profImage}
-          source={require('../../assets/images/wall.png')}
+          source={require('../../assets/images/event-profile.jpg')}
         />
         <Text>QR</Text>
       </View>
