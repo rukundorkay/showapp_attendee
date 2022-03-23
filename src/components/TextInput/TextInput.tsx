@@ -9,8 +9,8 @@ type TextInputProps = {
   label?: string;
   placeholder: string;
   value: string;
-  onChange: (e: string | ChangeEvent<any>) => void;
-  onBlur: () => void;
+  onChange: (e: any) => void;
+  onBlur?: () => void;
   style?: {};
   Icon?: ReactElement;
   securedInput?: boolean;
@@ -39,7 +39,7 @@ const CustomTextInput = ({
         <TextInput
           value={value}
           onBlur={onBlur}
-          onChange={onChange}
+          onChangeText={onChange}
           style={styles.input}
           placeholder={placeholder}
           secureTextEntry={securedInput || false}

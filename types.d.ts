@@ -1,6 +1,7 @@
 import {boolean} from 'yup';
 
 export type RootStackParamList = {
+  welcome: undefined;
   home: undefined;
   welcome: undefined;
   register: undefined;
@@ -20,14 +21,17 @@ export type RootStackParamList = {
 interface ContextParams {
   authInfo?: User | null;
   isAuth: boolean;
-  handlerUser?: contextHandler;
+  handlerUser: UsercontextHandler;
+  handleInterests: UserInterestshandler;
+  UserInterests: Interest[]
 }
 
-type Contexhandler = (type: string, value: User) => void;
+type UserContexhandler = (type: string, value: User) => void;
+type UserInterestshandler = (type: string, value: Interest[]) => Promise;
 
 interface User {
   name: string;
-  phone: number;
+  phone: string;
   email: string;
 }
 

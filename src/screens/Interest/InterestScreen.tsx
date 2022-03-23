@@ -21,8 +21,10 @@ import Trails from '../../assets/images/trails.png'
 import Wellness from '../../assets/images/wellness.png'
 import Workshop from '../../assets/images/workshop.png'
 import InterestCard from '../../components/InterestCard'
-import { Interest } from '../../../types'
+import { Interest, RootStackParamList } from '../../../types'
 import { useNavigation } from '@react-navigation/native'
+import { useContextMode } from '../../context/useContext'
+import { AddInterests } from '../../context/Actions'
 
 const data:Interest[] = [
     {
@@ -91,14 +93,17 @@ const data:Interest[] = [
         status:false
     }
 ]
+
 const InterestScreen = () => {
-    const navigation = useNavigation()
+    const { handleInterests } = useContextMode()
     const [ interests,setInterests ] = useState(data);
     const SlideOneScale:any = useRef(new Animated.Value(3)).current;
     const SlideTwoScale:any = useRef(new Animated.Value(1)).current;
     const [ currentIndex,setCurrentIndex ] = useState<number | null>(0);
 
-    const handlerInterest = (interest:Interest) => {
+    const navigation = useNavigation<RootStackParamList>()
+
+    const InterestSelector = (interest:Interest) => {
         setInterests(prev => prev.map(one => {
             if(one.title == interest.title){
                 return { ...one, status: !one.status }
@@ -144,6 +149,13 @@ const InterestScreen = () => {
     const viewableItemChange = useRef(({ viewableItems }:{ viewableItems:ViewToken[] }) => setCurrentIndex(viewableItems[0].index)).current;
     const viewConfig = useRef({ viewAreaCoveragePercentThreshold:20 }).current;
 
+    const handleSubmit = () => {
+        const validInterests = interests.filter( one => one.status ) // those with status === true 
+        if(validInterests[0]){
+            handleInterests(AddInterests,validInterests)
+        }
+    }
+
     return (
         <View style={styles.screen}>
             <View />
@@ -172,7 +184,7 @@ const InterestScreen = () => {
                                     keyExtractor={(_, i) => i.toString()}
                                     renderItem={({ item, index }) => 
                                         <InterestCard 
-                                            handleChange={()=>handlerInterest(item)} 
+                                            handleChange={()=>InterestSelector(item)} 
                                             item={item} index={index} 
                                             /> 
                                         } 
@@ -188,7 +200,7 @@ const InterestScreen = () => {
                                     keyExtractor={(_, i) => i.toString()}
                                     renderItem={({ item, index }) => 
                                         <InterestCard 
-                                            handleChange={()=>handlerInterest(item)} 
+                                            handleChange={()=>InterestSelector(item)} 
                                             item={item} index={index} 
                                             />
                                         } 
@@ -207,7 +219,7 @@ const InterestScreen = () => {
                 <Button
                     type="primary"
                     title='Continue'
-                    onPress={() => { }}
+                    onPress={handleSubmit}
                 />
                 <Pressable onPress={()=> navigation.navigate('login')}>
                     <Text style={styles.skip}>Skip for now</Text>

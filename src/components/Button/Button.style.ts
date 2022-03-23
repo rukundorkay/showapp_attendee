@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {width, colors, Spacing, borderRadius, fonts} from '../../constants';
+import {width, colors, Spacing, borderRadius, fonts, textSize} from '../../constants';
 
 export default StyleSheet.create({
   primary: {
@@ -21,9 +21,11 @@ export default StyleSheet.create({
   primary_text: {
     color: colors.background,
     fontFamily: fonts.ExtraBold,
+    fontSize: textSize.M
   },
   secondary_text: {
     color: colors.primary,
     fontFamily: fonts.ExtraBold,
+    fontSize: textSize.M
   },
 });

@@ -129,17 +129,11 @@ const WelcomeScreen = () => {
       <View style={styles.footer}>
         <Button
           type="primary"
-          title="Create An account"
+          title="Create New Account"
           onPress={() => navigation.navigate('register')}
         />
-        <Button
-          type="secondary"
-          title="Sign In"
-          onPress={() => navigation.navigate('login')}
-        />
-        <Pressable onPress={() => navigation.navigate('home')}>
-          <Text style={styles.textalign}>Skip for now</Text>
-        </Pressable>
+        <Button type="secondary" title="Sign In" onPress={() => navigation.navigate('login')} />
+        <Text style={styles.skip} onPress={() => navigation.navigate('home')}>Skip for now</Text>
       </View>
     </View>
   );

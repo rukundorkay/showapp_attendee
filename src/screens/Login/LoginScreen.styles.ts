@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native'
 import { colors, fonts, Spacing, textSize, width } from '../../constants'
 
 export const styles = StyleSheet.create({
+  icon:{
+    padding:5
+  },
   bigCircle:{
     width:width*0.7,
     height:width*0.7,

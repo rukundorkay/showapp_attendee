@@ -61,7 +61,8 @@ export const styles = StyleSheet.create({
   textlinks: {
     color: colors.primary,
   },
-  textalign: {
+  skip: {
     color: colors.primary,
+    fontFamily: fonts.Regular
   },
 });

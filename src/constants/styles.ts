@@ -4,6 +4,15 @@ import colors from './colors';
 import fonts from './fonts';
 
 export const globalStyles = StyleSheet.create({
+  error:{
+    marginTop:Spacing/2,
+    marginBottom:Spacing,
+    fontFamily: fonts.Regular,
+    textTransform:'capitalize',
+    color:colors.error,
+    opacity:.7,
+    textAlign:'center'
+  },
   spacer: {
     margin: Spacing,
   },
