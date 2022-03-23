@@ -6,6 +6,7 @@ export type RootStackParamList = {
   login: undefined;
   interest: undefined;
   forgotPassword: undefined;
+  Profile: undefined
 };
 
 interface ContextParams {
