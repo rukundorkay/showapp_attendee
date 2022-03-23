@@ -13,8 +13,10 @@ export default {
   lightBlue: '#1446AD1A',
   lightPrimary: 'rgba(224, 67, 40, 0.1)',
   inputAccent: 'rgba(20, 70, 173, 0.1)',
+  inputBgBlue: '#C9D3E690',
+  midBlue: '#323F5A',
   darkBlue: '#323F5A',
   mutedBlue: '#717D96',
   green: '#30A80C',
-  darkGray: '#666666'
+  darkGray: '#666666',
 };

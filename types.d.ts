@@ -13,4 +13,6 @@ type Contexhandler = (type: string, value: User) => void;
 
 interface User {
   name: string;
+  phone: number;
+  email: string;
 }

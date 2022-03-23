@@ -10,6 +10,7 @@ type TextInputProps = {
   value: string;
   onChange: () => void;
   onBlur: () => void;
+  style?: {};
 };
 
 const CustomTextInput = ({
@@ -20,9 +21,10 @@ const CustomTextInput = ({
   onBlur,
   onChange,
   type,
+  style,
 }: TextInputProps) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style && style]}>
       <View style={styles.flex}>
         {label && <Text style={styles.label}>{label}</Text>}
         {required && <Text style={styles.asterisk}>*</Text>}
