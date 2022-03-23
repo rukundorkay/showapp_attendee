@@ -36,6 +36,10 @@ export default StyleSheet.create({
     // marginRight: Spacing * 0.2,
     width: width * 0.5,
   },
+  img: {
+    height: 50,
+    width: 50,
+  },
   left: {
     marginLeft: Spacing,
   },

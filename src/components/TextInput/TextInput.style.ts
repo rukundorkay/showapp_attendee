@@ -9,7 +9,7 @@ export default StyleSheet.create({
     marginBottom: dimesions.Spacing * 0.2,
   },
   input: {
-    backgroundColor: colors.lightPrimary,
+    // backgroundColor: colors.lightPrimary,
     borderRadius: borderRadius.XS,
     padding: Spacing * 0.5,
     flex: 1,

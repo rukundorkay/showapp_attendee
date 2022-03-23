@@ -3,10 +3,11 @@ import React, {useState} from 'react';
 import {styles} from './Registration.styles';
 import {Button, TextInput} from '../../components';
 import RadioGroup, {RadioButtonProps} from 'react-native-radio-buttons-group';
-import Feather from 'react-native-vector-icons/Feather'
+import Feather from 'react-native-vector-icons/Feather';
 import {colors, globalStyles, Spacing, textSize} from '../../constants';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useFormik} from 'formik';
+import {useNavigation} from '@react-navigation/native';
 
 const radioButtonsData = [
   {
@@ -24,8 +25,9 @@ const radioButtonsData = [
 const initialValues = {email: '', password: '', name: '', phone: ''};
 
 const RegistrationScreen = () => {
-  const [ showPassword,setPassword ] = useState<boolean>(true)
-  const [radioButtons, setRadioButtons] = useState<RadioButtonProps[]>(radioButtonsData);
+  const [showPassword, setPassword] = useState<boolean>(true);
+  const [radioButtons, setRadioButtons] =
+    useState<RadioButtonProps[]>(radioButtonsData);
 
   function onPressRadioButton(radioButtonsArray: RadioButtonProps[]) {
     setRadioButtons(radioButtonsArray);
@@ -35,6 +37,8 @@ const RegistrationScreen = () => {
     initialValues,
     onSubmit: async () => {},
   });
+
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -74,11 +78,16 @@ const RegistrationScreen = () => {
             required
             securedInput={showPassword}
             placeholder="************"
-            Icon={ (
-              <Pressable onPress={()=>setPassword(!showPassword)} style={styles.icon} >
-                <Feather name="eye" size={textSize.M} color={colors.mutedText} />
+            Icon={
+              <Pressable
+                onPress={() => setPassword(!showPassword)}
+                style={styles.icon}>
+                <Feather
+                  name="eye"
+                  size={textSize.M}
+                  color={colors.mutedText}
+                />
               </Pressable>
-              )
             }
           />
           <Text style={styles.text}>You are joining as an?</Text>
@@ -93,7 +102,9 @@ const RegistrationScreen = () => {
             <Button type="primary" title="Continue" onPress={() => {}} />
             <View style={styles.textingContainer}>
               <Text style={styles.textfooter}>Already have an account ? </Text>
-              <Text style={styles.textlinks}>Login</Text>
+              <Pressable onPress={() => navigation.navigate('login')}>
+                <Text style={styles.textlinks}>Login</Text>
+              </Pressable>
             </View>
           </View>
         </View>
