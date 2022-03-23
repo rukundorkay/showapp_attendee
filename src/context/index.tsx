@@ -8,8 +8,8 @@ const initialContext:ContextParams = {
   authInfo: { name: 'kabundege', phone: '0788781384', email: 'Ibiz@gmail.com' },
   isAuth: false,
   UserInterests:[],
-  handlerUser: () => {},
-  handleInterests: () => Promise
+  handlerUser: (type: string, value: User) => {},
+  handleInterests: (type: string, value: Interest[]) => Promise
 };
 
 const StoreContext = createContext<ContextParams>(initialContext);
@@ -42,7 +42,6 @@ const StoreProvider: React.FC = ({children}) => {
         setState(prev => ({...prev, authInfo: value}));
         break;
       case DeleteUser:
-        console.log('deleting');
         setState(prev => ({...prev, authInfo: null, isAuth: false}));
         break;
     }

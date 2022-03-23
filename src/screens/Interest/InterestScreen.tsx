@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, Text, View, Animated, ViewToken, FlexStyle, Easing } from 'react-native'
+import { Pressable, Text, View, Animated, ViewToken, FlexStyle, Easing } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 import { styles } from './Interest.styles'
 import { Button } from '../../components'
@@ -37,7 +37,8 @@ const data:Interest[] = [
         status:false
     },{
         title:'community',
-        image: Community
+        image: Community,
+        status:false,
     },{
         title:'festival',
         image: Festival,
@@ -152,7 +153,8 @@ const InterestScreen = () => {
     const handleSubmit = () => {
         const validInterests = interests.filter( one => one.status ) // those with status === true 
         if(validInterests[0]){
-            handleInterests(AddInterests,validInterests)
+            Promise.resolve(handleInterests(AddInterests,validInterests))
+            .then(() => navigation.navigate('login'))
         }
     }
 

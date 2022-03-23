@@ -8,11 +8,16 @@ interface Credentials {
 }
 
 export const UserSignup = (credentials:Credentials) => {
-    return Fetcher(credentials,'/auth/attendee-register','POST')
+    return Fetcher(credentials,'/auth/organizer-register','POST')
 }
 
 export const UserLogin = (credentials:Credentials) => {
     return Fetcher(credentials,'/auth/login','POST')
+}
+
+
+export const UserVerification = (credentials:{ code:number }) => {
+    return Fetcher(credentials,'/auth/verify','POST')
 }
 
 export const UserForgotPassword = (credentials:Credentials) => {

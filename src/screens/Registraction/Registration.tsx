@@ -41,7 +41,7 @@ const RegistrationScreen = () => {
         .then(res => {
           setLoader(false)
           if(res.success){
-            navigation.navigate('interest')
+            navigation.navigate('verification')
           }else{
             setError(res.message)
           }
