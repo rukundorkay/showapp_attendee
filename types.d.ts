@@ -3,6 +3,9 @@ import {boolean} from 'yup';
 export type RootStackParamList = {
   home: undefined;
   BuyTicket: undefined;
+  concert: {id: String};
+  explore: undefined;
+  filter: undefined;
   login: undefined;
   interest: undefined;
   forgotPassword: undefined;

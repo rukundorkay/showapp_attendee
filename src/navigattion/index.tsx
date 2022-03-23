@@ -3,6 +3,9 @@ import HomeScreen from '../screens/Home/HomeScreen';
 import {RootStackParamList} from '../../types';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import ConcertScreen from '../screens/Concert';
+import ExploreScreen from '../screens/Explore/ExploreScreen';
+import FilterScreen from '../screens/Filter/FilterScreen';
 import ProfileScreen from '../screens/Profile';
 import BuyTicketScreen from '../screens/BuyTicketScreen/BuyTicketScreen';
 import LoginScreen from '../screens/Login';
@@ -30,6 +33,9 @@ export default () => {
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="home" component={HomeScreen} />
             <Stack.Screen name="BuyTicket" component={BuyTicketScreen} />
+            <Stack.Screen name="concert" component={ConcertScreen} />
+            <Stack.Screen name="explore" component={ExploreScreen} />
+            <Stack.Screen name="filter" component={FilterScreen} />
           </>
         ) : (
           <>
