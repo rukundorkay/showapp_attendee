@@ -8,6 +8,7 @@ import BuyTicketScreen from '../screens/BuyTicketScreen/BuyTicketScreen';
 import LoginScreen from '../screens/Login';
 import InterestScreen from '../screens/Interest';
 import ForgotPassword from '../screens/ForgotPassword';
+import {useContextMode} from '../context/useContext';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -16,15 +17,25 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
  * */
 const options = {headerShown: false};
 
-export default () => (
-  <NavigationContainer>
-    <Stack.Navigator initialRouteName="home" screenOptions={options}>
-      <Stack.Screen name="home" component={HomeScreen} />
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-      <Stack.Screen name="BuyTicket" component={BuyTicketScreen} />
-      <Stack.Screen name="login" component={LoginScreen} />
-      <Stack.Screen name="forgotPassword" component={ForgotPassword} />
-      <Stack.Screen name="interest" component={InterestScreen} />
-    </Stack.Navigator>
-  </NavigationContainer>
-);
+export default () => {
+  const {isAuth} = useContextMode();
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Profile" screenOptions={options}>
+        {isAuth ? (
+          <>
+            <Stack.Screen name="home" component={HomeScreen} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen name="BuyTicket" component={BuyTicketScreen} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen name="login" component={LoginScreen} />
+            <Stack.Screen name="forgotPassword" component={ForgotPassword} />
+            <Stack.Screen name="interest" component={InterestScreen} />
+          </>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
