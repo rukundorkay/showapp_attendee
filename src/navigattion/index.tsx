@@ -5,6 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ConcertScreen from '../screens/Concert';
 import ExploreScreen from '../screens/Explore/ExploreScreen';
+import FilterScreen from '../screens/Filter/FilterScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -15,10 +16,11 @@ const options = {headerShown: false};
 
 export default () => (
   <NavigationContainer>
-    <Stack.Navigator initialRouteName="explore" screenOptions={options}>
+    <Stack.Navigator initialRouteName="home" screenOptions={options}>
       <Stack.Screen name="home" component={HomeScreen} />
       <Stack.Screen name="concert" component={ConcertScreen} />
       <Stack.Screen name="explore" component={ExploreScreen} />
+      <Stack.Screen name="filter" component={FilterScreen} />
     </Stack.Navigator>
   </NavigationContainer>
 );

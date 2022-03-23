@@ -3,10 +3,7 @@ import React from 'react';
 import styles from './ExploreEventCard.style';
 
 type ExploreEventCardProps = {
-  name: string;
-  date: string;
-  price: string;
-  image: string;
+  event: any;
 };
 
 const ExploreEventCard: React.FC<any> = (props: ExploreEventCardProps) => (
@@ -17,12 +14,12 @@ const ExploreEventCard: React.FC<any> = (props: ExploreEventCardProps) => (
     />
     <View style={styles.eventDescription}>
       <Text numberOfLines={1} style={styles.eventname}>
-        {props.name}
+        {props.event.name}
       </Text>
-      <Text style={styles.eventDate}>{props.date}</Text>
+      <Text style={styles.eventDate}>{props.event.date}</Text>
     </View>
     <View style={styles.eventprice}>
-      <Text style={styles.eventpricetext}>{props.price}</Text>
+      <Text style={styles.eventpricetext}>{props.event.price}</Text>
     </View>
   </View>
 );

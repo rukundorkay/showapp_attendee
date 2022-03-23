@@ -6,7 +6,7 @@ import {colors} from '../../constants';
 import {StoreContext} from '../../context';
 import {useContextMode} from '../../context/useContext';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import {ScrollView} from 'react-native-gesture-handler';
 import IconHolder from '../../components/IconHolder';
 
 const ConcertScreen = () => {

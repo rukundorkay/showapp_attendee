@@ -96,7 +96,7 @@ export const styles = StyleSheet.create({
     width: width,
   },
   header: {
-    // backgroundColor:"blue",
+   
     position:'absolute',
     top:0,
     flex: 1,
@@ -105,10 +105,5 @@ export const styles = StyleSheet.create({
     zIndex:10
   },
   
-  // title: {
-  // fontFamily: fonts.Bold,
-  // fontSize: textSize.XL,
-  // color: colors.mainText,
-  // textAlign: 'center',
-  // },
+
 });

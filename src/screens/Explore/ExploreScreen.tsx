@@ -4,6 +4,7 @@ import {colors} from '../../constants';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import ExploreEventCard from '../../components/ExploreEventCard';
 import {
+  FlatList,
   ScrollView,
   TextInput,
   TouchableOpacity,
@@ -12,79 +13,18 @@ import {styles} from './ExploreScreen.styles';
 import Feather from 'react-native-vector-icons/Feather';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {color} from 'react-native-reanimated';
-const eventList = [
-  {
-    name: 'Tuza Album Launch',
-    date: 'Tue, 3rd Sept 2022',
-    price: '10K',
-    image: '../../assets/images/wall.png',
-  },
-  {
-    name: 'Tuza Album Launch',
-    date: 'Tue, 3rd Sept 2022',
-    price: '10K',
-    image: '../../assets/images/wall.png',
-  },
-  {
-    name: 'Tuza Album Launch',
-    date: 'Tue, 3rd Sept 2022',
-    price: '10K',
-    image: '../../assets/images/wall.png',
-  },
-  {
-    name: 'Tuza Album Launch',
-    date: 'Tue, 3rd Sept 2022',
-    price: '10K',
-    image: '../../assets/images/wall.png',
-  },
-  {
-    name: 'Tuza Album Launch',
-    date: 'Tue, 3rd Sept 2022',
-    price: '10K',
-    image: '../../assets/images/wall.png',
-  },
-  {
-    name: 'Tuza Album Launch',
-    date: 'Tue, 3rd Sept 2022',
-    price: '10K',
-    image: '../../assets/images/wall.png',
-  },
-  {
-    name: 'Tuza Album Launch',
-    date: 'Tue, 3rd Sept 2022',
-    price: '10K',
-    image: '../../assets/images/wall.png',
-  },
-  {
-    name: 'Tuza Album Launch',
-    date: 'Tue, 3rd Sept 2022',
-    price: '10K',
-    image: '../../assets/images/wall.png',
-  },
-];
+import {eventList} from '../Home/mockdata';
 
 const EXploreScreen = () => {
   // const {authInfo} = useContextMode();
-  const ExploreEventCards = () =>
-    eventList.map((list: any, index: number) => {
-      return (
-        <ExploreEventCard
-          key={index}
-          name={list.name}
-          date={list.date}
-          price={list.price}
-          image={list.image}
-        />
-      );
-    });
   return (
     <SafeAreaView>
-      <StatusBar backgroundColor={colors.background} />
+      <StatusBar backgroundColor={colors.background} barStyle="dark-content" />
       <View style={styles.eventheader}>
         <View style={styles.searchFilterWrapper}>
           <View style={styles.eventsearch}>
             <TextInput
-              placeholder="trappish concert "
+              placeholder="search by concert "
               style={styles.searchField}
             />
             <TouchableOpacity style={styles.searchButton}>
@@ -97,9 +37,15 @@ const EXploreScreen = () => {
         </View>
         <Text style={styles.eventTitle}>Events</Text>
       </View>
-      <ScrollView>
+      <FlatList
+        renderItem={item => <ExploreEventCard event={item.item} />}
+        keyExtractor={item => item.id}
+        data={eventList}
+        showsVerticalScrollIndicator={false}
+      />
+      {/* <ScrollView>
         <ExploreEventCards />
-      </ScrollView>
+      </ScrollView> */}
     </SafeAreaView>
   );
 };
