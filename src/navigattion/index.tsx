@@ -8,6 +8,10 @@ import BuyTicketScreen from '../screens/BuyTicketScreen/BuyTicketScreen';
 import LoginScreen from '../screens/Login';
 import InterestScreen from '../screens/Interest';
 import ForgotPassword from '../screens/ForgotPassword';
+import RegistrationScreen from '../screens/Registraction/Registration';
+import WelcomeScreen from '../screens/WelcomePage/Welcome';
+import VerificationCodePage from '../screens/VerificationCodePage';
+// import VerificationCode from '../screens/VerificationCodePage/VerificationCode';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -25,6 +29,9 @@ export default () => (
       <Stack.Screen name="login" component={LoginScreen} />
       <Stack.Screen name="forgotPassword" component={ForgotPassword} />
       <Stack.Screen name="interest" component={InterestScreen} />
+      <Stack.Screen name="home" component={WelcomeScreen} />
+      <Stack.Screen name="RegistrationScreen" component={RegistrationScreen} />
+      <Stack.Screen name="VerificationScreen" component={VerificationCodePage} />
     </Stack.Navigator>
   </NavigationContainer>
 );
