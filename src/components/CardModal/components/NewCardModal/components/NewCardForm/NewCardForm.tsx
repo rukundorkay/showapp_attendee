@@ -1,14 +1,67 @@
-import {View, TextInput, Text} from 'react-native';
+import {View, TextInput, Text, Image} from 'react-native';
 import React from 'react';
 import {Formik} from 'formik';
 import styles from './NewCardForm.style';
 import Button from '../../../../../Button';
+import {storeCard} from '../../../../../../utils/storage';
 
-const NewCardForm = () => {
-  return (
+const NewCardForm = ({card}: any) => {
+  return card.title === 'Mobile Money' ? (
     <Formik
-      initialValues={{cardNo: '', month: '', year: '', cvv: '', name: ''}}
-      onSubmit={values => console.log(values)}>
+      initialValues={{
+        cardNo: '',
+        month: '',
+        year: '',
+        cvv: '',
+        name: '',
+        type: card.title,
+      }}
+      onSubmit={values => storeCard(values)}>
+      {/* onSubmit={values => console.log(values)}> */}
+      {({handleChange, handleBlur, handleSubmit, values}) => (
+        <View>
+          <Text style={styles.label}>Phone Information</Text>
+          <View style={styles.flex}>
+            <TextInput
+              onChangeText={handleChange('cardNo')}
+              onBlur={handleBlur('cardNo')}
+              value={values.cardNo}
+              placeholder="+ 250 788 000 000"
+              style={styles.cardInput}
+            />
+            <View style={styles.icon}>
+              <Image style={styles.img} source={card.img} />
+            </View>
+          </View>
+          {/* Expiration Date */}
+
+          <View>
+            <Text style={styles.label}>Registered Name</Text>
+            <TextInput
+              onChangeText={handleChange('name')}
+              onBlur={handleBlur('name')}
+              value={values.name}
+              placeholder="Your name"
+              style={styles.input}
+            />
+          </View>
+
+          <Button onPress={handleSubmit} type="primary" title="Add" />
+        </View>
+      )}
+    </Formik>
+  ) : (
+    <Formik
+      initialValues={{
+        cardNo: '',
+        month: '',
+        year: '',
+        cvv: '',
+        name: '',
+        type: card.title,
+      }}
+      onSubmit={values => storeCard(values)}>
+      {/* onSubmit={values => console.log(values)}> */}
       {({handleChange, handleBlur, handleSubmit, values}) => (
         <View>
           <Text style={styles.label}>Card Information</Text>
@@ -21,7 +74,7 @@ const NewCardForm = () => {
               style={styles.cardInput}
             />
             <View style={styles.icon}>
-              <Text>Visa</Text>
+              <Image style={styles.img} source={card.img} />
             </View>
           </View>
           {/* Expiration Date */}
@@ -69,6 +122,7 @@ const NewCardForm = () => {
               style={styles.input}
             />
           </View>
+
           <Button onPress={handleSubmit} type="primary" title="Add" />
         </View>
       )}

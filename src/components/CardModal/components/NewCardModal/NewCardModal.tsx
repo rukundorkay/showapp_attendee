@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './NewCardModal.style';
 import {NewCardForm} from './components';
 
-const NewCardModal = ({shown, toggleVisible}: any) => {
+const NewCardModal = ({shown, toggleVisible, card}: any) => {
   return (
     <View>
       <Modal
@@ -22,7 +22,7 @@ const NewCardModal = ({shown, toggleVisible}: any) => {
               </Pressable>
             </View>
             {/* New Card Form */}
-            <NewCardForm />
+            <NewCardForm card={card} />
           </View>
         </View>
       </Modal>

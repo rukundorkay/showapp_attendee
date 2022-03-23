@@ -2,6 +2,9 @@ import React from 'react';
 import {RootStackParamList} from '../../types';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import ConcertScreen from '../screens/Concert';
+import ExploreScreen from '../screens/Explore/ExploreScreen';
+import FilterScreen from '../screens/Filter/FilterScreen';
 import ProfileScreen from '../screens/Profile';
 import BuyTicketScreen from '../screens/BuyTicketScreen/BuyTicketScreen';
 import LoginScreen from '../screens/Login';
@@ -11,6 +14,7 @@ import RegistrationScreen from '../screens/Registraction/Registration';
 import WelcomeScreen from '../screens/WelcomePage/Welcome';
 import VerificationCodePage from '../screens/VerificationCodePage';
 import { useContextMode } from '../context/useContext';
+import HomeScreen from '../screens/Home/HomeScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -23,21 +27,24 @@ export default () => {
   const {isAuth} = useContextMode();
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="home" screenOptions={options}>
+      <Stack.Navigator screenOptions={options}>
         {isAuth ? (
           <>
-            <Stack.Screen name="home" component={WelcomeScreen} />
+            <Stack.Screen name="home" component={HomeScreen} />
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="BuyTicket" component={BuyTicketScreen} />
+            <Stack.Screen name="concert" component={ConcertScreen} />
+            <Stack.Screen name="explore" component={ExploreScreen} />
+            <Stack.Screen name="filter" component={FilterScreen} />
           </>
         ) : (
           <>
+            <Stack.Screen name="welcome" component={WelcomeScreen} />
             <Stack.Screen name="login" component={LoginScreen} />
             <Stack.Screen name="interest" component={InterestScreen} />
+            <Stack.Screen name="register" component={RegistrationScreen} />
             <Stack.Screen name="forgotPassword" component={ForgotPassword} />
-            <Stack.Screen name="RegistrationScreen" component={RegistrationScreen} />
-            <Stack.Screen name="VerificationScreen" component={VerificationCodePage} />
-            <Stack.Screen name="VerificationScreen" component={VerificationCodePage} />
+            <Stack.Screen name="verification" component={VerificationCodePage} />
           </>
         )}
       </Stack.Navigator>

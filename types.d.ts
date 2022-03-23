@@ -2,13 +2,17 @@ import {boolean} from 'yup';
 
 export type RootStackParamList = {
   home: undefined;
+  welcome: undefined;
+  register: undefined;
+  verification: undefined;
   BuyTicket: undefined;
+  concert: {id: String};
+  explore: undefined;
+  filter: undefined;
   login: undefined;
   interest: undefined;
   forgotPassword: undefined;
   Profile: undefined
-  RegistrationScreen: undefined;
-  VerificationScreen: undefined;
   navigate: (name: string) => void;
   goBack: () => void;
 };
