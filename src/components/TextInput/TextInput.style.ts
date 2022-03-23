@@ -11,10 +11,9 @@ export default StyleSheet.create({
   input: {
     // backgroundColor: colors.lightPrimary,
     borderRadius: borderRadius.XS,
-    padding: Spacing * 0.5,
     flex: 1,
     color: colors.dimeText,
-    fontFamily: fonts.Bold,
+    fontFamily: fonts.SemiBold,
   },
   inputWrapper: {
     backgroundColor: colors.inputAccent,

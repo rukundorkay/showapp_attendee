@@ -16,7 +16,7 @@ import {CardModal, IconHolder} from '../../components';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
 
-const ProfileScreen: React.FC = () => {
+const ProfileScreen = () => {
   const navigation = useNavigation();
   const FormValidationSchema = Yup.object().shape({
     name: Yup.string().required('List name is required'),

@@ -1,5 +1,5 @@
 import {View, Text, TextInput} from 'react-native';
-import React, {ChangeEvent, FunctionComponent, ReactElement} from 'react';
+import React, { ChangeEvent, ReactElement } from 'react';
 import styles from './TextInput.style';
 import {colors, globalStyles} from '../../constants';
 
@@ -9,8 +9,8 @@ type TextInputProps = {
   label?: string;
   placeholder: string;
   value: string;
-  onChange: (e: string | ChangeEvent<any>) => void;
-  onBlur: () => void;
+  onChange: (e: any) => void;
+  onBlur?: () => void;
   style?: {};
   Icon?: ReactElement;
   securedInput?: boolean;
@@ -23,10 +23,10 @@ const CustomTextInput = ({
   value,
   onBlur,
   onChange,
-  securedInput,
   type,
   style,
   Icon,
+  securedInput
 }: TextInputProps) => {
   return (
     <View style={[styles.container, style && style]}>
@@ -35,37 +35,17 @@ const CustomTextInput = ({
         {required && <Text style={styles.asterisk}>*</Text>}
       </View>
 
-      {type === 'accent' ? (
+      <View style={[globalStyles.flexer,styles.inputWrapper,{ backgroundColor: type === 'accent' ? colors.inputAccent : colors.lightPrimary }]}>
         <TextInput
-          style={styles.accent_input}
-          placeholder={placeholder}
           value={value}
           onBlur={onBlur}
-          onChange={onChange}
-          secureTextEntry={securedInput}
+          onChangeText={onChange}
+          style={styles.input}
+          placeholder={placeholder}
+          secureTextEntry={securedInput || false}
         />
-      ) : (
-        <View
-          style={[
-            globalStyles.flexer,
-            styles.inputWrapper,
-            {
-              backgroundColor:
-                type === 'accent' ? colors.inputAccent : colors.lightPrimary,
-            },
-          ]}>
-          <TextInput
-            style={styles.input}
-            placeholder={placeholder}
-            value={value}
-            onBlur={onBlur}
-            secureTextEntry={securedInput}
-            onChange={onChange}
-            secureTextEntry={securedInput || false}
-          />
-          {Icon}
-        </View>
-      )}
+        {Icon}
+      </View>
     </View>
   );
 };

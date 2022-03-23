@@ -2,10 +2,13 @@ import {StyleSheet} from 'react-native';
 import {colors, fonts, Spacing, textSize} from '../../constants';
 
 export const styles = StyleSheet.create({
+  form:{
+    marginTop:Spacing,
+  },
   container: {
     flex: 1,
     paddingHorizontal: Spacing,
-    justifyContent: 'space-evenly',
+    backgroundColor:colors.background
   },
   header: {
     color: colors.mainText,

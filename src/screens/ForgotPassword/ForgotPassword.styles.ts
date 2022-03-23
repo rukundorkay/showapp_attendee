@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
   },
   modal:{ 
     flex:.3,
+    maxHeight:'40%',
     padding:Spacing,
     alignItems:'center',
     borderRadius: borderRadius.L,

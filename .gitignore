@@ -67,3 +67,6 @@ package-*.json
 
 # vscode
 .vscode
+
+#npm
+package-lock.json
