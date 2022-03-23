@@ -9,7 +9,7 @@ type ExploreEventCardProps = {
 const ExploreEventCard: React.FC<any> = (props: ExploreEventCardProps) => (
   <View style={styles.eventWrapper}>
     <Image
-      source={require('../../assets/images/wall.png')}
+      source={require('../../assets/images/event-profile.jpg')}
       style={styles.eventImage}
     />
     <View style={styles.eventDescription}>

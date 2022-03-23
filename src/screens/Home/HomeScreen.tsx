@@ -1,17 +1,16 @@
 import {
   Pressable,
   SafeAreaView,
-  StatusBar,
   Text,
   View,
   ScrollView,
   Modal,
   FlatList,
   Image,
+  ActivityIndicator,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {styles} from './HomeScreen.styles';
-import {useContextMode} from '../../context/useContext';
 import {
   BottomTabNavigationProp,
   createBottomTabNavigator,
@@ -29,17 +28,17 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Octicons from 'react-native-vector-icons/Octicons';
 import EXploreScreen from '../Explore/ExploreScreen';
 import {colors} from '../../constants';
-import {events, navList} from './mockdata';
+import {navList} from './mockdata';
+import axios from 'axios';
 
 const BottomTab = createBottomTabNavigator<MainBottomTabParamList>();
 const HomeScreen = () => {
-  // const { authInfo } = useContextMode()
   return (
     <BottomTab.Navigator
       screenOptions={({route}) => ({
         headerShown: false,
-        tabBarActiveTintColor: colors.error,
-        tabBarInactiveTintColor: '#ccc',
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.inactiveIcon,
       })}>
       <BottomTab.Screen
         name="HomeScreen"
@@ -84,16 +83,40 @@ type HomeScreenProp = CompositeNavigationProp<
   BottomTabNavigationProp<MainBottomTabParamList, 'HomeScreen'>
 >;
 
-// const
-
 const HomeEvents = () => {
+  const [events, setEvents] = useState<any>([]);
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation<HomeScreenProp>();
   const [LocationModal, setLocationModal] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get('https://showapp-api.awesomity.rw/api/v1/events')
+      .then(function (response) {
+        // handle success
+        setEvents(response.data.data);
+        setLoading(false);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  }, []);
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.body}>
         <View style={styles.header}>
-          <View style={styles.profileImage}></View>
+          <Pressable onPress={() => navigation.navigate('Profile')}>
+            <Image
+              source={require('../../assets/images/event-profile.jpg')}
+              style={styles.profileImage}
+            />
+          </Pressable>
           <View style={styles.findEvents}>
             <Text style={styles.findEventsText}>Find Events in</Text>
             <Pressable
@@ -125,8 +148,12 @@ const HomeEvents = () => {
       </View>
       <FlatList
         data={events}
+        refreshing={loading}
+        ListEmptyComponent={
+          <ActivityIndicator size="large" color={colors.primary} />
+        }
         renderItem={item => (
-          <EventCard navigation={navigation} event={item.item} />
+          <EventCard navigation={navigation} event={item} key={item.index} />
         )}
         numColumns={2}
         keyExtractor={item => item.id}

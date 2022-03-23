@@ -1,116 +1,117 @@
-import { StyleSheet } from 'react-native'
-import { colors, fonts, Spacing, textSize } from '../../constants'
+import {StyleSheet} from 'react-native';
+import {colors, fonts, Spacing, textSize} from '../../constants';
 
 export const styles = StyleSheet.create({
-  locationText:{
-color:colors.error
+  locationText: {
+    color: colors.error,
   },
   safeArea: {
-    backgroundColor:'#fff'
+    backgroundColor: '#fff',
   },
   body: {
     borderBottomWidth: 2,
-    borderBottomColor: "#efefef",
-    backgroundColor: "#fff",
-    paddingHorizontal: 20
+    borderBottomColor: '#efefef',
+    backgroundColor: '#fff',
+    paddingHorizontal: 20,
   },
-  header:{
-    marginTop:Spacing,
-    flexDirection: 'row'
+  header: {
+    marginTop: Spacing,
+    flexDirection: 'row',
   },
   profileImage: {
     height: 48,
     width: 48,
-    backgroundColor: '#efefef',
-    borderRadius: 5
+    borderRadius: 5,
   },
   findEvents: {
-    color:colors.blue,
+    color: colors.blue,
     flex: 1,
-    justifyContent:'center',
-
+    justifyContent: 'center',
   },
   findEventsText: {
-    color:colors.blue,
-    textAlign:'center'
+    color: colors.blue,
+    textAlign: 'center',
   },
   findEventsButton: {
-    flexDirection:'row',
-    justifyContent:'center',
-    alignItems:'center'
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   notificationBadge: {
     height: 48,
     width: 48,
     backgroundColor: '#efefef',
     borderRadius: 5,
-    justifyContent:'center',
-    alignItems: 'center'
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   categoryPane: {
-    marginTop: 20
+    marginTop: 20,
   },
   categoryItem: {
     margin: 10,
-    marginBottom: 20
+    marginBottom: 20,
   },
-  categoryText: {
-
-  },
+  categoryText: {},
   eventsWrapper: {
-    padding:10,
+    padding: 10,
     marginBottom: 151,
   },
   eventsContainer: {
-    marginBottom: 200
+    marginBottom: 200,
   },
   searchLocationModal: {
-    backgroundColor:'green',
+    backgroundColor: 'green',
     height: 500,
     position: 'absolute',
     bottom: 0,
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
-    width: '100%'
+    width: '100%',
   },
   searchLocationClose: {
-    flex:1,
-    alignItems:'center'
+    flex: 1,
+    alignItems: 'center',
   },
-  searchLocationBody:{
-    backgroundColor:'#00000029',
+  searchLocationBody: {
+    backgroundColor: '#00000029',
     width: 60,
     height: 6,
-    borderRadius: 6
+    borderRadius: 6,
   },
   // Event card style
   eventCardWrapper: {
     borderRadius: 10,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     margin: 10,
     width: '45%',
     elevation: 5,
     shadowColor: '#efefef',
     shadowRadius: 5,
-    shadowOpacity: 1
+    shadowOpacity: 1,
   },
-  eventPoster:{
+  eventPoster: {
     height: 150,
-    width:'100%',
+    width: '100%',
     borderTopLeftRadius: 10,
-    borderTopRightRadius: 10
+    borderTopRightRadius: 10,
   },
   eventInfoContainer: {
-    padding: 10
+    padding: 5,
   },
   eventTitle: {
-    padding: 5,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    color: colors.darkBlue,
+    fontFamily: fonts.ExtraBold,
+    fontSize: Spacing * 0.5,
   },
-  eventStartDate:{
-    paddingHorizontal: 10
+  eventStartDate: {
+    paddingHorizontal: 10,
+    color: colors.primary,
+    fontFamily: fonts.ExtraBold,
+    fontSize: Spacing * 0.35,
   },
-  iconColor:{
-    color: "#000"
-  }
-})
+  iconColor: {
+    color: '#000',
+  },
+});

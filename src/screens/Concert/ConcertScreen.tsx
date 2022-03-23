@@ -8,21 +8,27 @@ import {useContextMode} from '../../context/useContext';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ScrollView} from 'react-native-gesture-handler';
 import IconHolder from '../../components/IconHolder';
+import {formatDate} from '../../utils/dateFormat';
 
-const ConcertScreen = () => {
-  // const {authInfo} = useContextMode();
+const ConcertScreen = ({route}: any) => {
+  const {concert, img} = route.params;
+  const pics = [
+    require('../../assets/images/1.png'),
+    require('../../assets/images/2.png'),
+    require('../../assets/images/3.png'),
+    require('../../assets/images/4.png'),
+  ];
   return (
     <SafeAreaView>
       <StatusBar backgroundColor={colors.primary} />
 
       <View style={styles.header}>
-        <Image
-          source={require('../../assets/images/wall.png')}
-          style={styles.headerImage}
-        />
+        <Image source={pics[img]} style={styles.headerImage} />
         <View style={styles.headerTextWrapper}>
-          <Text style={styles.concertTitle}>Trappish Concert</Text>
-          <Text style={styles.concertOraganizer}>Intore Entertainmeent</Text>
+          <Text style={styles.concertTitle}>{concert.title}</Text>
+          <Text style={styles.concertOraganizer}>
+            {concert.organization.name}
+          </Text>
         </View>
       </View>
       <ScrollView style={{zIndex: 1, marginTop: 200}}>
@@ -34,7 +40,9 @@ const ConcertScreen = () => {
                 <View style={styles.aboutItem}>
                   <IconHolder type="AntDesign" name="calendar" />
                   <View>
-                    <Text style={styles.aboutDate}>25 october 2022</Text>
+                    <Text style={styles.aboutDate}>
+                      {formatDate(concert.startDate)}
+                    </Text>
                     <Text style={styles.aboutTime}>10:00-14:00</Text>
                   </View>
                 </View>
@@ -42,25 +50,23 @@ const ConcertScreen = () => {
                   <IconHolder type="FontAwesome" name="location" />
 
                   <View>
-                    <Text style={styles.aboutDate}>Kigali Arena</Text>
+                    <Text style={styles.aboutDate}>{concert.venue}</Text>
                   </View>
                 </View>
                 <View style={styles.aboutItem}>
                   <IconHolder type="Feather" name="dollar" />
 
                   <View>
-                    <Text style={{color: 'red'}}>10,000 - 25,000 Rwf</Text>
+                    <Text style={{color: 'red'}}>
+                      {concert.standard.price} Rwf
+                    </Text>
                   </View>
                 </View>
               </View>
             </View>
             <View style={styles.descriptionWrapper}>
               <Text style={styles.title}>Description</Text>
-              <Text style={styles.aboutDescription}>
-                Isn't this a worse answer than the original question? This
-                method requires that you have space around the container and the
-                guttering must always be an even number.
-              </Text>
+              <Text style={styles.aboutDescription}>{concert.description}</Text>
             </View>
             <View style={styles.mapWrapper}>
               <Text style={styles.title}>Map</Text>

@@ -19,4 +19,5 @@ export default {
   mutedBlue: '#717D96',
   green: '#30A80C',
   darkGray: '#666666',
+  inactiveIcon: '#C9D3E6',
 };
