@@ -1,6 +1,6 @@
 import {SafeAreaView, Text, View} from 'react-native';
 import React, {useState} from 'react';
-import {styles} from '../Registraction/Registration.style';
+import {styles} from './Registration.styles';
 import {Button, TextInput} from '../../components';
 import RadioGroup, {RadioButtonProps} from 'react-native-radio-buttons-group';
 

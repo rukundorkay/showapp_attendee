@@ -1,16 +1,16 @@
 export type RootStackParamList = {
-    home: undefined;
-  };
+  home: undefined;
+  RegistrationScreen: undefined;
+};
 
 interface ContextParams {
-  authInfo?: User| null,
-  isAuth: boolean,
-  handlerUser?: contextHandler
+  authInfo?: User | null;
+  isAuth: boolean;
+  handlerUser?: contextHandler;
 }
 
-type Contexhandler = (  type: string,value: User) => void
+type Contexhandler = (type: string, value: User) => void;
 
 interface User {
-  name:string
+  name: string;
 }
-  
