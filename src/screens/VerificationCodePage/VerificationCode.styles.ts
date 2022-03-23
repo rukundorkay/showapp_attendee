@@ -1,47 +1,69 @@
 import {StyleSheet} from 'react-native';
-import {colors, fonts} from '../../constants';
+import {borderRadius, colors, fonts, Spacing, textSize} from '../../constants';
 
 export const styles = StyleSheet.create({
-  root: {flex: 1, padding: 50},
-  title: {textAlign: 'center', fontSize: 30, fontFamily: fonts.ExtraBold},
-  paragraph: {
-    marginVertical: 30,
-    color: colors.blue,
+  root: {
+    flex: 1,
+    padding:Spacing,
+    justifyContent:'space-around',
   },
-  codeFieldRoot: {marginTop: 20},
-  cell: {
-    width: 40,
-    height: 40,
-    lineHeight: 38,
-    fontSize: 24,
-    borderWidth: 2,
-    borderColor: '#00000030',
+  title: {
     textAlign: 'center',
+    color:colors.mainText,
+    fontSize: textSize.XL,
+    fontFamily: fonts.ExtraBold,
+  },
+  paragraph: {
+    color: colors.mutedText,
+    textAlign:'center',
+    fontSize:textSize.M,
+    fontFamily:fonts.Regular,
+  },
+  email:{
+    color:colors.blue
+  },
+  codeFieldRoot: {
+    marginTop: 20
+  },
+  cell: {
+    paddingVertical:Spacing/2,
+    paddingHorizontal:Spacing,
+    fontSize:textSize.L,
+    alignItems:'center',
+    justifyContent:'center',
+    borderRadius: borderRadius.SM,
+    backgroundColor: colors.inputAccent,
   },
   focusCell: {
     borderColor: '#000',
   },
   container: {
     flexDirection: 'row',
-    color: 'black',
-    marginVertical: 30,
-    paddingLeft: 50,
+    justifyContent:'center',
+    alignItems:'flex-start'
   },
   text: {
-    color: 'black',
+    color: colors.mainText,
+    fontFamily:fonts.Regular,
+    marginRight:5,
+    fontSize: textSize.SM
   },
   code: {
     color: colors.primary,
+    fontSize:textSize.M,
+    fontFamily:fonts.Medium
   },
   textingContainer: {
     flexDirection: 'row',
-    color: 'black',
-    marginVertical: 30,
+    alignItems:'center',
+    marginVertical: Spacing,
   },
   textfooter: {
-    color: 'black',
+    color: colors.mutedText,
   },
   textlinks: {
     color: colors.primary,
+    fontFamily: fonts.Medium,
+    textDecorationLine:"underline"
   },
 });

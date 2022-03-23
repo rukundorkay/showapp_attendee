@@ -1,11 +1,12 @@
-import {SafeAreaView, Text, View} from 'react-native';
+import {Pressable, SafeAreaView, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {styles} from './Registration.styles';
 import {Button, TextInput} from '../../components';
 import RadioGroup, {RadioButtonProps} from 'react-native-radio-buttons-group';
-
-import {globalStyles} from '../../constants';
+import Feather from 'react-native-vector-icons/Feather'
+import {colors, globalStyles, Spacing, textSize} from '../../constants';
 import {ScrollView} from 'react-native-gesture-handler';
+import {useFormik} from 'formik';
 
 const radioButtonsData = [
   {
@@ -20,31 +21,66 @@ const radioButtonsData = [
   },
 ];
 
+const initialValues = {email: '', password: '', name: '', phone: ''};
+
 const RegistrationScreen = () => {
-  const [radioButtons, setRadioButtons] =
-    useState<RadioButtonProps[]>(radioButtonsData);
+  const [ showPassword,setPassword ] = useState<boolean>(true)
+  const [radioButtons, setRadioButtons] = useState<RadioButtonProps[]>(radioButtonsData);
 
   function onPressRadioButton(radioButtonsArray: RadioButtonProps[]) {
     setRadioButtons(radioButtonsArray);
   }
+
+  const {values, handleChange, handleSubmit} = useFormik({
+    initialValues,
+    onSubmit: async () => {},
+  });
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={globalStyles.spacer} />
         <View>
           <Text style={styles.header}>Join Us Now!</Text>
-          <TextInput label="Full Name" required placeholder="thirtsa isimbi" />
           <TextInput
-            label="E-mail"
+            onBlur={() => {}}
+            label="Full Name"
+            value={values.name}
+            onChange={handleChange('name')}
             required
-            placeholder="thirtsaisimbi@gmail.com"
+            placeholder="thirtsa isimbi"
+          />
+          <TextInput
+            required
+            label="E-mail"
+            onBlur={() => {}}
+            value={values.email}
+            placeholder="isimbi@gmail.com"
+            onChange={handleChange('email')}
           />
           <TextInput
             label="Phone Number"
             required
             placeholder="078**************"
+            value={values.phone}
+            onChange={handleChange('phone')}
+            onBlur={() => {}}
           />
-          <TextInput label="Password" required placeholder="************" />
+          <TextInput
+            value={values.password}
+            onChange={handleChange('password')}
+            onBlur={() => {}}
+            label="Password"
+            required
+            securedInput={showPassword}
+            placeholder="************"
+            Icon={ (
+              <Pressable onPress={()=>setPassword(!showPassword)} style={styles.icon} >
+                <Feather name="eye" size={textSize.M} color={colors.mutedText} />
+              </Pressable>
+              )
+            }
+          />
           <Text style={styles.text}>You are joining as an?</Text>
 
           <RadioGroup
@@ -53,14 +89,10 @@ const RegistrationScreen = () => {
             onPress={onPressRadioButton}
           />
 
-          <View style={[globalStyles.centerd, {marginVertical: 30}]}>
-            <Button
-              type="primary"
-              title="Create An account"
-              onPress={() => {}}
-            />
+          <View style={[globalStyles.centerd, {marginTop: Spacing / 2}]}>
+            <Button type="primary" title="Continue" onPress={() => {}} />
             <View style={styles.textingContainer}>
-              <Text style={styles.textfooter}>Already have an account? </Text>
+              <Text style={styles.textfooter}>Already have an account ? </Text>
               <Text style={styles.textlinks}>Login</Text>
             </View>
           </View>

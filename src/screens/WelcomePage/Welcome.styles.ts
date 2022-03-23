@@ -1,31 +1,54 @@
 import {StyleSheet} from 'react-native';
 import {color} from 'react-native-reanimated';
+import { fonts, globalStyles, height, Spacing, textSize, width } from '../../constants';
 import colors from '../../constants/colors';
 // import {colors, fonts} from '../../constants';
 
 export const styles = StyleSheet.create({
+  IndicatorWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  SlideIndicator: {
+    height: 7,
+    width: 10,
+    backgroundColor: colors.lightPrimary,
+  },
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-},
-  maincontainer: {},
-
+    justifyContent:'space-evenly',
+    backgroundColor:colors.background
+  },
+  footer:{
+    justifyContent:"space-between",
+    alignItems:'center',
+    flex:.2
+  },
   image: {
-    width: 200,
-    height: 150,
-    marginVertical: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingLeft: 50,
+    position:'absolute',
+    width:'85%',
+    height:"100%",
+    resizeMode:'contain',
+    top:0,
+  },
+  imageWrapper:{
+    flex:.9,
+    width,
+    ...globalStyles.centerd
   },
   title: {
     fontSize: 24,
     color: 'black',
     textAlign: 'center',
+    fontFamily: fonts.SemiBold
   },
   subtitle: {
     textAlign: 'center',
+    fontFamily: fonts.Medium,
+    fontSize: textSize.SM,
+    color:colors.dimeText
   },
   textingContainer: {
     flexDirection: 'row',
@@ -38,7 +61,7 @@ export const styles = StyleSheet.create({
   textlinks: {
     color: colors.primary,
   },
-  textalign:{
+  textalign: {
     color: colors.primary,
-  }
+  },
 });

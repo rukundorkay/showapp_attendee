@@ -1,6 +1,9 @@
 export type RootStackParamList = {
   home: undefined;
   RegistrationScreen: undefined;
+  VerificationScreen: undefined;
+  navigate: (name:string)=> void;
+  goBack: () => void
 };
 
 interface ContextParams {
