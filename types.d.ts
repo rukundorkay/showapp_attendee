@@ -6,6 +6,10 @@ export type RootStackParamList = {
   login: undefined;
   interest: undefined;
   forgotPassword: undefined;
+  RegistrationScreen: undefined;
+  VerificationScreen: undefined;
+  navigate: (name: string) => void;
+  goBack: () => void;
 };
 
 interface ContextParams {

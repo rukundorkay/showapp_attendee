@@ -9,6 +9,9 @@ import LoginScreen from '../screens/Login';
 import InterestScreen from '../screens/Interest';
 import ForgotPassword from '../screens/ForgotPassword';
 import {useContextMode} from '../context/useContext';
+import WelcomeScreen from '../screens/WelcomePage/Welcome';
+import RegistrationScreen from '../screens/Registraction/Registration';
+import VerificationCodePage from '../screens/VerificationCodePage';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -21,7 +24,7 @@ export default () => {
   const {isAuth} = useContextMode();
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Profile" screenOptions={options}>
+      <Stack.Navigator initialRouteName="home" screenOptions={options}>
         {isAuth ? (
           <>
             <Stack.Screen name="home" component={HomeScreen} />
@@ -31,6 +34,12 @@ export default () => {
         ) : (
           <>
             <Stack.Screen name="login" component={LoginScreen} />
+            <Stack.Screen name="register" component={RegistrationScreen} />
+            <Stack.Screen name="home" component={WelcomeScreen} />
+            <Stack.Screen
+              name="VerificationScreen"
+              component={VerificationCodePage}
+            />
             <Stack.Screen name="forgotPassword" component={ForgotPassword} />
             <Stack.Screen name="interest" component={InterestScreen} />
           </>
