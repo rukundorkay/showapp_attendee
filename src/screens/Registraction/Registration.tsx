@@ -1,12 +1,14 @@
-import {Pressable, SafeAreaView, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import {Keyboard, Pressable, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import {styles} from './Registration.styles';
 import {Button, TextInput} from '../../components';
-import RadioGroup, {RadioButtonProps} from 'react-native-radio-buttons-group';
 import Feather from 'react-native-vector-icons/Feather'
 import {colors, globalStyles, Spacing, textSize} from '../../constants';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useFormik} from 'formik';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from '../../../types';
+import { UserSignup } from '../../API/auth';
 
 const radioButtonsData = [
   {
@@ -21,84 +23,100 @@ const radioButtonsData = [
   },
 ];
 
-const initialValues = {email: '', password: '', name: '', phone: ''};
+const initialValues = {email: '', password: '', names: '', phone: ''};
 
 const RegistrationScreen = () => {
+  const [ error,setError ] = useState<string>("")
+  const [ loading,setLoader ] = useState<boolean>(false)
   const [ showPassword,setPassword ] = useState<boolean>(true)
-  const [radioButtons, setRadioButtons] = useState<RadioButtonProps[]>(radioButtonsData);
 
-  function onPressRadioButton(radioButtonsArray: RadioButtonProps[]) {
-    setRadioButtons(radioButtonsArray);
-  }
+  const navigation = useNavigation<RootStackParamList>()
 
   const {values, handleChange, handleSubmit} = useFormik({
     initialValues,
-    onSubmit: async () => {},
+    onSubmit: async (credentials) => {
+      if(!loading){
+        setLoader(true)
+        UserSignup(credentials)
+        .then(res => {
+          setLoader(false)
+          if(res.success){
+            navigation.navigate('interest')
+          }else{
+            setError(res.message)
+          }
+        })
+      }
+    },
   });
 
+  useEffect(()=>{
+    /**
+     * * if error has value
+     * ? reset error to empty
+     * * if any chage is made
+     */
+    if(error){
+      setError('')
+    }
+  },[values])
+
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={globalStyles.spacer} />
-        <View>
+    <Pressable style={{flex:1}} onPress={Keyboard.dismiss}>
+        <ScrollView  style={styles.container}>
+          <View style={globalStyles.spacer} />
           <Text style={styles.header}>Join Us Now!</Text>
-          <TextInput
-            onBlur={() => {}}
-            label="Full Name"
-            value={values.name}
-            onChange={handleChange('name')}
-            required
-            placeholder="thirtsa isimbi"
-          />
-          <TextInput
-            required
-            label="E-mail"
-            onBlur={() => {}}
-            value={values.email}
-            placeholder="isimbi@gmail.com"
-            onChange={handleChange('email')}
-          />
-          <TextInput
-            label="Phone Number"
-            required
-            placeholder="078**************"
-            value={values.phone}
-            onChange={handleChange('phone')}
-            onBlur={() => {}}
-          />
-          <TextInput
-            value={values.password}
-            onChange={handleChange('password')}
-            onBlur={() => {}}
-            label="Password"
-            required
-            securedInput={showPassword}
-            placeholder="************"
-            Icon={ (
-              <Pressable onPress={()=>setPassword(!showPassword)} style={styles.icon} >
-                <Feather name="eye" size={textSize.M} color={colors.mutedText} />
-              </Pressable>
-              )
-            }
-          />
-          <Text style={styles.text}>You are joining as an?</Text>
-
-          <RadioGroup
-            containerStyle={{flexDirection: 'row'}}
-            radioButtons={radioButtons}
-            onPress={onPressRadioButton}
-          />
-
-          <View style={[globalStyles.centerd, {marginTop: Spacing / 2}]}>
-            <Button type="primary" title="Continue" onPress={() => {}} />
+          <View style={styles.form}>
+            <TextInput
+              onBlur={() => {}}
+              label="Full Name"
+              value={values.names}
+              onChange={handleChange('names')}
+              required
+              placeholder="thirtsa isimbi"
+            />
+            <TextInput
+              required
+              label="E-mail"
+              onBlur={() => {}}
+              value={values.email}
+              placeholder="isimbi@gmail.com"
+              onChange={handleChange('email')}
+            />
+            <TextInput
+              label="Phone Number"
+              required
+              placeholder="078**************"
+              value={values.phone}
+              onChange={handleChange('phone')}
+              onBlur={() => {}}
+            />
+            <TextInput
+              required
+              onBlur={() => {}}
+              label="Password"
+              value={values.password}
+              securedInput={showPassword}
+              onChange={handleChange('password')}
+              placeholder='* * * * * * * * * * *'
+              Icon={ (
+                <Pressable onPress={()=>setPassword(!showPassword)} style={styles.icon} >
+                  <Feather name="eye" size={textSize.M} color={colors.mutedText} />
+                </Pressable>
+                )
+              }
+            />
+          </View>
+          <Text style={globalStyles.error}>{error}</Text>
+          <View style={globalStyles.centerd}>
+            <Button type="primary" title="Continue" onPress={handleSubmit} isLoading={loading} />
             <View style={styles.textingContainer}>
               <Text style={styles.textfooter}>Already have an account ? </Text>
-              <Text style={styles.textlinks}>Login</Text>
+              <Text style={styles.textlinks} onPress={()=>navigation.navigate('login')} >Login</Text>
             </View>
           </View>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+        </ScrollView>
+    </Pressable>
   );
 };
 export default RegistrationScreen;
