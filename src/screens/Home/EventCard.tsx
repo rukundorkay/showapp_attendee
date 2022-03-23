@@ -3,8 +3,6 @@ import {View, Image, Text, Pressable} from 'react-native';
 import {styles} from './HomeScreen.styles';
 import {formatDate} from '../../utils/dateFormat';
 
-let pic = Math.floor(Math.random() * 5);
-console.log(pic);
 const pics = [
   require('../../assets/images/1.png'),
   require('../../assets/images/2.png'),
