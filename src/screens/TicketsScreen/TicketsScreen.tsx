@@ -1,22 +1,43 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {
   View,
   SafeAreaView,
   Text,
   TextInput,
   Pressable,
+  ActivityIndicator,
   StatusBar,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import FIcon from 'react-native-vector-icons/Feather';
-import {Button, TicketCarousel} from '../../components';
 
+import {Button, TicketCarousel} from '../../components';
 import {colors} from '../../constants';
+import {Fetcher} from '../../utils/Fetcher';
 import styles from './TicketsScreen.styles';
 
 const TicketsScreen = () => {
   const [activeTab, setActiveTab] = useState<'active' | 'cancelled'>('active');
   const [selectedItem, setSelectedItem] = useState<number>();
+  const [result, setResult] = useState();
+  const [loading, setLoading] = useState(false);
+
+  const fetchTickets = useCallback(async () => {
+    try {
+      setLoading(true);
+
+      const res = await Fetcher(undefined, '/tickets/user', 'GET');
+      console.log(res);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchTickets();
+  }, [fetchTickets]);
 
   const onItemPress = (id: number) => {
     setSelectedItem(id);
@@ -66,11 +87,19 @@ const TicketsScreen = () => {
         </Pressable>
       </View>
       <ScrollView>
-        <View>
-          <TicketCarousel
-            data={[{id: 1}, {id: 2}, {id: 3}]}
-            onItemPress={onItemPress}
-          />
+        <View style={styles.content}>
+          {loading ? (
+            <ActivityIndicator
+              size="large"
+              color={colors.primary}
+              style={styles.loader}
+            />
+          ) : (
+            <TicketCarousel
+              data={[{id: 1}, {id: 2}, {id: 3}]}
+              onItemPress={onItemPress}
+            />
+          )}
         </View>
       </ScrollView>
       {selectedItem ? (
