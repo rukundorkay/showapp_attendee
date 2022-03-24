@@ -6,3 +6,4 @@ export {default as Header} from './Header';
 export {default as AddHolderModal} from './AddHolderModal';
 export {default as TicketCard} from './TicketCard';
 export {default as ModedModal} from './ModedModal';
+export {default as TicketCarousel} from './TicketCarousel';

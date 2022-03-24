@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Pressable, Image} from 'react-native';
 import Animated from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -10,13 +10,23 @@ import dimesions from '../../constants/dimesions';
 import styles from './TicketCard.styles';
 
 const ITEM_WIDTH = dimesions.width * 0.7;
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 type TicketCardProps = {
   index?: number;
   scrollX?: Animated.Value<number>;
+  item: object;
+  onItemPress?: (arg0: number) => void;
+  selected?: boolean;
 };
 
-const TicketCard: React.FC<TicketCardProps> = ({index, scrollX}) => {
+const TicketCard: React.FC<TicketCardProps> = ({
+  index,
+  scrollX,
+  item,
+  onItemPress,
+  selected,
+}) => {
   let scaleY: any;
   if (index && scrollX) {
     const inputRange = [
@@ -29,9 +39,24 @@ const TicketCard: React.FC<TicketCardProps> = ({index, scrollX}) => {
       outputRange: [0.94, 1, 0.94],
     });
   }
+
+  const onPress = (id: number) => {
+    onItemPress && onItemPress(id);
+  };
+
   return (
-    <Animated.View style={[styles.card, scaleY && {transform: [{scaleY}]}]}>
+    <AnimatedPressable
+      style={[styles.card, scaleY && {transform: [{scaleY}]}]}
+      onPress={() => onPress(item.id)}>
       <View style={styles.imgContainer}>
+        {selected ? (
+          <Icon
+            name="checkbox"
+            size={14}
+            color={colors.green}
+            style={styles.selected}
+          />
+        ) : null}
         <Image
           source={require('../../assets/images/event-profile.jpg')}
           style={styles.img}
@@ -103,7 +128,7 @@ const TicketCard: React.FC<TicketCardProps> = ({index, scrollX}) => {
         />
         <Text style={styles.footerCaption}>Don’t show this to anyone</Text>
       </View>
-    </Animated.View>
+    </AnimatedPressable>
   );
 };
 

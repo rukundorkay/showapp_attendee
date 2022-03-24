@@ -30,6 +30,7 @@ import EXploreScreen from '../Explore/ExploreScreen';
 import {colors} from '../../constants';
 import {navList} from './mockdata';
 import axios from 'axios';
+import TicketsScreen from '../TicketsScreen';
 
 const BottomTab = createBottomTabNavigator<MainBottomTabParamList>();
 const HomeScreen = () => {
@@ -62,7 +63,7 @@ const HomeScreen = () => {
       />
       <BottomTab.Screen
         name="Tickets"
-        component={TicketsEvents}
+        component={TicketsScreen}
         options={{
           tabBarLabel: 'Tickets',
           tabBarIcon: ({size, color}: {size: number; color: number}) => (
