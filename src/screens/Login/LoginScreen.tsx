@@ -9,6 +9,7 @@ import { RootStackParamList } from '../../../types'
 import Feather from 'react-native-vector-icons/Feather'
 import { UserLogin } from '../../API/auth'
 import EncryptedStorage from 'react-native-encrypted-storage';
+import { useContextMode } from '../../context/useContext'
 
 const initialValues = {email: '', password: ''};
 
@@ -18,6 +19,7 @@ const LoginScreen = () => {
   const [ showPassword,setPassword ] = useState<boolean>(true)
 
   const navigation = useNavigation<RootStackParamList>()
+  const { setAuth } = useContextMode()
 
   const { values,handleChange,handleSubmit } = useFormik({
     initialValues,
@@ -30,7 +32,7 @@ const LoginScreen = () => {
           // if successulf redirect to login
           if(res.success){
             EncryptedStorage.setItem('userToken',res.data)
-            .then(()=>navigation.navigate('home'))
+            .then(()=> setAuth(true))
           }else{
             setError(res.message)
           }

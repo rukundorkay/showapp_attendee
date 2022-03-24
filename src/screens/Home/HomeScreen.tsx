@@ -31,6 +31,7 @@ import {colors} from '../../constants';
 import {navList} from './mockdata';
 import axios from 'axios';
 import TicketsScreen from '../TicketsScreen';
+import {useContextMode} from '../../context/useContext';
 
 const BottomTab = createBottomTabNavigator<MainBottomTabParamList>();
 const HomeScreen = () => {
@@ -89,6 +90,7 @@ const HomeEvents = () => {
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation<HomeScreenProp>();
   const [LocationModal, setLocationModal] = useState(false);
+  const {handleEvents} = useContextMode();
 
   useEffect(() => {
     setLoading(true);
@@ -97,6 +99,7 @@ const HomeEvents = () => {
       .then(function (response) {
         // handle success
         setEvents(response.data.data);
+        handleEvents(response.data.data);
         setLoading(false);
       })
       .catch(function (error) {

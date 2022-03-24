@@ -16,6 +16,10 @@ import {Transition, Transitioning} from 'react-native-reanimated';
 import {RootStackParamList} from '../../../types';
 import {Holder} from '../../interfaces/holder.interface';
 import {AddHolderModal, Button, Header} from '../../components';
+import {useContextMode} from '../../context/useContext';
+import {formatDate} from '../../utils/dateFormat';
+import pick from '../../utils/pick';
+import {Fetcher} from '../../utils/Fetcher';
 import {colors} from '../../constants';
 import styles from './BuyTicketScreen.styles';
 
@@ -50,30 +54,53 @@ const transition = (
 
 type BuyTicketScreenProps = {
   navigation: StackScreenProps<RootStackParamList, 'BuyTicket'>['navigation'];
+  route: StackScreenProps<RootStackParamList, 'BuyTicket'>['route'];
 };
 
-const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({navigation}) => {
+const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({
+  navigation,
+  route,
+}) => {
+  const {event} = route.params;
   const [showHolders, setShowHolders] = useState(false);
   const [showHolderModal, setShowHolderModal] = useState(false);
-  const [holders, setHolders] = useState<Holder[]>([
-    {seatCategory: 'VIP', quantity: 1, name: 'Isimbi P.'},
-  ]);
-  const [selectedSeat, setSelectedSeat] = useState<string>('');
+  const [selectedSeat, setSelectedSeat] = useState<object>();
   const [selectedPayment, setSelectedPayment] = useState<number>();
+  const [loading, setLoading] = useState(false);
   const transitionRef = useRef<any>();
+
+  const seats = pick(event, ['vip', 'vvip', 'standard', 'table']);
+  const arrSeats = Object.keys(seats).map(key => ({...seats[key], name: key}));
+  const [holders, setHolders] = useState<Holder[]>([
+    {
+      seatCategory: arrSeats[0].name,
+      price: arrSeats[0].price,
+      quantity: 1,
+      name: 'Isimbi P.',
+    },
+  ]);
+  const {handleTickets} = useContextMode();
 
   const expandHolders = () => {
     setShowHolders(!showHolders);
     transitionRef?.current.animateNextTransition();
   };
 
-  const addHolders = (seatCategory: string) => {
-    setSelectedSeat(seatCategory);
+  const addHolders = (seat: object) => {
+    setSelectedSeat(seat);
     setShowHolderModal(true);
   };
 
   const saveHolder = (name: string) => {
-    setHolders([...holders, {seatCategory: selectedSeat, quantity: 1, name}]);
+    setHolders([
+      ...holders,
+      {
+        seatCategory: selectedSeat.name,
+        price: selectedSeat.price,
+        quantity: 1,
+        name,
+      },
+    ]);
   };
 
   const removeHolders = (seatCategory: string) => {
@@ -95,8 +122,41 @@ const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({navigation}) => {
       .filter(holder => holder.seatCategory === seatCategory)
       .reduce((prev, curr) => prev + (curr.quantity || 0), 0);
 
-  const onConfirm = () => {
-    console.log(holders);
+  const countTotal = () =>
+    holders.reduce((prev, curr) => prev + (curr.quantity || 0) * curr.price, 0);
+
+  const onConfirm = async () => {
+    try {
+      setLoading(true);
+      const uniqueSeats = holders.filter(
+        (v, i, a) =>
+          a.findIndex(v2 => v2.seatCategory === v.seatCategory) === i,
+      );
+
+      const response = await Promise.all(
+        uniqueSeats.map(seat =>
+          Fetcher(
+            {
+              eventId: event.id,
+              seatCategory: seat.seatCategory,
+              ticketQuantity: holders.filter(
+                holder => holder.seatCategory === seat.seatCategory,
+              ).length,
+            },
+            '/tickets',
+            'POST',
+          ),
+        ),
+      );
+
+      const result = response.map(res => res.data).flat();
+      handleTickets(result);
+
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
     navigation.navigate('TicketBought');
   };
 
@@ -115,11 +175,13 @@ const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({navigation}) => {
             </View>
             <View style={styles.topRight}>
               <View style={styles.topHeading}>
-                <Text style={styles.topTitle}>Trappish Concert</Text>
-                <Text style={styles.topDate}>25 October 2022</Text>
-                <Text style={styles.topTime}>10:00 - 17:00</Text>
+                <Text style={styles.topTitle}>{event.title}</Text>
+                <Text style={styles.topDate}>
+                  {formatDate(event.startDate)}
+                </Text>
+                <Text style={styles.topTime}>10:00 - 14:00</Text>
               </View>
-              <Text style={styles.topCaption}>Intore Entertainment</Text>
+              <Text style={styles.topCaption}>{event.organization.name}</Text>
             </View>
           </View>
           <ScrollView>
@@ -127,46 +189,28 @@ const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({navigation}) => {
               <View style={styles.rowHeading}>
                 <Text style={styles.rowTitle}>Tickets</Text>
               </View>
-              <View style={styles.addTicket}>
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  style={styles.qtyButton}
-                  onPress={() => removeHolders('VIP')}>
-                  <Icon name="remove" size={15} color={colors.blue} />
-                </TouchableOpacity>
-                <View style={styles.qty}>
-                  <Text style={styles.qtyText}>{countSeats('VIP')}</Text>
+              {arrSeats.map((seat, index) => (
+                <View key={index} style={styles.addTicket}>
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    style={styles.qtyButton}
+                    onPress={() => removeHolders(seat.name)}>
+                    <Icon name="remove" size={15} color={colors.blue} />
+                  </TouchableOpacity>
+                  <View style={styles.qty}>
+                    <Text style={styles.qtyText}>{countSeats(seat.name)}</Text>
+                  </View>
+                  <View style={styles.ticketType}>
+                    <Text style={styles.ticketTypeText}>{seat.name}</Text>
+                  </View>
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    style={styles.qtyButton}
+                    onPress={() => addHolders(seat)}>
+                    <Icon name="add" size={15} color={colors.blue} />
+                  </TouchableOpacity>
                 </View>
-                <View style={styles.ticketType}>
-                  <Text style={styles.ticketTypeText}>VIP</Text>
-                </View>
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  style={styles.qtyButton}
-                  onPress={() => addHolders('VIP')}>
-                  <Icon name="add" size={15} color={colors.blue} />
-                </TouchableOpacity>
-              </View>
-              <View style={styles.addTicket}>
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  style={styles.qtyButton}
-                  onPress={() => removeHolders('Regular')}>
-                  <Icon name="remove" size={15} color={colors.blue} />
-                </TouchableOpacity>
-                <View style={styles.qty}>
-                  <Text style={styles.qtyText}>{countSeats('Regular')}</Text>
-                </View>
-                <View style={styles.ticketType}>
-                  <Text style={styles.ticketTypeText}>Regular</Text>
-                </View>
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  style={styles.qtyButton}
-                  onPress={() => addHolders('Regular')}>
-                  <Icon name="add" size={15} color={colors.blue} />
-                </TouchableOpacity>
-              </View>
+              ))}
             </View>
             <Transitioning.View ref={transitionRef} transition={transition}>
               <View style={styles.row}>
@@ -184,7 +228,7 @@ const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({navigation}) => {
                   <View style={styles.holder}>
                     <Text style={styles.holderName}>{holders[0].name}</Text>
                     <Text style={styles.holderType}>
-                      {holders[0].seatCategory.substring(0, 3)}
+                      {holders[0].seatCategory.substring(0, 5)}
                     </Text>
                   </View>
                 ) : null}
@@ -193,7 +237,7 @@ const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({navigation}) => {
                       <View key={index} style={styles.holder}>
                         <Text style={styles.holderName}>{holder.name}</Text>
                         <Text style={styles.holderType}>
-                          {holder.seatCategory.substring(0, 3)}
+                          {holder.seatCategory.substring(0, 5)}
                         </Text>
                       </View>
                     ))
@@ -238,13 +282,18 @@ const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({navigation}) => {
           <View style={styles.footer}>
             <View style={styles.total}>
               <Text style={styles.totalLabel}>Total</Text>
-              <Text style={styles.totalText}>37,000Rwf</Text>
+              <Text style={styles.totalText}>{`${countTotal()}Rwf`}</Text>
             </View>
             <Text style={styles.terms}>
               By Placing this order, you agree to terms and conditions
             </Text>
             <View style={styles.buttonView}>
-              <Button title="Confirm" type="primary" onPress={onConfirm} />
+              <Button
+                title="Confirm"
+                type="primary"
+                onPress={onConfirm}
+                isLoading={loading}
+              />
             </View>
           </View>
         </View>

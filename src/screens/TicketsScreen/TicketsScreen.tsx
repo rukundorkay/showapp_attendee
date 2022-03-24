@@ -10,24 +10,38 @@ import {
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import FIcon from 'react-native-vector-icons/Feather';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {CompositeNavigationProp} from '@react-navigation/native';
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 
+import {RootStackParamList} from '../../../types';
+import {MainBottomTabParamList} from '../Home/MainBottomTabParams';
 import {Button, TicketCarousel} from '../../components';
-import {colors} from '../../constants';
+import {useContextMode} from '../../context/useContext';
 import {Fetcher} from '../../utils/Fetcher';
+import {colors} from '../../constants';
 import styles from './TicketsScreen.styles';
 
-const TicketsScreen = () => {
+type TicketsScreenProps = {
+  navigation: CompositeNavigationProp<
+    StackNavigationProp<RootStackParamList, 'home'>,
+    BottomTabNavigationProp<MainBottomTabParamList, 'Tickets'>
+  >;
+};
+
+const TicketsScreen: React.FC<TicketsScreenProps> = ({navigation}) => {
   const [activeTab, setActiveTab] = useState<'active' | 'cancelled'>('active');
   const [selectedItem, setSelectedItem] = useState<number>();
   const [result, setResult] = useState();
   const [loading, setLoading] = useState(false);
+  const [loadingRefund, setLoadingRefund] = useState(false);
+  const {tickets} = useContextMode();
 
   const fetchTickets = useCallback(async () => {
     try {
       setLoading(true);
 
       const res = await Fetcher(undefined, '/tickets/user', 'GET');
-      console.log(res);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -43,7 +57,18 @@ const TicketsScreen = () => {
     setSelectedItem(id);
   };
 
-  console.log(selectedItem);
+  const refund = async () => {
+    try {
+      setLoadingRefund(true);
+
+      await Fetcher(undefined, `/tickets/refund/${selectedItem}`, 'PATCH');
+      setLoadingRefund(false);
+      navigation.navigate('TicketStatus');
+    } catch (error) {
+      console.log(error);
+      setLoadingRefund(false);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -95,10 +120,7 @@ const TicketsScreen = () => {
               style={styles.loader}
             />
           ) : (
-            <TicketCarousel
-              data={[{id: 1}, {id: 2}, {id: 3}]}
-              onItemPress={onItemPress}
-            />
+            <TicketCarousel data={tickets} onItemPress={onItemPress} />
           )}
         </View>
       </ScrollView>
@@ -107,7 +129,12 @@ const TicketsScreen = () => {
           {activeTab === 'active' ? (
             <Button type="primary" title="Share" />
           ) : (
-            <Button type="primary" title="Ask for refund" />
+            <Button
+              type="primary"
+              title="Ask for refund"
+              onPress={() => refund()}
+              isLoading={loadingRefund}
+            />
           )}
         </View>
       ) : null}

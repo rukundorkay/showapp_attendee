@@ -82,7 +82,7 @@ const ConcertScreen = ({route, navigation}: any) => {
         <Button
           type="primary"
           title="Buy ticket"
-          onPress={() => navigation.navigate('BuyTicket')}
+          onPress={() => navigation.navigate('BuyTicket', {event: concert})}
         />
       </View>
     </SafeAreaView>

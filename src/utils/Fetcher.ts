@@ -6,7 +6,7 @@ export const controller = new AbortController();
 export const Fetcher = async (
   Body?: {},
   url: string,
-  method: 'GET' | 'POST',
+  method: 'GET' | 'POST' | 'PATCH',
 ) => {
   const {signal} = controller;
   const token = await EncryptedStorage.getItem('userToken');
@@ -24,10 +24,15 @@ export const Fetcher = async (
     signal,
     body: JSON.stringify(Body),
   })
-    .then(res => res.json())
+    .then(async res => {
+      const result = await res.json();
+      const success = String(res.status).startsWith('2') ? true : false;
+      return {
+        ...result,
+        success,
+      };
+    })
     .catch(({message}) => ({message}));
-
-  result.success = String(result.statusCode).startsWith('2') ? true : false;
 
   return result;
 };
