@@ -1,6 +1,7 @@
 export type RootStackParamList = {
   home: undefined;
   BuyTicket: undefined;
+  TicketBought: undefined;
 };
 
 interface ContextParams {

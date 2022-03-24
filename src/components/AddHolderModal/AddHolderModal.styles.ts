@@ -4,16 +4,30 @@ import {colors, fonts} from '../../constants';
 import dimesions from '../../constants/dimesions';
 
 const styles = StyleSheet.create({
+  absolute: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
   backDrop: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
   },
   modalView: {
     backgroundColor: colors.background,
     margin: 48,
     borderRadius: 10,
+    shadowColor: colors.blue,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   header: {
     alignItems: 'center',

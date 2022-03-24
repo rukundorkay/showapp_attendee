@@ -16,5 +16,6 @@ export default {
   darkBlue: '#323F5A',
   mutedBlue: '#717D96',
   green: '#30A80C',
-  darkGray: '#666666'
+  darkGray: '#666666',
+  mutedGray: '#8693AD',
 };

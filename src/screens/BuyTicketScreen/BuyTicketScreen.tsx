@@ -10,10 +10,10 @@ import {
   StatusBar,
 } from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
-import {RootStackParamList} from '../../../types';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Transition, Transitioning} from 'react-native-reanimated';
 
+import {RootStackParamList} from '../../../types';
 import {Holder} from '../../interfaces/holder.interface';
 import {AddHolderModal, Button, Header} from '../../components';
 import {colors} from '../../constants';
@@ -97,6 +97,7 @@ const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({navigation}) => {
 
   const onConfirm = () => {
     console.log(holders);
+    navigation.navigate('TicketBought');
   };
 
   return (

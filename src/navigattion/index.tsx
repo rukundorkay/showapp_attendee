@@ -4,6 +4,7 @@ import {RootStackParamList} from '../../types';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import BuyTicketScreen from '../screens/BuyTicketScreen/BuyTicketScreen';
+import TicketBoughtScreen from '../screens/TicketBoughtScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -17,6 +18,7 @@ export default () => (
     <Stack.Navigator initialRouteName="BuyTicket" screenOptions={options}>
       <Stack.Screen name="home" component={HomeScreen} />
       <Stack.Screen name="BuyTicket" component={BuyTicketScreen} />
+      <Stack.Screen name="TicketBought" component={TicketBoughtScreen} />
     </Stack.Navigator>
   </NavigationContainer>
 );
