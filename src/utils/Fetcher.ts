@@ -21,9 +21,14 @@ export const Fetcher = async (Body:{}, url:string, method: 'GET'|'POST') => {
     method,
     signal,
     body:JSON.stringify(Body),
-  }).then(res => res.json()).catch(({ message }) => ({ message }))
-
-  result.success = String(result.statusCode).startsWith('2') ? true : false
+  }).then( async res => {
+      const result = await res.json()
+      const success = String(res.status).startsWith('2') ? true : false;
+     return { 
+       ...result,
+       success
+      }
+  }).catch(({ message }) => ({ message }))
 
   return result;
 };

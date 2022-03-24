@@ -16,6 +16,7 @@ const initialContext: ContextParams = {
   UserInterests: [],
   handlerUser: (type: string, value: User) => {},
   handleInterests: (type: string, value: Interest[]) => Promise,
+  setAuth: () => {}
 };
 
 const StoreContext = createContext<ContextParams>(initialContext);
@@ -72,10 +73,13 @@ const StoreProvider: React.FC = ({children}) => {
     });
   };
 
+  const setAuth = (type:boolean) => { setState(prev => ({...prev,isAuth:type})) } 
+
   const options = {
     ...state,
     handlerUser,
     handleInterests,
+    setAuth
   };
 
   return (

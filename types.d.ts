@@ -23,6 +23,7 @@ interface ContextParams {
   handlerUser: UsercontextHandler;
   handleInterests: UserInterestshandler;
   UserInterests: Interest[];
+  setAuth: (type:boolean) => void
 }
 
 type UserContexhandler = (type: string, value: User) => void;
