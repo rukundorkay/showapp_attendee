@@ -13,7 +13,7 @@ const options = {headerShown: false};
 
 export default () => (
   <NavigationContainer>
-    <Stack.Navigator initialRouteName="home" screenOptions={options}>
+    <Stack.Navigator initialRouteName="TicketStatus" screenOptions={options}>
       <Stack.Screen name="home" component={HomeScreen} />
       <Stack.Screen name="TicketStatus" component={TicketStatusScreen} />
     </Stack.Navigator>
