@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, Modal, Pressable, TextInput} from 'react-native';
+import {BlurView} from '@react-native-community/blur';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Button from '../Button';
@@ -30,6 +31,12 @@ const AddHolderModal: React.FC<AddHolderModal> = ({visible, close, action}) => {
       transparent={true}
       statusBarTranslucent
       onRequestClose={() => close()}>
+      <BlurView
+        style={styles.absolute}
+        blurType="light"
+        blurAmount={5}
+        reducedTransparencyFallbackColor="white"
+      />
       <Pressable onPress={close} style={styles.backDrop}>
         <View style={styles.modalView}>
           <View style={styles.header}>

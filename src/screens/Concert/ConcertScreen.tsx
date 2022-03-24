@@ -10,7 +10,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import IconHolder from '../../components/IconHolder';
 import {formatDate} from '../../utils/dateFormat';
 
-const ConcertScreen = ({route}: any) => {
+const ConcertScreen = ({route, navigation}: any) => {
   const {concert, img} = route.params;
   const pics = [
     require('../../assets/images/1.png'),
@@ -82,7 +82,7 @@ const ConcertScreen = ({route}: any) => {
         <Button
           type="primary"
           title="Buy ticket"
-          onPress={() => console.log('buy ticket')}
+          onPress={() => navigation.navigate('BuyTicket')}
         />
       </View>
     </SafeAreaView>

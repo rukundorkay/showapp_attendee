@@ -4,4 +4,5 @@ export {default as CardModal} from './CardModal';
 export {default as IconHolder} from './IconHolder';
 export {default as Header} from './Header';
 export {default as AddHolderModal} from './AddHolderModal';
+export {default as TicketCard} from './TicketCard';
 export {default as ModedModal} from './ModedModal';

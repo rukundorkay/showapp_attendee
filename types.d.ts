@@ -1,5 +1,3 @@
-import {boolean} from 'yup';
-
 export type RootStackParamList = {
   welcome: undefined;
   home: undefined;
@@ -7,13 +5,14 @@ export type RootStackParamList = {
   register: undefined;
   verification: undefined;
   BuyTicket: undefined;
+  TicketBought: undefined;
   concert: {id: String};
   explore: undefined;
   filter: undefined;
   login: undefined;
   interest: undefined;
   forgotPassword: undefined;
-  Profile: undefined
+  Profile: undefined;
   navigate: (name: string) => void;
   goBack: () => void;
 };
@@ -23,7 +22,7 @@ interface ContextParams {
   isAuth: boolean;
   handlerUser: UsercontextHandler;
   handleInterests: UserInterestshandler;
-  UserInterests: Interest[]
+  UserInterests: Interest[];
 }
 
 type UserContexhandler = (type: string, value: User) => void;

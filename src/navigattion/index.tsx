@@ -7,13 +7,14 @@ import ExploreScreen from '../screens/Explore/ExploreScreen';
 import FilterScreen from '../screens/Filter/FilterScreen';
 import ProfileScreen from '../screens/Profile';
 import BuyTicketScreen from '../screens/BuyTicketScreen/BuyTicketScreen';
+import TicketBoughtScreen from '../screens/TicketBoughtScreen';
 import LoginScreen from '../screens/Login';
 import InterestScreen from '../screens/Interest';
 import ForgotPassword from '../screens/ForgotPassword';
 import RegistrationScreen from '../screens/Registraction/Registration';
 import WelcomeScreen from '../screens/WelcomePage/Welcome';
 import VerificationCodePage from '../screens/VerificationCodePage';
-import { useContextMode } from '../context/useContext';
+import {useContextMode} from '../context/useContext';
 import HomeScreen from '../screens/Home/HomeScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -36,6 +37,7 @@ export default () => {
             <Stack.Screen name="concert" component={ConcertScreen} />
             <Stack.Screen name="explore" component={ExploreScreen} />
             <Stack.Screen name="filter" component={FilterScreen} />
+            <Stack.Screen name="TicketBought" component={TicketBoughtScreen} />
           </>
         ) : (
           <>
@@ -44,7 +46,10 @@ export default () => {
             <Stack.Screen name="interest" component={InterestScreen} />
             <Stack.Screen name="register" component={RegistrationScreen} />
             <Stack.Screen name="forgotPassword" component={ForgotPassword} />
-            <Stack.Screen name="verification" component={VerificationCodePage} />
+            <Stack.Screen
+              name="verification"
+              component={VerificationCodePage}
+            />
           </>
         )}
       </Stack.Navigator>
