@@ -61,3 +61,12 @@ buck-out/
 
 #yarn
 yarn.lock
+
+# npm
+package-*.json
+
+# vscode
+.vscode
+
+#npm
+package-lock.json
