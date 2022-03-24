@@ -14,7 +14,8 @@ const styles = StyleSheet.create({
   top: {
     alignItems: 'center',
     paddingHorizontal: dimesions.Spacing,
-    paddingVertical: 30,
+    paddingTop: 30,
+    paddingBottom: 10,
   },
   checkImg: {
     width: 35,
@@ -33,11 +34,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 22,
     color: colors.mutedGray,
-  },
-  contentContainer: {
-    alignItems: 'center',
-    paddingHorizontal: dimesions.Spacing + 10,
-    paddingBottom: 20,
   },
   buttonView: {
     alignItems: 'center',

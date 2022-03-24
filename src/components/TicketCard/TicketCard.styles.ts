@@ -27,6 +27,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  selected: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    zIndex: 10,
+  },
   cardContent: {
     paddingTop: 16,
   },
@@ -130,10 +136,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 14,
   },
-  barcodeImg:{
+  barcodeImg: {
     width: '100%',
     height: 48,
-  }
+  },
 });
 
 export default styles;
