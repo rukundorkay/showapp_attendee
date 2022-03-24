@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, Text, Pressable, Image} from 'react-native';
 import Animated from 'react-native-reanimated';
-import Icon from 'react-native-vector-icons/Ionicons';
-import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faCalendar, faCheckSquare, faLocation } from '@fortawesome/free-solid-svg-icons'
 import Svg, {Path} from 'react-native-svg';
 
-import {colors} from '../../constants';
+import {colors, textSize} from '../../constants';
 import dimesions from '../../constants/dimesions';
 import styles from './TicketCard.styles';
 
@@ -50,8 +50,8 @@ const TicketCard: React.FC<TicketCardProps> = ({
       onPress={() => onPress(item.id)}>
       <View style={styles.imgContainer}>
         {selected ? (
-          <Icon
-            name="checkbox"
+          <FontAwesomeIcon
+            icon={faCheckSquare}
             size={14}
             color={colors.green}
             style={styles.selected}
@@ -69,9 +69,10 @@ const TicketCard: React.FC<TicketCardProps> = ({
         </View>
         <View style={styles.cardRow}>
           <View style={styles.cardRowLeft}>
-            <MIcon
-              name="calendar-month-outline"
-              size={14}
+            <FontAwesomeIcon
+              // name="calendar-month-outline"
+              icon={faCalendar}
+              size={textSize.M}
               color={colors.blue}
             />
           </View>
@@ -82,7 +83,11 @@ const TicketCard: React.FC<TicketCardProps> = ({
         </View>
         <View style={styles.cardRow}>
           <View style={styles.cardRowLeft}>
-            <Icon name="location-outline" size={14} color={colors.blue} />
+            <FontAwesomeIcon 
+              icon={faLocation} 
+              size={textSize.M} 
+              color={colors.blue} 
+              />
           </View>
           <View style={styles.cardRowRight}>
             <Text style={styles.cardRowText}>Kigali Arena</Text>

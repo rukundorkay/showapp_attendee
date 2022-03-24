@@ -1,7 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {color} from 'react-native-reanimated';
-import { blue, red } from 'react-native-reanimated/src/reanimated2/Colors';
-import {colors, fonts, height, Spacing, textSize, width} from '../../constants';
+import {Platform, StyleSheet} from 'react-native';
+import {borderRadius, colors, fonts, globalStyles, Spacing, textSize } from '../../constants';
 
 export const styles = StyleSheet.create({
     eventTitle:{
@@ -11,44 +9,31 @@ export const styles = StyleSheet.create({
         color:colors.blue,
         fontFamily:fonts.SemiBold,
         fontSize:textSize.XL
-
     },
     filterButton:{
       paddingVertical:Spacing-25,
-      paddingHorizontal:Spacing-20
     },
     searchFilterWrapper:{
-     flexDirection:'row',
-     marginHorizontal:Spacing,
-     marginTop:Spacing-25
-    //  backgroundColor:"red",
-    },
-    searchButton:{
-        marginVertical:10
-
+        ...globalStyles.flexer,
+        paddingHorizontal:Spacing,
+        marginTop: Platform.OS === 'android' ? Spacing/2 : 0
     },
     searchField:{
-        marginHorizontal:Spacing-20,
-        width:180,
         color:colors.blue,
-        
-        // textDecorationLine:0,
-        
+        flex:1,
+        fontFamily: fonts.Medium,
+        fontSize: textSize.M
     },
     eventsearch:{
       backgroundColor:colors.lightBlue,
-      marginHorizontal:0,
-      width:250,
       flexDirection:'row',
-      height:45,
-      borderRadius:12
-
+      alignItems:'center',
+      flex:.95,
+      paddingVertical: Platform.OS === 'android' ? 0 : Spacing*0.4,
+      paddingHorizontal:Spacing*0.7,
+      borderRadius: borderRadius.SM
     },
     eventheader:{
         backgroundColor:colors.background
-
     }
-    
-  
-  
 });

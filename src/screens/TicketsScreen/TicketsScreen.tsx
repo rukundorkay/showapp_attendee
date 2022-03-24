@@ -8,7 +8,8 @@ import {
   StatusBar,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import FIcon from 'react-native-vector-icons/Feather';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import {Button, TicketCarousel} from '../../components';
 
 import {colors} from '../../constants';
@@ -21,8 +22,6 @@ const TicketsScreen = () => {
   const onItemPress = (id: number) => {
     setSelectedItem(id);
   };
-
-  console.log(selectedItem);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -38,7 +37,7 @@ const TicketsScreen = () => {
             style={styles.inputSearch}
             returnKeyType="search"
           />
-          <FIcon name="search" size={30} color={colors.blue} />
+          <FontAwesomeIcon icon={faSearch} size={30} color={colors.blue} />
         </View>
       </View>
       <View style={styles.tabs}>
@@ -76,9 +75,9 @@ const TicketsScreen = () => {
       {selectedItem ? (
         <View style={styles.buttonView}>
           {activeTab === 'active' ? (
-            <Button type="primary" title="Share" />
+            <Button onPress={()=>{}} type="primary" title="Share" />
           ) : (
-            <Button type="primary" title="Ask for refund" />
+            <Button onPress={()=>{}} type="primary" title="Ask for refund" />
           )}
         </View>
       ) : null}

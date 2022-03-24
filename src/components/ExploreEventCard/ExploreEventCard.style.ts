@@ -6,41 +6,38 @@ export default StyleSheet.create({
   eventname:{
     fontFamily:fonts.Medium,
     color:colors.mainText
-
   },
   eventWrapper:{
     flexDirection:'row',
+    alignItems:'center',
+    justifyContent:"space-between",
     marginHorizontal:30,
     marginVertical:10,
     backgroundColor:colors.background,
-    borderRadius:5,
+    borderRadius:borderRadius.SM,
     elevation:3,
-    paddingLeft:Spacing-20,
-    paddingVertical:Spacing-20
-    
-      },
+    paddingHorizontal:Spacing-20,
+    paddingVertical:Spacing-20,
+  },
   eventImage:{
-    width:60,
-    height:60,
-    borderRadius:8
+    width: width*0.2,
+    height: width*0.2,
+    borderRadius:borderRadius.SM,
   },
   eventprice:{
-    width:65,
+    // width:65,
+    color:colors.primary,
   },
   eventDescription:{
-    marginVertical:Spacing-25,
-    marginHorizontal:Spacing-20,
-  
+    flex:.9,
   },
   eventDate:{
     marginTop:15,
     fontFamily:fonts.Medium,
-    color:'#8693AD'
+    color:colors.mutedBlue
   },
   eventpricetext:{
     color:colors.error,
-    marginLeft:30,
-    marginTop:35
   
   },
   

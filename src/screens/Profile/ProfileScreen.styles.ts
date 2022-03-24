@@ -9,8 +9,16 @@ import {
 } from '../../constants';
 
 export const style = StyleSheet.create({
+  qr:{
+    padding: Spacing/2,
+    // backgroundColor: 'lightgrey',
+    borderRadius: borderRadius.L,
+    fontFamily: fonts.Bold,
+    fontSize:textSize.L,
+    color: colors.mutedText
+  },
   header: {
-    marginBottom: Spacing * 0.9,
+    marginVertical: Spacing * 0.9,
   },
   profile: {
     flexDirection: 'row',
@@ -23,6 +31,7 @@ export const style = StyleSheet.create({
   container: {
     flex: 1,
     padding: Spacing,
+    backgroundColor: colors.background
   },
   profImage: {
     width: width * 0.15,
@@ -53,7 +62,7 @@ export const style = StyleSheet.create({
   title: {
     fontFamily: fonts.ExtraBold,
     color: colors.midBlue,
-    fontSize: Spacing * 0.4,
+    fontSize: textSize.M,
     paddingVertical: Spacing * 0.4,
   },
   text: {
@@ -74,11 +83,10 @@ export const style = StyleSheet.create({
     width: width * 0.6,
     backgroundColor: colors.inputBgBlue,
     color: colors.blue,
-    fontWeight: 'bold',
+    fontFamily: fonts.SemiBold,
     fontSize: textSize.M,
-    // marginLeft: Spacing,
     borderRadius: borderRadius.XS,
-    paddingLeft: Spacing * 0.5,
+    padding: Spacing * 0.5,
     marginBottom: Spacing * 0.5,
   },
 });

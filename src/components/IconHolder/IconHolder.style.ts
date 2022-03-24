@@ -1,15 +1,15 @@
 import {StyleSheet} from 'react-native';
-import {width, colors, Spacing, borderRadius, fonts} from '../../constants';
+import {colors, Spacing, borderRadius} from '../../constants';
 
 export default StyleSheet.create({
   IconHolder: {
-    marginRight: Spacing - 12,
+    marginRight: Spacing / 2,
     backgroundColor: colors.inputBgBlue,
-
+    justifyContent:'center',
+    alignItems:'center',
     width: 40,
     height: 40,
-    borderRadius: 3,
-    paddingTop: Spacing - 25,
-    paddingLeft: Spacing - 25,
+    borderRadius: borderRadius.SM,
+    padding:Spacing/1.3
   },
 });

@@ -10,13 +10,14 @@ import {
   StatusBar,
 } from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faAdd, faChevronDown, faChevronUp, faRemove } from '@fortawesome/free-solid-svg-icons'
 import {Transition, Transitioning} from 'react-native-reanimated';
 
 import {RootStackParamList} from '../../../types';
 import {Holder} from '../../interfaces/holder.interface';
 import {AddHolderModal, Button, Header} from '../../components';
-import {colors} from '../../constants';
+import {colors, textSize} from '../../constants';
 import styles from './BuyTicketScreen.styles';
 
 const PAYMENT_METHODS = [
@@ -144,7 +145,7 @@ const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({navigation}) => {
                   activeOpacity={0.8}
                   style={styles.qtyButton}
                   onPress={() => addHolders('VIP')}>
-                  <Icon name="add" size={15} color={colors.blue} />
+                  <FontAwesomeIcon icon={faAdd} size={textSize.M} color={colors.blue} />
                 </TouchableOpacity>
               </View>
               <View style={styles.addTicket}>
@@ -152,7 +153,7 @@ const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({navigation}) => {
                   activeOpacity={0.8}
                   style={styles.qtyButton}
                   onPress={() => removeHolders('Regular')}>
-                  <Icon name="remove" size={15} color={colors.blue} />
+                  <FontAwesomeIcon icon={faRemove} size={textSize.M} color={colors.blue} />
                 </TouchableOpacity>
                 <View style={styles.qty}>
                   <Text style={styles.qtyText}>{countSeats('Regular')}</Text>
@@ -164,7 +165,7 @@ const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({navigation}) => {
                   activeOpacity={0.8}
                   style={styles.qtyButton}
                   onPress={() => addHolders('Regular')}>
-                  <Icon name="add" size={15} color={colors.blue} />
+                  <FontAwesomeIcon icon={faAdd} size={textSize.M} color={colors.blue} />
                 </TouchableOpacity>
               </View>
             </View>
@@ -173,10 +174,10 @@ const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({navigation}) => {
                 <Pressable onPress={expandHolders}>
                   <View style={styles.rowHeading}>
                     <Text style={styles.rowTitle}>Holders</Text>
-                    <Icon
-                      name={showHolders ? 'chevron-up' : 'chevron-down'}
-                      size={14}
-                      color={colors.mainText}
+                    <FontAwesomeIcon
+                      icon={ showHolderModal ? faChevronUp : faChevronDown }
+                      color={ colors.mainText }
+                      size={ textSize.M }
                     />
                   </View>
                 </Pressable>

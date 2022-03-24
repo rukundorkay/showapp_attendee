@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import {View, Text, Modal, Pressable, TextInput} from 'react-native';
 import {BlurView} from '@react-native-community/blur';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 import Button from '../Button';
-import {colors} from '../../constants';
+import {colors, textSize} from '../../constants';
 import styles from './AddHolderModal.styles';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faClose } from '@fortawesome/free-solid-svg-icons'
 
 type AddHolderModal = {
   visible: boolean;
@@ -41,11 +42,11 @@ const AddHolderModal: React.FC<AddHolderModal> = ({visible, close, action}) => {
         <View style={styles.modalView}>
           <View style={styles.header}>
             <Text style={styles.headerText}>Holder Information</Text>
-            <Icon
-              name="close"
-              size={15}
+            <FontAwesomeIcon 
+              icon={faClose}
+              size={textSize.M} 
               color={colors.primary}
-              style={styles.closeButton}
+              style={styles.closeButton} 
             />
           </View>
           <View style={styles.content}>
