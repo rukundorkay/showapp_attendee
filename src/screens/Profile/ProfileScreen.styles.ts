@@ -9,13 +9,23 @@ import {
 } from '../../constants';
 
 export const style = StyleSheet.create({
-  qr:{
-    padding: Spacing/2,
+  qr: {
+    padding: Spacing / 2,
     // backgroundColor: 'lightgrey',
     borderRadius: borderRadius.L,
     fontFamily: fonts.Bold,
-    fontSize:textSize.L,
-    color: colors.mutedText
+    fontSize: textSize.L,
+    color: colors.mutedText,
+  },
+  img: {
+    width: 20,
+    height: 20,
+    borderRadius: 5,
+  },
+  card: {
+    flexDirection: 'row',
+    width: width * 0.5,
+    justifyContent: 'space-around',
   },
   header: {
     marginVertical: Spacing * 0.9,
@@ -31,7 +41,7 @@ export const style = StyleSheet.create({
   container: {
     flex: 1,
     padding: Spacing,
-    backgroundColor: colors.background
+    backgroundColor: colors.background,
   },
   profImage: {
     width: width * 0.15,

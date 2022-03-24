@@ -21,8 +21,14 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../../types';
 import {useNavigation} from '@react-navigation/native';
 import EventCard from './EventCard';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faBell, faChevronDown, faGlobe, faHome, faTicket } from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+  faBell,
+  faChevronDown,
+  faGlobe,
+  faHome,
+  faTicket,
+} from '@fortawesome/free-solid-svg-icons';
 import EXploreScreen from '../Explore/ExploreScreen';
 import {colors, fonts, Spacing, textSize} from '../../constants';
 import {navList} from './mockdata';
@@ -34,11 +40,10 @@ const HomeScreen = () => {
   const config = {
     headerShown: false,
     tabBarActiveTintColor: colors.primary,
-    tabBarInactiveTintColor: colors.inactiveIcon
-  }
+    tabBarInactiveTintColor: colors.inactiveIcon,
+  };
   return (
-    <BottomTab.Navigator
-      screenOptions={() => (config)}>
+    <BottomTab.Navigator screenOptions={() => config}>
       <BottomTab.Screen
         name="HomeScreen"
         component={HomeEvents}
@@ -65,11 +70,7 @@ const HomeScreen = () => {
         options={{
           tabBarLabel: 'Tickets',
           tabBarIcon: ({size, color}: {size: number; color: string}) => (
-            <FontAwesomeIcon
-              icon={faTicket}
-              size={size}
-              color={color}
-            />
+            <FontAwesomeIcon icon={faTicket} size={size} color={color} />
           ),
         }}
       />
@@ -81,6 +82,20 @@ type HomeScreenProp = CompositeNavigationProp<
   StackNavigationProp<RootStackParamList, 'home'>,
   BottomTabNavigationProp<MainBottomTabParamList, 'HomeScreen'>
 >;
+
+const locations = [
+  'Kigali',
+  'Nyamaseke',
+  'Rubavu',
+  'Kibuye',
+  'Nyaruguru',
+  'Nyamagabe',
+  'Karongi',
+  'Nyanza',
+  'Nyagatare',
+  'Rusizi',
+  'More...',
+];
 
 const HomeEvents = () => {
   const [events, setEvents] = useState<any>([]);
@@ -121,16 +136,18 @@ const HomeEvents = () => {
             <Pressable
               style={styles.findEventsButton}
               onPress={() => setLocationModal(val => !val)}>
-              <Text style={styles.location}>
-                Kigali
-              </Text>
+              <Text style={styles.location}>Kigali</Text>
               <Text>
-                <FontAwesomeIcon icon={faChevronDown} size={textSize.M} color={colors.error} />
+                <FontAwesomeIcon
+                  icon={faChevronDown}
+                  size={textSize.M}
+                  color={colors.error}
+                />
               </Text>
             </Pressable>
           </View>
           <View style={styles.notificationBadge}>
-            <FontAwesomeIcon  icon={faBell} color="#98aedb" size={textSize.L} />
+            <FontAwesomeIcon icon={faBell} color="#98aedb" size={textSize.L} />
           </View>
         </View>
         <ScrollView
@@ -162,10 +179,33 @@ const HomeEvents = () => {
       <Modal animationType="slide" visible={LocationModal} transparent={true}>
         <View style={styles.searchLocationModal}>
           <View>
-            <Pressable
-              style={styles.searchLocationClose}
-              onPress={() => setLocationModal(false)}>
-              <View style={styles.searchLocationBody}></View>
+            <Pressable onPress={() => setLocationModal(false)}>
+              <View style={styles.searchLocationClose}>
+                <View style={styles.searchLocationBody}></View>
+                <Text style={styles.searchLocationTitle}>Location</Text>
+              </View>
+              <View style={styles.searchLocationScroll}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                  {locations.map(loc => (
+                    <Pressable onPress={() => setLocationModal(false)}>
+                      <Text key={loc} style={styles.searchLocationItem}>
+                        {loc}
+                      </Text>
+                    </Pressable>
+                  ))}
+                </ScrollView>
+              </View>
+              {/* <FlatList
+                data={locations}
+                renderItem={item => {
+                  return (
+                    <Pressable>
+                      <Text>{item.item}</Text>
+                    </Pressable>
+                  );
+                }}
+                keyExtractor={(_, id: number) => id}
+              /> */}
             </Pressable>
           </View>
         </View>

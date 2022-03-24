@@ -2,14 +2,25 @@ import {Platform, StyleSheet} from 'react-native';
 import {borderRadius, colors, fonts, Spacing, textSize} from '../../constants';
 
 export const styles = StyleSheet.create({
-  location:{
-    color: colors.primary, 
-    fontFamily:fonts.Medium , 
-    fontSize: textSize.M, 
-    marginRight:Spacing*0.2
+  location: {
+    color: colors.primary,
+    fontFamily: fonts.Medium,
+    fontSize: textSize.M,
+    marginRight: Spacing * 0.2,
   },
   locationText: {
     color: colors.error,
+  },
+  searchLocationScroll: {position: 'relative', marginTop: 85},
+  searchLocationTitle: {
+    fontWeight: 'bold',
+    padding: 10,
+    width: '90%',
+  },
+  searchLocationItem: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#efefef',
   },
   safeArea: {
     backgroundColor: '#fff',
@@ -38,15 +49,15 @@ export const styles = StyleSheet.create({
     color: colors.blue,
     textAlign: 'center',
     fontFamily: fonts.Medium,
-    fontSize: textSize.M
+    fontSize: textSize.M,
   },
   findEventsButton: {
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: Platform.OS === 'android' ? 'center' : "flex-end" ,
+    alignItems: Platform.OS === 'android' ? 'center' : 'flex-end',
   },
   notificationBadge: {
-    padding:Spacing/2.6,
+    padding: Spacing / 2.6,
     backgroundColor: '#efefef',
     borderRadius: borderRadius.SM,
     justifyContent: 'center',
