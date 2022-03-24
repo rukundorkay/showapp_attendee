@@ -21,24 +21,30 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../../types';
 import {useNavigation} from '@react-navigation/native';
 import EventCard from './EventCard';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faBell, faChevronDown, faGlobe, faHome, faTicket } from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+  faBell,
+  faChevronDown,
+  faGlobe,
+  faHome,
+  faTicket,
+} from '@fortawesome/free-solid-svg-icons';
 import EXploreScreen from '../Explore/ExploreScreen';
 import {colors, fonts, Spacing, textSize} from '../../constants';
 import {navList} from './mockdata';
 import axios from 'axios';
 import TicketsScreen from '../TicketsScreen';
+import {useContextMode} from '../../context/useContext';
 
 const BottomTab = createBottomTabNavigator<MainBottomTabParamList>();
 const HomeScreen = () => {
   const config = {
     headerShown: false,
     tabBarActiveTintColor: colors.primary,
-    tabBarInactiveTintColor: colors.inactiveIcon
-  }
+    tabBarInactiveTintColor: colors.inactiveIcon,
+  };
   return (
-    <BottomTab.Navigator
-      screenOptions={() => (config)}>
+    <BottomTab.Navigator screenOptions={() => config}>
       <BottomTab.Screen
         name="HomeScreen"
         component={HomeEvents}
@@ -65,11 +71,7 @@ const HomeScreen = () => {
         options={{
           tabBarLabel: 'Tickets',
           tabBarIcon: ({size, color}: {size: number; color: string}) => (
-            <FontAwesomeIcon
-              icon={faTicket}
-              size={size}
-              color={color}
-            />
+            <FontAwesomeIcon icon={faTicket} size={size} color={color} />
           ),
         }}
       />
@@ -87,6 +89,8 @@ const HomeEvents = () => {
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation<HomeScreenProp>();
   const [LocationModal, setLocationModal] = useState(false);
+
+  const {isAuth} = useContextMode();
 
   useEffect(() => {
     setLoading(true);
@@ -110,27 +114,37 @@ const HomeEvents = () => {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.body}>
         <View style={styles.header}>
-          <Pressable onPress={() => navigation.navigate('Profile')}>
+          {isAuth ? (
+            <Pressable onPress={() => navigation.navigate('Profile')}>
+              <Image
+                source={require('../../assets/images/event-profile.jpg')}
+                style={styles.profileImage}
+              />
+            </Pressable>
+          ) : (
             <Image
-              source={require('../../assets/images/event-profile.jpg')}
+              source={require('../../assets/images/blank.webp')}
               style={styles.profileImage}
             />
-          </Pressable>
+          )}
+
           <View style={styles.findEvents}>
             <Text style={styles.findEventsText}>Find Events In</Text>
             <Pressable
               style={styles.findEventsButton}
               onPress={() => setLocationModal(val => !val)}>
-              <Text style={styles.location}>
-                Kigali
-              </Text>
+              <Text style={styles.location}>Kigali</Text>
               <Text>
-                <FontAwesomeIcon icon={faChevronDown} size={textSize.M} color={colors.error} />
+                <FontAwesomeIcon
+                  icon={faChevronDown}
+                  size={textSize.M}
+                  color={colors.error}
+                />
               </Text>
             </Pressable>
           </View>
           <View style={styles.notificationBadge}>
-            <FontAwesomeIcon  icon={faBell} color="#98aedb" size={textSize.L} />
+            <FontAwesomeIcon icon={faBell} color="#98aedb" size={textSize.L} />
           </View>
         </View>
         <ScrollView

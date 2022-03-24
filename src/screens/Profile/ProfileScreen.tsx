@@ -13,8 +13,15 @@ import {Formik} from 'formik';
 import {useContextMode} from '../../context/useContext';
 import {RootStackParamList, User} from '../../../types';
 import {CardModal, IconHolder} from '../../components';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faChevronLeft, faCog, faCogs, faCreditCard, faSignOut, faStore } from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+  faChevronLeft,
+  faCog,
+  faCogs,
+  faCreditCard,
+  faSignOut,
+  faStore,
+} from '@fortawesome/free-solid-svg-icons';
 import {useNavigation} from '@react-navigation/native';
 
 const ProfileScreen = () => {
@@ -93,7 +100,7 @@ const ProfileScreen = () => {
             phone: authInfo?.phone,
             name: authInfo?.name,
           }}
-          onSubmit={values => console.log(values)}>
+          onSubmit={values => handlerUser('add', values)}>
           {({handleChange, handleBlur, handleSubmit, values}) => (
             <View>
               <View style={[style.flex, style.name]}>
