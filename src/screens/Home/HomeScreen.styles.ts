@@ -1,5 +1,5 @@
 import {Platform, StyleSheet} from 'react-native';
-import {borderRadius, colors, fonts, Spacing, textSize} from '../../constants';
+import {borderRadius, colors, fonts, globalStyles, Spacing, textSize} from '../../constants';
 
 export const styles = StyleSheet.create({
   location: {
@@ -24,15 +24,14 @@ export const styles = StyleSheet.create({
   },
   safeArea: {
     backgroundColor: '#fff',
+    flex:1
   },
   body: {
-    borderBottomWidth: 2,
-    borderBottomColor: '#efefef',
-    backgroundColor: '#fff',
-    paddingHorizontal: 20,
+    backgroundColor: colors.background,
+    paddingHorizontal: Spacing/1.2,
   },
   header: {
-    marginTop: Spacing,
+    marginTop: Platform.OS === "ios" ? Spacing/2 : Spacing,
     flexDirection: 'row',
   },
   profileImage: {
@@ -64,19 +63,18 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   categoryPane: {
-    marginTop: 20,
+    marginVertical: Spacing/2,
   },
   categoryItem: {
-    margin: 10,
-    marginBottom: 20,
+    marginRight: Spacing,
   },
-  categoryText: {},
+  categoryText: {
+    fontFamily: fonts.Medium,
+    color:colors.mutedText
+  },
   eventsWrapper: {
-    padding: 10,
-    marginBottom: 151,
-  },
-  eventsContainer: {
-    marginBottom: 200,
+    flex:1,
+    padding:10
   },
   searchLocationModal: {
     backgroundColor: 'green',
@@ -100,13 +98,9 @@ export const styles = StyleSheet.create({
   // Event card style
   eventCardWrapper: {
     borderRadius: 10,
-    backgroundColor: '#fff',
-    margin: 10,
-    width: '45%',
-    elevation: 5,
-    shadowColor: '#efefef',
-    shadowRadius: 5,
-    shadowOpacity: 1,
+    marginVertical: Spacing/2,
+    width: '47%',
+    margin:Spacing*0.15
   },
   eventPoster: {
     height: 150,
@@ -115,18 +109,23 @@ export const styles = StyleSheet.create({
     borderTopRightRadius: 10,
   },
   eventInfoContainer: {
-    padding: 5,
+    backgroundColor: colors.background,
+    elevation:5,
+    borderBottomRightRadius:5,
+    borderBottomLeftRadius:5,
+    shadowColor: 'black',
+    shadowRadius: 5,
+    shadowOpacity: 1,
+    paddingHorizontal:Spacing/2
   },
   eventTitle: {
-    paddingHorizontal: 10,
     color: colors.darkBlue,
-    fontFamily: fonts.ExtraBold,
     fontSize: Spacing * 0.5,
+    fontFamily: fonts.ExtraBold,
   },
   eventStartDate: {
-    paddingHorizontal: 10,
     color: colors.primary,
-    fontFamily: fonts.ExtraBold,
+    fontFamily: fonts.Medium,
     fontSize: Spacing * 0.35,
   },
   iconColor: {

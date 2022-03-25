@@ -30,10 +30,7 @@ const ProfileModal = ({shown, toggleVisible}: any) => {
         animationType="fade"
         transparent
         visible={shown}
-        onRequestClose={() => {
-          console.log('Closed');
-          toggleVisible();
-        }}>
+        onRequestClose={() => toggleVisible()}>
         <View style={styles.container}>
           <View style={styles.card}>
             <View style={styles.header}>
@@ -44,14 +41,13 @@ const ProfileModal = ({shown, toggleVisible}: any) => {
                 <Text style={styles.red}>X</Text>
               </Pressable>
             </View>
-            <View style={styles.options}>
-              <FlatList
-                data={DATA}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-                horizontal
-              />
-            </View>
+            <FlatList
+              data={DATA}
+              renderItem={renderItem}
+              keyExtractor={item => item.id.toString()}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
           </View>
         </View>
       </Modal>

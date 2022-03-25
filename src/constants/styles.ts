@@ -5,8 +5,7 @@ import fonts from './fonts';
 
 export const globalStyles = StyleSheet.create({
   error:{
-    marginTop:Spacing/2,
-    marginBottom:Spacing,
+    marginVertical:Spacing/2,
     fontFamily: fonts.Regular,
     textTransform:'capitalize',
     color:colors.error,

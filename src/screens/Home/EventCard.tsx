@@ -24,7 +24,7 @@ const EventCard = ({navigation, event}: {navigation: any; event: any}) => {
         resizeMode="cover"
       />
       <View style={styles.eventInfoContainer}>
-        <Text style={styles.eventTitle}>{event.item.title}</Text>
+        <Text numberOfLines={1} style={styles.eventTitle}>{event.item.title}</Text>
         <Text style={styles.eventStartDate}>
           {formatDate(event.item.startDate)}
         </Text>

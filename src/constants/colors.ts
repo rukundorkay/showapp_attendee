@@ -21,4 +21,5 @@ export default {
   darkGray: '#666666',
   mutedGray: '#8693AD',
   inactiveIcon: '#C9D3E6',
+  solidLightBlue: '#c9d3e6'
 };

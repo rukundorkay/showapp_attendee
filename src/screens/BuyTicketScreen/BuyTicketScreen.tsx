@@ -8,6 +8,7 @@ import {
   ScrollView,
   TouchableOpacity,
   StatusBar,
+  Platform,
 } from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -161,7 +162,6 @@ const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({
 
       setLoading(false);
     } catch (error) {
-      console.log(error);
       setLoading(false);
     }
     navigation.navigate('TicketBought');
@@ -169,7 +169,7 @@ const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor={colors.background} />
+      <StatusBar backgroundColor={colors.primary} barStyle={ Platform.OS === 'android' ? "light-content" : "dark-content" } />
       <View style={styles.container}>
         <Header title="Buy Tickets" leftHandler={() => navigation.goBack()} />
         <View style={styles.content}>

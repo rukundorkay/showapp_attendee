@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
   searchFilterWrapper: {
     ...globalStyles.flexer,
     paddingHorizontal: Spacing,
-    marginTop: Platform.OS === 'android' ? Spacing / 2 : 0,
+    marginTop: Platform.OS === 'android' ? Spacing / 2 : - Spacing/1.5,
   },
   searchField: {
     color: colors.blue,

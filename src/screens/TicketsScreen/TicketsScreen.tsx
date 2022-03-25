@@ -46,7 +46,6 @@ const TicketsScreen: React.FC<TicketsScreenProps> = ({navigation}) => {
       const res = await Fetcher(undefined, '/tickets/user', 'GET');
       setLoading(false);
     } catch (error) {
-      console.log(error);
       setLoading(false);
     }
   }, []);
@@ -67,7 +66,6 @@ const TicketsScreen: React.FC<TicketsScreenProps> = ({navigation}) => {
       setLoadingRefund(false);
       navigation.navigate('TicketStatus');
     } catch (error) {
-      console.log(error);
       setLoadingRefund(false);
     }
   };

@@ -5,7 +5,8 @@ import {width, colors, Spacing, borderRadius, fonts} from '../../constants';
 export default StyleSheet.create({
   eventname:{
     fontFamily:fonts.Medium,
-    color:colors.mainText
+    color:colors.mainText,
+    width:"90%"
   },
   eventWrapper:{
     flexDirection:'row',
@@ -24,21 +25,18 @@ export default StyleSheet.create({
     height: width*0.2,
     borderRadius:borderRadius.SM,
   },
-  eventprice:{
-    // width:65,
-    color:colors.primary,
-  },
   eventDescription:{
     flex:.9,
   },
   eventDate:{
     marginTop:15,
     fontFamily:fonts.Medium,
-    color:colors.mutedBlue
+    color:colors.mutedBlue,
+    width:"90%"
   },
   eventpricetext:{
     color:colors.error,
-  
+    fontFamily: fonts.SemiBold
   },
   
 });

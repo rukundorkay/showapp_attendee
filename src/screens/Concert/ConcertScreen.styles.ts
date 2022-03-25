@@ -1,15 +1,16 @@
 import {StyleSheet} from 'react-native';
-import {color} from 'react-native-reanimated';
-import {colors, fonts, height, Spacing, textSize, width} from '../../constants';
+import {colors, fonts, globalStyles, height, Spacing, textSize, width} from '../../constants';
 
 export const styles = StyleSheet.create({
-  button:{
-    marginLeft:Spacing+20,
-    bottom:20,
+  backHandler:{ 
     position:'absolute',
-    zIndex:10
-    
-
+    margin:Spacing,
+    zIndex:1 
+  },
+  button:{
+    position:'absolute',
+    bottom: height*0.05,
+    marginHorizontal: width*0.15,
   },
   map: {
     borderRadius: 3,
@@ -46,7 +47,6 @@ export const styles = StyleSheet.create({
   aboutIcon: {
     marginRight: Spacing - 12,
     backgroundColor: '#C9D3E690',
-    
     width: 40,
     height:40,
     borderRadius: 3,
@@ -56,9 +56,10 @@ export const styles = StyleSheet.create({
   aboutItem: {
     marginTop: Spacing - 22,
     flexDirection: 'row',
+    alignItems:'center'
   },
   aboutItemWrapper: {
-    marginLeft: Spacing - 22,
+    marginLeft: Spacing / 2,
   },
   aboutTitle: {
     fontFamily: fonts.Bold,
@@ -71,39 +72,37 @@ export const styles = StyleSheet.create({
     marginLeft: Spacing,
   },
   body: {
-    flex: 2,
+    flex: 1,
   },
   concertTitle: {
     fontFamily: fonts.SemiBold,
     fontSize: textSize.M,
-    color: "#323F5A",
+    color: colors.darkBlue,
+    flex:.6
   },
   concertOraganizer: {
     color: colors.error,
+    fontFamily: fonts.Medium,
+    textTransform:'capitalize',
+    fontSize: textSize.M,
+    flex:.6
   },
-
   headerTextWrapper: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: '#C9D3E690',
-    opacity:0.7,
+    backgroundColor: colors.solidLightBlue,
+    ...globalStyles.flexer,
     padding: Spacing - 20,
+    position:'absolute',
+    width:'100%',
+    bottom:0,
   },
   headerImage: {
-    flex: 6,
-    height: 150,
-    width: width,
+    position:'absolute',
+    width:'100%',
+    height:'100%',
+    top:0,
   },
   header: {
-   
-    position:'absolute',
-    top:0,
-    flex: 1,
-    height: 200,
-    width: width,
-    zIndex:10
-  },
-  
-
+    height: height*0.4,
+    width,
+  }
 });

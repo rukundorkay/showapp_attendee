@@ -1,9 +1,9 @@
-import { Keyboard, Pressable, Text, View, TextInput as TX } from 'react-native'
+import { Keyboard, Pressable, Text, View, TextInput as TX, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { styles } from './LoginScreen.styles'
 import { Button, TextInput } from '../../components'
 import { useFormik } from 'formik'
-import { colors, globalStyles, textSize, width } from '../../constants'
+import { colors, globalStyles, height, textSize, width } from '../../constants'
 import { useNavigation } from '@react-navigation/native'
 import { RootStackParamList } from '../../../types'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -54,13 +54,13 @@ const LoginScreen = () => {
   },[values])
 
   return (
-    <Pressable style={{ flex:1 }} onPress={Keyboard.dismiss}>
-      <View style={styles.screen}>
-        <View style={styles.circleWrapper}>
-          <View style={styles.bigCircle} />
-          <View style={styles.smallCircle} />
-        </View>
-        <View style={globalStyles.spacer} />
+    <Pressable style={{ flex:1, }} onPress={Keyboard.dismiss}>
+      <View style={styles.circleWrapper}>
+        <View style={styles.bigCircle} />
+        <View style={styles.smallCircle} />
+      </View>
+      <ScrollView style={styles.screen}>
+        { height > 700 &&  <View style={globalStyles.spacer} />}
         <View>
           <Text style={styles.mainText}>Login First</Text>
           <Text style={styles.secondaryText}>
@@ -108,7 +108,7 @@ const LoginScreen = () => {
               isLoading={loading}
               />
         </View>
-        <View style={[globalStyles.flexer,{ justifyContent:'center' }]}>
+        <View style={styles.footerWrapper}>
           <Text style={styles.footer}>
             Don't have an account ? 
           </Text>
@@ -116,7 +116,7 @@ const LoginScreen = () => {
             <Text style={styles.signup}>Sign Up</Text>
           </Pressable>
         </View>
-      </View>
+      </ScrollView>
     </Pressable>
   )
 }

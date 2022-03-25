@@ -98,6 +98,7 @@ const data:Interest[] = [
 const InterestScreen = () => {
     const { handleInterests } = useContextMode()
     const [ interests,setInterests ] = useState(data);
+    const [ loading,setLoader ] = useState<boolean>(false);
     const SlideOneScale:any = useRef(new Animated.Value(3)).current;
     const SlideTwoScale:any = useRef(new Animated.Value(1)).current;
     const [ currentIndex,setCurrentIndex ] = useState<number | null>(0);
@@ -153,8 +154,12 @@ const InterestScreen = () => {
     const handleSubmit = () => {
         const validInterests = interests.filter( one => one.status ) // those with status === true 
         if(validInterests[0]){
+            setLoader(true)
             Promise.resolve(handleInterests(AddInterests,validInterests))
-            .then(() => navigation.navigate('login'))
+            .then(() =>{
+                setLoader(false);
+                navigation.navigate('login');
+            })
         }
     }
 
@@ -221,6 +226,7 @@ const InterestScreen = () => {
                 <Button
                     type="primary"
                     title='Continue'
+                    isLoading={loading}
                     onPress={handleSubmit}
                 />
                 <Pressable onPress={()=> navigation.navigate('login')}>

@@ -14,5 +14,6 @@ export default StyleSheet.create({
   img: {
     height: 50,
     width: 50,
+    resizeMode:"contain"
   },
 });

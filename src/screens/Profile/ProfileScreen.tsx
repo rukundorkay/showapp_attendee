@@ -51,7 +51,7 @@ const ProfileScreen = () => {
 
   return (
     <View style={style.container}>
-      <ScrollView>
+      <ScrollView style={{flex:1}} showsVerticalScrollIndicator={false} >
         <SafeAreaView style={style.header}>
           <Pressable onPress={() => navigation.navigate('home')}>
             <FontAwesomeIcon icon={faChevronLeft} size={25} />
@@ -74,7 +74,7 @@ const ProfileScreen = () => {
               </Pressable>
             </View>
             <View style={[style.flex, style.section]}>
-              <IconHolder type="AntDesign" name={faStore} />
+              <IconHolder name={faStore} />
               <View>
                 <Text style={style.title}>About</Text>
                 <Text style={style.text}>{authInfo?.email}</Text>
@@ -82,14 +82,14 @@ const ProfileScreen = () => {
               </View>
             </View>
             <View style={[style.flex, style.section]}>
-              <IconHolder type="AntDesign" name={faCreditCard} />
+              <IconHolder name={faCreditCard} />
 
               <View>
                 <Text style={style.title}>Payment information</Text>
-                {cards.map(card => {
+                { cards && cards.map((card:any,index:number) => {
                   if (card.type === 'Visa') {
                     return (
-                      <View style={style.card}>
+                      <View style={style.card} key={index}>
                         <Image
                           style={style.img}
                           source={require('../../assets/images/visa.png')}
@@ -149,7 +149,7 @@ const ProfileScreen = () => {
                   </Pressable>
                 </View>
                 <View style={[style.flex, style.section]}>
-                  <IconHolder type="AntDesign" name={faStore} />
+                  <IconHolder name={faStore} />
                   <View>
                     <Text style={style.title}>About</Text>
                     <TextInput
@@ -169,7 +169,7 @@ const ProfileScreen = () => {
                   </View>
                 </View>
                 <View style={[style.flex, style.section]}>
-                  <IconHolder type="AntDesign" name={faCreditCard} />
+                  <IconHolder name={faCreditCard} />
                   <View>
                     <View style={style.add}>
                       <Text style={style.title}>Payment Method</Text>
@@ -191,7 +191,7 @@ const ProfileScreen = () => {
           </Formik>
         )}
         <View style={[style.flex, style.section]}>
-          <IconHolder type="AntDesign" name={faCog} />
+          <IconHolder name={faCog} />
           <Text style={style.title}>Settings</Text>
         </View>
         {/* <Pressable onPress={() => console.log('hello')}> */}
@@ -200,7 +200,7 @@ const ProfileScreen = () => {
             handlerUser('delete', {name: '', phone: '', email: ''})
           }>
           <View style={[style.flex, style.section]}>
-            <IconHolder type="AntDesign" name={faSignOut} />
+            <IconHolder name={faSignOut} />
             <Text style={style.title}>Log out</Text>
           </View>
         </Pressable>

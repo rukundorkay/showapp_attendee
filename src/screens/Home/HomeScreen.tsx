@@ -8,6 +8,8 @@ import {
   FlatList,
   Image,
   ActivityIndicator,
+  StatusBar,
+  Platform,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {styles} from './HomeScreen.styles';
@@ -30,7 +32,7 @@ import {
   faTicket,
 } from '@fortawesome/free-solid-svg-icons';
 import EXploreScreen from '../Explore/ExploreScreen';
-import {colors, fonts, Spacing, textSize} from '../../constants';
+import {colors, textSize, width} from '../../constants';
 import {navList} from './mockdata';
 import axios from 'axios';
 import TicketsScreen from '../TicketsScreen';
@@ -119,7 +121,6 @@ const HomeEvents = () => {
       })
       .catch(function (error) {
         // handle error
-        console.log(error);
       })
       .then(function () {
         // always executed
@@ -128,6 +129,7 @@ const HomeEvents = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
+      <StatusBar backgroundColor={colors.primary} barStyle={ Platform.OS === 'android' ? "light-content" : "dark-content" } />
       <View style={styles.body}>
         <View style={styles.header}>
           {isAuth ? (
@@ -179,15 +181,14 @@ const HomeEvents = () => {
         data={events}
         refreshing={loading}
         ListEmptyComponent={
-          <ActivityIndicator size="large" color={colors.primary} />
+          <ActivityIndicator size={textSize.L} color={colors.primary} />
         }
         renderItem={item => (
           <EventCard navigation={navigation} event={item} key={item.index} />
         )}
         numColumns={2}
-        keyExtractor={item => item.id}
         style={styles.eventsWrapper}
-        contentContainerStyle={styles.eventsContainer}
+        keyExtractor={item => item.id}
       />
       <Modal animationType="slide" visible={LocationModal} transparent={true}>
         <View style={styles.searchLocationModal}>

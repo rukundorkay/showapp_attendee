@@ -2,7 +2,6 @@ import EncryptedStorage from 'react-native-encrypted-storage';
 
 export async function storeCard(values: any) {
   let obj: any = await retrieveCards();
-  console.log(obj);
 
   obj.cards.push(values);
 

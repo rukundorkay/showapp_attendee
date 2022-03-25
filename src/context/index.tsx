@@ -38,7 +38,6 @@ const StoreProvider: React.FC = ({children}) => {
       // 2. Get Interests
       const interests = await AsyncStorage.getItem('userInterests');
       // 3. Sync with the context
-      console.log(user)
       setState(prev => ({
         ...prev,
         isAuth: user ? true : false,
@@ -63,19 +62,19 @@ const StoreProvider: React.FC = ({children}) => {
   };
 
   const handleInterests = async (type: string, value: Interest[]) => {
-    await new Promise((resolve, rej) => {
+    return new Promise((resolve, rej) => {
       switch (type) {
         case AddInterests:
-          async () => {
+          (async () => {
             await AsyncStorage.setItem('userInterests', JSON.stringify(value));
             resolve(setState(prev => ({...prev, UserInterests: value})));
-          };
+          })();
           break;
         case RemoveInterest:
-          async () => {
+          (async () => {
             await AsyncStorage.removeItem('userInterests');
             resolve(setState(prev => ({...prev, UserInterests: []})));
-          };
+          })()
           break;
       }
     });

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { colors, fonts, Spacing, textSize, width } from '../../constants'
+import { colors, fonts, globalStyles, height, Spacing, textSize, width } from '../../constants'
 
 export const styles = StyleSheet.create({
   icon:{
@@ -34,7 +34,8 @@ export const styles = StyleSheet.create({
   footer:{
     textAlign:'center',
     fontFamily:fonts.Regular,
-    color:colors.lightText
+    color:colors.lightText,
+    marginBottom:Spacing*2,
   },
   forgotPassword:{
     textAlign:"left",
@@ -52,11 +53,12 @@ export const styles = StyleSheet.create({
       fontFamily:fonts.Bold,
       fontSize: textSize.L,
       color:colors.blue,
-      marginBottom: Spacing
+      paddingTop:Spacing*3,
     },
     secondaryText:{
       fontFamily: fonts.Regular,
-      color:colors.mutedText
+      color:colors.mutedText,
+      marginBottom: Spacing/2
     },
     title:{
       fontFamily: fonts.Bold,
@@ -66,8 +68,13 @@ export const styles = StyleSheet.create({
     },
     screen:{
       flex:1,
-      backgroundColor:colors.background,
-      justifyContent:"space-evenly",
-      paddingHorizontal:Spacing
-    }
+      paddingHorizontal:Spacing,
+      minHeight:height,
+    },
+    footerWrapper:{
+      ...globalStyles.flexer,
+      justifyContent:'center',
+      alignItems:'flex-start',
+      marginTop:Spacing/2
+    },
 })

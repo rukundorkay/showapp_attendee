@@ -16,7 +16,7 @@ export type RootStackParamList = {
   interest: undefined;
   forgotPassword: undefined;
   Profile: undefined;
-  navigate: (name: string) => void;
+  navigate: (name: string,payload?:{}) => void;
   goBack: () => void;
   TicketStatus: undefined;
 };

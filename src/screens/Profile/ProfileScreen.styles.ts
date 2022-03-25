@@ -40,7 +40,7 @@ export const style = StyleSheet.create({
   },
   container: {
     flex: 1,
-    padding: Spacing,
+    paddingHorizontal: Spacing,
     backgroundColor: colors.background,
   },
   profImage: {

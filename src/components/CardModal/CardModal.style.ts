@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors, fonts} from '../../constants';
+import {borderRadius, colors, fonts, globalStyles, textSize} from '../../constants';
 import {height, width, Spacing} from '../../constants';
 
 export default StyleSheet.create({
@@ -10,26 +10,26 @@ export default StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.3)',
   },
   card: {
-    width: width * 0.7,
-    height: height * 0.2,
+    width: width * 0.75,
+    // height: height * 0.2,
     backgroundColor: colors.background,
-    // justifyContent: 'center',
+    justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: borderRadius.M,
+    padding: Spacing/2
   },
   header: {
-    flexDirection: 'row',
-    paddingTop: Spacing * 0.3,
+    ...globalStyles.flexer,
+    width:'100%',
   },
   closeIcon: {
-    marginHorizontal: Spacing * 0.5,
-    paddingHorizontal: 15,
+    padding: 15,
     color: colors.primary,
   },
-  options: {
-    paddingTop: Spacing * 0.5,
-  },
   title: {
-    fontFamily: fonts.ExtraBold,
+    fontFamily: fonts.SemiBold,
+    fontSize: textSize.M,
+    color: colors.mutedText
   },
   red: {
     color: colors.primary,

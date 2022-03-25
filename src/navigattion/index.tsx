@@ -32,7 +32,9 @@ export default () => {
       <Stack.Navigator screenOptions={options}>
         {isAuth ? (
           <>        
-            <Stack.Screen name="home" component={HomeScreen} />
+            <Stack.Screen name="home" listeners={({ navigation })=>({
+              focus: () => { if(!isAuth) navigation.navigate('welcome') }
+            })} component={HomeScreen} />
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="BuyTicket" component={BuyTicketScreen} />
             <Stack.Screen name="concert" component={ConcertScreen} />
@@ -46,6 +48,7 @@ export default () => {
             <Stack.Screen name="welcome" component={WelcomeScreen} />
             <Stack.Screen name="login" component={LoginScreen} />
             <Stack.Screen name="home" component={HomeScreen} />
+            <Stack.Screen name="concert" component={ConcertScreen} />
             <Stack.Screen name="interest" component={InterestScreen} />
             <Stack.Screen name="register" component={RegistrationScreen} />
             <Stack.Screen name="forgotPassword" component={ForgotPassword} />
