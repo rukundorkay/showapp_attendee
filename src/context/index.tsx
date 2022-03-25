@@ -9,6 +9,8 @@ import {
   AddInterests,
   RemoveInterest,
 } from './Actions';
+import {Event} from '../interfaces/event.interfaces';
+import {Ticket} from '../interfaces/ticket.interfaces';
 
 const initialContext: ContextParams = {
   authInfo: {name: 'kabundege', phone: '0788781384', email: 'Ibiz@gmail.com'},
@@ -16,7 +18,11 @@ const initialContext: ContextParams = {
   UserInterests: [],
   handlerUser: (type: string, value: User) => {},
   handleInterests: (type: string, value: Interest[]) => Promise,
-  setAuth: () => {}
+  setAuth: () => {},
+  events: [],
+  handleEvents: () => {},
+  tickets: [],
+  handleTickets: () => {},
 };
 
 const StoreContext = createContext<ContextParams>(initialContext);
@@ -75,13 +81,25 @@ const StoreProvider: React.FC = ({children}) => {
     });
   };
 
-  const setAuth = (type:boolean) => { setState(prev => ({...prev,isAuth:type})) } 
+  const setAuth = (type: boolean) => {
+    setState(prev => ({...prev, isAuth: type}));
+  };
+
+  const handleEvents = (events: Event[]) => {
+    setState(prev => ({...prev, events}));
+  };
+
+  const handleTickets = (tickets: Ticket[]) => {
+    setState(prev => ({...prev, tickets}));
+  };
 
   const options = {
     ...state,
     handlerUser,
     handleInterests,
-    setAuth
+    setAuth,
+    handleEvents,
+    handleTickets,
   };
 
   return (

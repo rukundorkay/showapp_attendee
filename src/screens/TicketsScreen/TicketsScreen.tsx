@@ -1,26 +1,75 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {
   View,
   SafeAreaView,
   Text,
   TextInput,
   Pressable,
+  ActivityIndicator,
   StatusBar,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import {Button, TicketCarousel} from '../../components';
+import FIcon from 'react-native-vector-icons/Feather';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {CompositeNavigationProp} from '@react-navigation/native';
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faSearch} from '@fortawesome/free-solid-svg-icons';
 
+import {RootStackParamList} from '../../../types';
+import {MainBottomTabParamList} from '../Home/MainBottomTabParams';
+import {Button, TicketCarousel} from '../../components';
+import {useContextMode} from '../../context/useContext';
+import {Fetcher} from '../../utils/Fetcher';
 import {colors} from '../../constants';
 import styles from './TicketsScreen.styles';
 
-const TicketsScreen = () => {
+type TicketsScreenProps = {
+  navigation: CompositeNavigationProp<
+    StackNavigationProp<RootStackParamList, 'home'>,
+    BottomTabNavigationProp<MainBottomTabParamList, 'Tickets'>
+  >;
+};
+
+const TicketsScreen: React.FC<TicketsScreenProps> = ({navigation}) => {
   const [activeTab, setActiveTab] = useState<'active' | 'cancelled'>('active');
   const [selectedItem, setSelectedItem] = useState<number>();
+  const [result, setResult] = useState();
+  const [loading, setLoading] = useState(false);
+  const [loadingRefund, setLoadingRefund] = useState(false);
+  const {tickets} = useContextMode();
+
+  const fetchTickets = useCallback(async () => {
+    try {
+      setLoading(true);
+
+      const res = await Fetcher(undefined, '/tickets/user', 'GET');
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchTickets();
+  }, [fetchTickets]);
 
   const onItemPress = (id: number) => {
     setSelectedItem(id);
+  };
+
+  const refund = async () => {
+    try {
+      setLoadingRefund(true);
+
+      await Fetcher(undefined, `/tickets/refund/${selectedItem}`, 'PATCH');
+      setLoadingRefund(false);
+      navigation.navigate('TicketStatus');
+    } catch (error) {
+      console.log(error);
+      setLoadingRefund(false);
+    }
   };
 
   return (
@@ -65,19 +114,29 @@ const TicketsScreen = () => {
         </Pressable>
       </View>
       <ScrollView>
-        <View>
-          <TicketCarousel
-            data={[{id: 1}, {id: 2}, {id: 3}]}
-            onItemPress={onItemPress}
-          />
+        <View style={styles.content}>
+          {loading ? (
+            <ActivityIndicator
+              size="large"
+              color={colors.primary}
+              style={styles.loader}
+            />
+          ) : (
+            <TicketCarousel data={tickets} onItemPress={onItemPress} />
+          )}
         </View>
       </ScrollView>
       {selectedItem ? (
         <View style={styles.buttonView}>
           {activeTab === 'active' ? (
-            <Button onPress={()=>{}} type="primary" title="Share" />
+            <Button onPress={() => {}} type="primary" title="Share" />
           ) : (
-            <Button onPress={()=>{}} type="primary" title="Ask for refund" />
+            <Button
+              type="primary"
+              title="Ask for refund"
+              onPress={() => refund()}
+              isLoading={loadingRefund}
+            />
           )}
         </View>
       ) : null}

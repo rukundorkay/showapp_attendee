@@ -1,10 +1,17 @@
 import React from 'react';
 import {View, Text, Pressable, Image} from 'react-native';
 import Animated from 'react-native-reanimated';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faCalendar, faCheckSquare, faLocation } from '@fortawesome/free-solid-svg-icons'
 import Svg, {Path} from 'react-native-svg';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+  faCalendarAlt,
+  faCheckSquare,
+  faMapMarkerAlt,
+} from '@fortawesome/free-solid-svg-icons';
 
+import {Ticket} from '../../interfaces/ticket.interfaces';
+import {Event} from '../../interfaces/event.interfaces';
+import {formatDate} from '../../utils/dateFormat';
 import {colors, textSize} from '../../constants';
 import dimesions from '../../constants/dimesions';
 import styles from './TicketCard.styles';
@@ -15,7 +22,8 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 type TicketCardProps = {
   index?: number;
   scrollX?: Animated.Value<number>;
-  item: object;
+  item: Ticket;
+  event: Event;
   onItemPress?: (arg0: number) => void;
   selected?: boolean;
 };
@@ -24,6 +32,7 @@ const TicketCard: React.FC<TicketCardProps> = ({
   index,
   scrollX,
   item,
+  event,
   onItemPress,
   selected,
 }) => {
@@ -64,36 +73,38 @@ const TicketCard: React.FC<TicketCardProps> = ({
       </View>
       <View style={styles.cardContent}>
         <View style={styles.cardHeading}>
-          <Text style={styles.title}>Trappish Concert</Text>
-          <Text style={styles.ticket}>VIP</Text>
+          <Text style={styles.title}>{event?.title}</Text>
+          <Text style={styles.ticket}>{item.seatCategory}</Text>
         </View>
         <View style={styles.cardRow}>
           <View style={styles.cardRowLeft}>
             <FontAwesomeIcon
               // name="calendar-month-outline"
-              icon={faCalendar}
+              icon={faCalendarAlt}
               size={textSize.M}
               color={colors.blue}
             />
           </View>
           <View style={styles.cardRowRight}>
-            <Text style={styles.cardRowText}>25 October 2022</Text>
-            <Text style={styles.cardRowText}>10:00 - 17:00</Text>
+            <Text style={styles.cardRowText}>
+              {formatDate(event?.startDate)}
+            </Text>
+            <Text style={styles.cardRowText}>10:00 - 14:00</Text>
           </View>
         </View>
         <View style={styles.cardRow}>
           <View style={styles.cardRowLeft}>
-            <FontAwesomeIcon 
-              icon={faLocation} 
-              size={textSize.M} 
-              color={colors.blue} 
-              />
+            <FontAwesomeIcon
+              icon={faMapMarkerAlt}
+              size={textSize.M}
+              color={colors.blue}
+            />
           </View>
           <View style={styles.cardRowRight}>
-            <Text style={styles.cardRowText}>Kigali Arena</Text>
+            <Text style={styles.cardRowText}>{event?.venue}</Text>
           </View>
         </View>
-        <Text style={styles.organization}>Intore Entertainment</Text>
+        <Text style={styles.organization}>{event?.organization.name}</Text>
       </View>
       <View style={styles.cardDivider}>
         <Svg

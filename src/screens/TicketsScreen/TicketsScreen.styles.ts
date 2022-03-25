@@ -10,6 +10,8 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     backgroundColor: colors.background,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   header: {
     alignItems: 'center',
@@ -81,6 +83,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingBottom: 20,
+  },
+  loader: {
+    marginVertical: dimesions.Spacing,
   },
 });
 

@@ -89,6 +89,7 @@ const HomeEvents = () => {
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation<HomeScreenProp>();
   const [LocationModal, setLocationModal] = useState(false);
+  const {handleEvents} = useContextMode();
 
   const {isAuth} = useContextMode();
 
@@ -99,6 +100,7 @@ const HomeEvents = () => {
       .then(function (response) {
         // handle success
         setEvents(response.data.data);
+        handleEvents(response.data.data);
         setLoading(false);
       })
       .catch(function (error) {

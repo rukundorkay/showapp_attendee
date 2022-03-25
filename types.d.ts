@@ -1,10 +1,13 @@
+import {Event} from './src/interfaces/event.interfaces';
+import {Ticket} from './src/interfaces/ticket.interfaces';
+
 export type RootStackParamList = {
   welcome: undefined;
   home: undefined;
   welcome: undefined;
   register: undefined;
   verification: undefined;
-  BuyTicket: undefined;
+  BuyTicket: {event: object};
   TicketBought: undefined;
   concert: {id: String};
   explore: undefined;
@@ -15,6 +18,7 @@ export type RootStackParamList = {
   Profile: undefined;
   navigate: (name: string) => void;
   goBack: () => void;
+  TicketStatus: undefined;
 };
 
 interface ContextParams {
@@ -23,7 +27,11 @@ interface ContextParams {
   handlerUser: UsercontextHandler;
   handleInterests: UserInterestshandler;
   UserInterests: Interest[];
-  setAuth: (type:boolean) => void
+  setAuth: (type: boolean) => void;
+  events: Event[];
+  handleEvents: (events: Event[]) => void;
+  tickets: Ticket[];
+  handleTickets: (tickets: Ticket[]) => void;
 }
 
 type UserContexhandler = (type: string, value: User) => void;

@@ -16,6 +16,7 @@ import WelcomeScreen from '../screens/WelcomePage/Welcome';
 import VerificationCodePage from '../screens/VerificationCodePage';
 import {useContextMode} from '../context/useContext';
 import HomeScreen from '../screens/Home/HomeScreen';
+import TicketStatusScreen from '../screens/TicketStatusScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -38,6 +39,7 @@ export default () => {
             <Stack.Screen name="explore" component={ExploreScreen} />
             <Stack.Screen name="filter" component={FilterScreen} />
             <Stack.Screen name="TicketBought" component={TicketBoughtScreen} />
+            <Stack.Screen name="TicketStatus" component={TicketStatusScreen} />
           </>
         ) : (
           <>
