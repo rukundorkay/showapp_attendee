@@ -73,7 +73,7 @@ const TicketCard: React.FC<TicketCardProps> = ({
       </View>
       <View style={styles.cardContent}>
         <View style={styles.cardHeading}>
-          <Text style={styles.title}>{event?.title}</Text>
+          <Text style={styles.title}>{item.event?.title || event?.title}</Text>
           <Text style={styles.ticket}>{item.seatCategory}</Text>
         </View>
         <View style={styles.cardRow}>
@@ -87,7 +87,7 @@ const TicketCard: React.FC<TicketCardProps> = ({
           </View>
           <View style={styles.cardRowRight}>
             <Text style={styles.cardRowText}>
-              {formatDate(event?.startDate)}
+              {formatDate(item.event?.startDate || event?.startDate)}
             </Text>
             <Text style={styles.cardRowText}>10:00 - 14:00</Text>
           </View>
@@ -101,10 +101,14 @@ const TicketCard: React.FC<TicketCardProps> = ({
             />
           </View>
           <View style={styles.cardRowRight}>
-            <Text style={styles.cardRowText}>{event?.venue}</Text>
+            <Text style={styles.cardRowText}>
+              {item.event?.venue || event?.venue}
+            </Text>
           </View>
         </View>
-        <Text style={styles.organization}>{event?.organization.name}</Text>
+        <Text style={styles.organization}>
+          {event?.organization.name || 'Intore Entertainment'}
+        </Text>
       </View>
       <View style={styles.cardDivider}>
         <Svg

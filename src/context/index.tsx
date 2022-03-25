@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import EncryptedStorage from 'react-native-encrypted-storage';
+import jwt_decode from 'jwt-decode';
 import React, {createContext, useEffect, useState} from 'react';
 import {ContextParams, User, Interest} from '../../types';
 import {
@@ -15,6 +16,7 @@ import {Ticket} from '../interfaces/ticket.interfaces';
 const initialContext: ContextParams = {
   authInfo: {name: 'kabundege', phone: '0788781384', email: 'Ibiz@gmail.com'},
   isAuth: false,
+  // user: null,
   UserInterests: [],
   handlerUser: (type: string, value: User) => {},
   handleInterests: (type: string, value: Interest[]) => Promise,
@@ -34,14 +36,15 @@ const StoreProvider: React.FC = ({children}) => {
     //
     (async () => {
       // 1. Check Auth
-      const user = await EncryptedStorage.getItem('userToken');
+      const userToken = await EncryptedStorage.getItem('userToken');
       // 2. Get Interests
       const interests = await AsyncStorage.getItem('userInterests');
       // 3. Sync with the context
-      console.log(user)
+      console.log(userToken);
       setState(prev => ({
         ...prev,
-        isAuth: user ? true : false,
+        isAuth: userToken ? true : false,
+        userToken,
         UserInterests: interests ? JSON.parse(interests) : [],
       }));
     })();
@@ -56,8 +59,9 @@ const StoreProvider: React.FC = ({children}) => {
         setState(prev => ({...prev, authInfo: value}));
         break;
       case DeleteUser:
-        EncryptedStorage.removeItem('userToken')
-        .then(() => setState(prev => ({...prev, authInfo: null, isAuth: false})))
+        EncryptedStorage.removeItem('userToken').then(() =>
+          setState(prev => ({...prev, authInfo: null, isAuth: false})),
+        );
         break;
     }
   };

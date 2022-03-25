@@ -24,6 +24,7 @@ export type RootStackParamList = {
 interface ContextParams {
   authInfo?: User | null;
   isAuth: boolean;
+  userToken: string;
   handlerUser: UsercontextHandler;
   handleInterests: UserInterestshandler;
   UserInterests: Interest[];

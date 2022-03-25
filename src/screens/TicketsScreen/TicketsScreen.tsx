@@ -9,15 +9,17 @@ import {
   StatusBar,
 } from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import FIcon from 'react-native-vector-icons/Feather';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {CompositeNavigationProp} from '@react-navigation/native';
+import {CompositeNavigationProp, useIsFocused} from '@react-navigation/native';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
+import jwt_decode from 'jwt-decode';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 import {RootStackParamList} from '../../../types';
 import {MainBottomTabParamList} from '../Home/MainBottomTabParams';
+import {Ticket} from '../../interfaces/ticket.interfaces';
 import {Button, TicketCarousel} from '../../components';
 import {useContextMode} from '../../context/useContext';
 import {Fetcher} from '../../utils/Fetcher';
@@ -32,18 +34,26 @@ type TicketsScreenProps = {
 };
 
 const TicketsScreen: React.FC<TicketsScreenProps> = ({navigation}) => {
-  const [activeTab, setActiveTab] = useState<'active' | 'cancelled'>('active');
+  const [activeTab, setActiveTab] = useState<'active' | 'canceled'>('active');
   const [selectedItem, setSelectedItem] = useState<number>();
-  const [result, setResult] = useState();
+  const [result, setResult] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState(false);
   const [loadingRefund, setLoadingRefund] = useState(false);
-  const {tickets} = useContextMode();
+  const [query, setQuery] = useState('');
+  const {handleTickets, tickets} = useContextMode();
+  const isFocused = useIsFocused();
 
   const fetchTickets = useCallback(async () => {
     try {
       setLoading(true);
 
-      const res = await Fetcher(undefined, '/tickets/user', 'GET');
+      const res = await Fetcher(undefined, '/tickets', 'GET');
+      const userToken = await EncryptedStorage.getItem('userToken');
+      const user = jwt_decode(userToken);
+
+      const userTickets = res.data[0].filter(data => data.user.id === user?.id);
+      handleTickets(userTickets);
+
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -53,7 +63,14 @@ const TicketsScreen: React.FC<TicketsScreenProps> = ({navigation}) => {
 
   useEffect(() => {
     fetchTickets();
-  }, [fetchTickets]);
+  }, [fetchTickets, isFocused]);
+
+  useEffect(() => {
+    const filteredTickets = tickets.filter(
+      ticket => ticket.event?.status === activeTab,
+    );
+    setResult(filteredTickets);
+  }, [activeTab, tickets]);
 
   const onItemPress = (id: number) => {
     setSelectedItem(id);
@@ -72,6 +89,14 @@ const TicketsScreen: React.FC<TicketsScreenProps> = ({navigation}) => {
     }
   };
 
+  const search = () => {
+    const filteredTickets = tickets.filter(ticket =>
+      ticket.event?.title.toLowerCase().includes(query.toLowerCase()),
+    );
+
+    setResult(filteredTickets);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor={colors.background} />
@@ -85,8 +110,10 @@ const TicketsScreen: React.FC<TicketsScreenProps> = ({navigation}) => {
             placeholderTextColor={colors.darkGray}
             style={styles.inputSearch}
             returnKeyType="search"
+            onChangeText={text => setQuery(text)}
+            onSubmitEditing={search}
           />
-          <FontAwesomeIcon icon={faSearch} size={30} color={colors.blue} />
+          <FontAwesomeIcon icon={faSearch} size={15} color={colors.blue} />
         </View>
       </View>
       <View style={styles.tabs}>
@@ -102,12 +129,12 @@ const TicketsScreen: React.FC<TicketsScreenProps> = ({navigation}) => {
           </Text>
         </Pressable>
         <Pressable
-          style={[styles.tab, activeTab === 'cancelled' && styles.tabActive]}
-          onPress={() => setActiveTab('cancelled')}>
+          style={[styles.tab, activeTab === 'canceled' && styles.tabActive]}
+          onPress={() => setActiveTab('canceled')}>
           <Text
             style={[
               styles.tabText,
-              activeTab === 'cancelled' && styles.tabTextActive,
+              activeTab === 'canceled' && styles.tabTextActive,
             ]}>
             Cancelled
           </Text>
@@ -122,7 +149,7 @@ const TicketsScreen: React.FC<TicketsScreenProps> = ({navigation}) => {
               style={styles.loader}
             />
           ) : (
-            <TicketCarousel data={tickets} onItemPress={onItemPress} />
+            <TicketCarousel data={result} onItemPress={onItemPress} />
           )}
         </View>
       </ScrollView>
