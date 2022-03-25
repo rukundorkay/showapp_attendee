@@ -1,9 +1,10 @@
-import {Keyboard, Pressable, Text, View} from 'react-native';
+import {Keyboard, Platform, Pressable, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {styles} from './Registration.styles';
 import {Button, TextInput} from '../../components';
-import Feather from 'react-native-vector-icons/Feather'
-import {colors, globalStyles, Spacing, textSize} from '../../constants';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import {colors, globalStyles, textSize} from '../../constants';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useFormik} from 'formik';
 import { useNavigation } from '@react-navigation/native';
@@ -65,6 +66,7 @@ const RegistrationScreen = () => {
     <Pressable style={{flex:1}} onPress={Keyboard.dismiss}>
         <ScrollView  style={styles.container}>
           <View style={globalStyles.spacer} />
+          { Platform.OS === 'ios' && <View style={globalStyles.spacer} />}
           <Text style={styles.header}>Join Us Now!</Text>
           <View style={styles.form}>
             <TextInput
@@ -101,7 +103,11 @@ const RegistrationScreen = () => {
               placeholder='* * * * * * * * * * *'
               Icon={ (
                 <Pressable onPress={()=>setPassword(!showPassword)} style={styles.icon} >
-                  <Feather name="eye" size={textSize.M} color={colors.mutedText} />
+                  {
+                    showPassword ?
+                      <FontAwesomeIcon icon={faEyeSlash} size={textSize.M} color={colors.mutedText} />:
+                      <FontAwesomeIcon icon={faEye} size={textSize.M} color={colors.mutedText} />
+                  }
                 </Pressable>
                 )
               }

@@ -11,13 +11,14 @@ import {style} from './ProfileScreen.styles';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
 import {useContextMode} from '../../context/useContext';
-import {User} from '../../../types';
+import {RootStackParamList, User} from '../../../types';
 import {CardModal, IconHolder} from '../../components';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faChevronLeft, faCog, faCogs, faCreditCard, faSignOut, faStore } from '@fortawesome/free-solid-svg-icons';
 import {useNavigation} from '@react-navigation/native';
 
 const ProfileScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackParamList>();
   const FormValidationSchema = Yup.object().shape({
     name: Yup.string().required('List name is required'),
     email: Yup.string().required('Email is required'),
@@ -45,18 +46,18 @@ const ProfileScreen = () => {
   const [edit, setEdit] = useState(false);
   const [modal, setModal] = useState(false);
   return (
-    <SafeAreaView style={style.container}>
-      <View style={style.header}>
+    <View style={style.container}>
+      <SafeAreaView style={style.header}>
         <Pressable onPress={() => navigation.navigate('home')}>
-          <AntDesign name="left" size={25} />
+          <FontAwesomeIcon icon={faChevronLeft} size={25} />
         </Pressable>
-      </View>
+      </SafeAreaView>
       <View style={style.profile}>
         <Image
           style={style.profImage}
           source={require('../../assets/images/event-profile.jpg')}
         />
-        <Text>QR</Text>
+        <Text style={style.qr}>QR</Text>
       </View>
 
       {edit ? (
@@ -68,7 +69,7 @@ const ProfileScreen = () => {
             </Pressable>
           </View>
           <View style={[style.flex, style.section]}>
-            <IconHolder type="AntDesign" name="appstore-o" />
+            <IconHolder type="AntDesign" name={faStore} />
             <View>
               <Text style={style.title}>About</Text>
               <Text style={style.text}>{authInfo?.email}</Text>
@@ -76,7 +77,7 @@ const ProfileScreen = () => {
             </View>
           </View>
           <View style={[style.flex, style.section]}>
-            <IconHolder type="AntDesign" name="creditcard" />
+            <IconHolder type="AntDesign" name={faSignOut} />
             <View>
               <Text style={style.title}>Payment Method</Text>
               <Text style={style.text}>*************** 423</Text>
@@ -112,7 +113,7 @@ const ProfileScreen = () => {
                 </Pressable>
               </View>
               <View style={[style.flex, style.section]}>
-                <IconHolder type="AntDesign" name="appstore-o" />
+                <IconHolder type="AntDesign" name={faStore} />
                 <View>
                   <Text style={style.title}>About</Text>
                   <TextInput
@@ -132,7 +133,7 @@ const ProfileScreen = () => {
                 </View>
               </View>
               <View style={[style.flex, style.section]}>
-                <IconHolder type="AntDesign" name="creditcard" />
+                <IconHolder type="AntDesign" name={faCreditCard} />
                 <View>
                   <View style={style.add}>
                     <Text style={style.title}>Payment Method</Text>
@@ -150,20 +151,19 @@ const ProfileScreen = () => {
           )}
         </Formik>
       )}
-
       <View style={[style.flex, style.section]}>
-        <IconHolder type="AntDesign" name="setting" />
+        <IconHolder type="AntDesign" name={faCog} />
         <Text style={style.title}>Settings</Text>
       </View>
       {/* <Pressable onPress={() => console.log('hello')}> */}
       <Pressable
         onPress={() => handlerUser('delete', {name: '', phone: '', email: ''})}>
         <View style={[style.flex, style.section]}>
-          <IconHolder type="AntDesign" name="logout" />
+          <IconHolder type="AntDesign" name={faSignOut} />
           <Text style={style.title}>Log out</Text>
         </View>
       </Pressable>
-    </SafeAreaView>
+    </View>
   );
 };
 

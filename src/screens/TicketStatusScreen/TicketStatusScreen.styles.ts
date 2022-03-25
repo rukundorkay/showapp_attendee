@@ -4,6 +4,7 @@ import {colors, fonts, height, Spacing, textSize} from '../../constants';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.background,
   },
   header: {
     fontFamily: fonts.Bold,

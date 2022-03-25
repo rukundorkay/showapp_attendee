@@ -7,9 +7,9 @@ import {
   Dimensions,
   Text,
 } from 'react-native';
-import Modal from 'react-native-modal';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faClose } from '@fortawesome/free-solid-svg-icons';
 import styles from './FilterScreen.styles';
 import {Button} from '../../components';
 
@@ -91,7 +91,7 @@ const Filter = ({visible, close}: {visible: Boolean; close: any}) => {
         </View>
         <View style={styles.rightView}>
           <Pressable style={styles.icon} onPress={close}>
-            <Icon name="close" size={24} color="#1F1F1F" />
+            <FontAwesomeIcon icon={faClose} size={24} color="#1F1F1F" />
           </Pressable>
         </View>
       </View>
@@ -163,8 +163,8 @@ const Filter = ({visible, close}: {visible: Boolean; close: any}) => {
             </View>
           </View>
           <View style={{flexDirection: 'row'}}>
-            <Button title="Cancel" type="primary" />
-            <Button title="Apply" />
+            <Button title="Cancel" type="primary" onPress={()=>{}}  />
+            <Button title="Apply" type="primary"  onPress={()=>{}} />
           </View>
           {/* {EVENTTYPES.map((option: String) => (
             <View key={option} style={styles.section}>

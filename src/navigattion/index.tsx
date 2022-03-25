@@ -31,7 +31,7 @@ export default () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={options}>
         {isAuth ? (
-          <>
+          <>        
             <Stack.Screen name="home" component={HomeScreen} />
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="BuyTicket" component={BuyTicketScreen} />
@@ -45,6 +45,7 @@ export default () => {
           <>
             <Stack.Screen name="welcome" component={WelcomeScreen} />
             <Stack.Screen name="login" component={LoginScreen} />
+            <Stack.Screen name="home" component={HomeScreen} />
             <Stack.Screen name="interest" component={InterestScreen} />
             <Stack.Screen name="register" component={RegistrationScreen} />
             <Stack.Screen name="forgotPassword" component={ForgotPassword} />

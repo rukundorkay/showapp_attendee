@@ -4,6 +4,7 @@ import {
   View,
   Keyboard,
   TouchableWithoutFeedback,
+  Pressable,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {styles} from './VerificationCode.styles';
@@ -17,7 +18,8 @@ import Button from '../../components/Button';
 import {colors, globalStyles, textSize} from '../../constants';
 import {useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../../types';
-import Feather from 'react-native-vector-icons/Feather';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import {UserVerification} from '../../API/auth';
 
 const CELL_COUNT = 4;
@@ -78,12 +80,13 @@ const VerificationCode = () => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.root}>
         <SafeAreaView>
-          <Feather
-            name="chevron-left"
-            size={textSize.XL}
-            color={colors.mainText}
-            onPress={() => navigation.goBack()}
-          />
+          <Pressable onPress={() => navigation.goBack()}>
+            <FontAwesomeIcon
+              icon={faChevronLeft}
+              size={textSize.XL}
+              color={colors.mainText}
+            />
+          </Pressable>
         </SafeAreaView>
         <Text style={styles.title}>Verification</Text>
         <Text style={styles.paragraph}>

@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { styles } from './LoginScreen.styles'
 import { Button, TextInput } from '../../components'
 import { useFormik } from 'formik'
-import { colors, globalStyles, textSize } from '../../constants'
+import { colors, globalStyles, textSize, width } from '../../constants'
 import { useNavigation } from '@react-navigation/native'
 import { RootStackParamList } from '../../../types'
-import Feather from 'react-native-vector-icons/Feather'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { UserLogin } from '../../API/auth'
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { useContextMode } from '../../context/useContext'
@@ -87,12 +88,18 @@ const LoginScreen = () => {
               placeholder='* * * * * * * * * * *'
               Icon={ (
                 <Pressable onPress={()=>setPassword(!showPassword)} style={styles.icon} >
-                  <Feather name="eye" size={textSize.M} color={colors.mutedText} />
+                  {
+                    showPassword ?
+                      <FontAwesomeIcon icon={faEyeSlash} size={textSize.M} color={colors.mutedText} />:
+                      <FontAwesomeIcon icon={faEye} size={textSize.M} color={colors.mutedText} />
+                  }
                 </Pressable>
                 )
               }
             />
-            <Text onPress={()=>navigation.navigate('forgotPassword')} style={styles.forgotPassword}>Forgot Password ?</Text>
+            <Pressable style={{width:"115%"}} onPress={()=>navigation.navigate('forgotPassword')}>
+              <Text style={styles.forgotPassword}>Forgot Password ?</Text>
+            </Pressable>
             <Text style={globalStyles.error}>{error}</Text>
             <Button
               type='primary'

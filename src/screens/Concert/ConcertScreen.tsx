@@ -1,14 +1,13 @@
 import {StatusBar, Text, View, Image} from 'react-native';
 import Button from '../../components/Button/index';
-import React, {useContext} from 'react';
+import React from 'react';
 import {styles} from './ConcertScreen.styles';
 import {colors} from '../../constants';
-import {StoreContext} from '../../context';
-import {useContextMode} from '../../context/useContext';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ScrollView} from 'react-native-gesture-handler';
 import IconHolder from '../../components/IconHolder';
 import {formatDate} from '../../utils/dateFormat';
+import { faCalendar, faDollar, faLocation } from '@fortawesome/free-solid-svg-icons';
 
 const ConcertScreen = ({route, navigation}: any) => {
   const {concert, img} = route.params;
@@ -38,7 +37,7 @@ const ConcertScreen = ({route, navigation}: any) => {
               <Text style={styles.aboutTitle}>About</Text>
               <View style={styles.aboutItemWrapper}>
                 <View style={styles.aboutItem}>
-                  <IconHolder type="AntDesign" name="calendar" />
+                  <IconHolder type="AntDesign" name={faCalendar} />
                   <View>
                     <Text style={styles.aboutDate}>
                       {formatDate(concert.startDate)}
@@ -47,15 +46,14 @@ const ConcertScreen = ({route, navigation}: any) => {
                   </View>
                 </View>
                 <View style={styles.aboutItem}>
-                  <IconHolder type="FontAwesome" name="location" />
+                  <IconHolder type="FontAwesome" name={faLocation} />
 
                   <View>
                     <Text style={styles.aboutDate}>{concert.venue}</Text>
                   </View>
                 </View>
                 <View style={styles.aboutItem}>
-                  <IconHolder type="Feather" name="dollar" />
-
+                  <IconHolder type="Feather" name={faDollar} />
                   <View>
                     <Text style={{color: 'red'}}>
                       {concert.standard.price} Rwf

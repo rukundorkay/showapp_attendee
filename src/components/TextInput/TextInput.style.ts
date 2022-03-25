@@ -9,11 +9,11 @@ export default StyleSheet.create({
     marginBottom: dimesions.Spacing * 0.2,
   },
   input: {
-    // backgroundColor: colors.lightPrimary,
+    paddingVertical: Spacing/2,
     borderRadius: borderRadius.XS,
     flex: 1,
     color: colors.dimeText,
-    fontFamily: fonts.SemiBold,
+    fontFamily: fonts.SemiBold
   },
   inputWrapper: {
     backgroundColor: colors.inputAccent,

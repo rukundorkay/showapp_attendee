@@ -1,7 +1,13 @@
-import {StyleSheet} from 'react-native';
-import {colors, fonts, Spacing, textSize} from '../../constants';
+import {Platform, StyleSheet} from 'react-native';
+import {borderRadius, colors, fonts, Spacing, textSize} from '../../constants';
 
 export const styles = StyleSheet.create({
+  location:{
+    color: colors.primary, 
+    fontFamily:fonts.Medium , 
+    fontSize: textSize.M, 
+    marginRight:Spacing*0.2
+  },
   locationText: {
     color: colors.error,
   },
@@ -19,9 +25,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   profileImage: {
-    height: 48,
-    width: 48,
-    borderRadius: 5,
+    height: 50,
+    width: 50,
+    borderRadius: borderRadius.SM,
   },
   findEvents: {
     color: colors.blue,
@@ -31,17 +37,18 @@ export const styles = StyleSheet.create({
   findEventsText: {
     color: colors.blue,
     textAlign: 'center',
+    fontFamily: fonts.Medium,
+    fontSize: textSize.M
   },
   findEventsButton: {
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: Platform.OS === 'android' ? 'center' : "flex-end" ,
   },
   notificationBadge: {
-    height: 48,
-    width: 48,
+    padding:Spacing/2.6,
     backgroundColor: '#efefef',
-    borderRadius: 5,
+    borderRadius: borderRadius.SM,
     justifyContent: 'center',
     alignItems: 'center',
   },

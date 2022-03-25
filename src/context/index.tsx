@@ -38,6 +38,7 @@ const StoreProvider: React.FC = ({children}) => {
       // 2. Get Interests
       const interests = await AsyncStorage.getItem('userInterests');
       // 3. Sync with the context
+      console.log(user)
       setState(prev => ({
         ...prev,
         isAuth: user ? true : false,
@@ -55,7 +56,8 @@ const StoreProvider: React.FC = ({children}) => {
         setState(prev => ({...prev, authInfo: value}));
         break;
       case DeleteUser:
-        setState(prev => ({...prev, authInfo: null, isAuth: false}));
+        EncryptedStorage.removeItem('userToken')
+        .then(() => setState(prev => ({...prev, authInfo: null, isAuth: false})))
         break;
     }
   };

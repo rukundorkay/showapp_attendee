@@ -1,6 +1,6 @@
 import {StatusBar, Text, View, Image} from 'react-native';
 import React, {useContext} from 'react';
-import {colors} from '../../constants';
+import {colors, textSize} from '../../constants';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import ExploreEventCard from '../../components/ExploreEventCard';
 import {
@@ -10,43 +10,37 @@ import {
   TouchableOpacity,
 } from 'react-native-gesture-handler';
 import {styles} from './ExploreScreen.styles';
-import Feather from 'react-native-vector-icons/Feather';
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import {color} from 'react-native-reanimated';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faFilter, faSearch } from '@fortawesome/free-solid-svg-icons';
 import {eventList} from '../Home/mockdata';
 
 const EXploreScreen = () => {
-  // const {authInfo} = useContextMode();
   return (
-    <SafeAreaView>
-      <StatusBar backgroundColor={colors.background} barStyle="dark-content" />
+    <View>
       <View style={styles.eventheader}>
+        <SafeAreaView />
+        <StatusBar backgroundColor={colors.background} barStyle="dark-content" />
         <View style={styles.searchFilterWrapper}>
           <View style={styles.eventsearch}>
             <TextInput
-              placeholder="search by concert "
+              placeholder="Search by concert "
               style={styles.searchField}
             />
-            <TouchableOpacity style={styles.searchButton}>
-              <Feather name="search" size={25} />
-            </TouchableOpacity>
+            <FontAwesomeIcon icon={faSearch} size={textSize.HM} color={colors.dimeText} />
           </View>
           <TouchableOpacity style={styles.filterButton}>
-            <Fontisto name="filter" size={25} color={colors.lightBlue} />
+            <FontAwesomeIcon icon={faFilter} size={textSize.HM} color={colors.lightBlue} />
           </TouchableOpacity>
         </View>
         <Text style={styles.eventTitle}>Events</Text>
       </View>
       <FlatList
         renderItem={item => <ExploreEventCard event={item.item} />}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
         data={eventList}
         showsVerticalScrollIndicator={false}
       />
-      {/* <ScrollView>
-        <ExploreEventCards />
-      </ScrollView> */}
-    </SafeAreaView>
+    </View>
   );
 };
 

@@ -21,13 +21,10 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../../types';
 import {useNavigation} from '@react-navigation/native';
 import EventCard from './EventCard';
-import AntiDesign from 'react-native-vector-icons/AntDesign';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Octicons from 'react-native-vector-icons/Octicons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faBell, faChevronDown, faGlobe, faHome, faTicket } from '@fortawesome/free-solid-svg-icons';
 import EXploreScreen from '../Explore/ExploreScreen';
-import {colors} from '../../constants';
+import {colors, fonts, Spacing, textSize} from '../../constants';
 import {navList} from './mockdata';
 import axios from 'axios';
 import TicketsScreen from '../TicketsScreen';
@@ -35,20 +32,21 @@ import {useContextMode} from '../../context/useContext';
 
 const BottomTab = createBottomTabNavigator<MainBottomTabParamList>();
 const HomeScreen = () => {
+  const config = {
+    headerShown: false,
+    tabBarActiveTintColor: colors.primary,
+    tabBarInactiveTintColor: colors.inactiveIcon
+  }
   return (
     <BottomTab.Navigator
-      screenOptions={({route}) => ({
-        headerShown: false,
-        tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colors.inactiveIcon,
-      })}>
+      screenOptions={() => (config)}>
       <BottomTab.Screen
         name="HomeScreen"
         component={HomeEvents}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: ({size, color}: {size: number; color: number}) => (
-            <FontAwesome name="home" size={size} color={color} />
+          tabBarIcon: ({size, color}: {size: number; color: string}) => (
+            <FontAwesomeIcon icon={faHome} size={size} color={color} />
           ),
         }}
       />
@@ -57,8 +55,8 @@ const HomeScreen = () => {
         component={EXploreScreen}
         options={{
           tabBarLabel: 'Explore',
-          tabBarIcon: ({size, color}: {size: number; color: number}) => (
-            <MaterialIcons name="explore" size={size} color={color} />
+          tabBarIcon: ({size, color}: {size: number; color: string}) => (
+            <FontAwesomeIcon icon={faGlobe} size={size} color={color} />
           ),
         }}
       />
@@ -67,9 +65,9 @@ const HomeScreen = () => {
         component={TicketsScreen}
         options={{
           tabBarLabel: 'Tickets',
-          tabBarIcon: ({size, color}: {size: number; color: number}) => (
-            <MaterialCommunityIcons
-              name="ticket-confirmation"
+          tabBarIcon: ({size, color}: {size: number; color: string}) => (
+            <FontAwesomeIcon
+              icon={faTicket}
               size={size}
               color={color}
             />
@@ -122,20 +120,20 @@ const HomeEvents = () => {
             />
           </Pressable>
           <View style={styles.findEvents}>
-            <Text style={styles.findEventsText}>Find Events in</Text>
+            <Text style={styles.findEventsText}>Find Events In</Text>
             <Pressable
               style={styles.findEventsButton}
               onPress={() => setLocationModal(val => !val)}>
-              <Text style={{...styles.locationText, color: colors.error}}>
+              <Text style={styles.location}>
                 Kigali
               </Text>
               <Text>
-                <AntiDesign name="down" size={18} color={colors.error} />
+                <FontAwesomeIcon icon={faChevronDown} size={textSize.M} color={colors.error} />
               </Text>
             </Pressable>
           </View>
           <View style={styles.notificationBadge}>
-            <Octicons name="bell-fill" color="#98aedb" size={26} />
+            <FontAwesomeIcon  icon={faBell} color="#98aedb" size={textSize.L} />
           </View>
         </View>
         <ScrollView

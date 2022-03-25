@@ -10,7 +10,14 @@ import {
   StatusBar,
 } from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+  faAdd,
+  faChevronDown,
+  faChevronUp,
+  faMinus,
+  faCheckSquare,
+} from '@fortawesome/free-solid-svg-icons';
 import {Transition, Transitioning} from 'react-native-reanimated';
 
 import {RootStackParamList} from '../../../types';
@@ -20,7 +27,7 @@ import {useContextMode} from '../../context/useContext';
 import {formatDate} from '../../utils/dateFormat';
 import pick from '../../utils/pick';
 import {Fetcher} from '../../utils/Fetcher';
-import {colors} from '../../constants';
+import {colors, textSize} from '../../constants';
 import styles from './BuyTicketScreen.styles';
 
 const PAYMENT_METHODS = [
@@ -195,7 +202,11 @@ const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({
                     activeOpacity={0.8}
                     style={styles.qtyButton}
                     onPress={() => removeHolders(seat.name)}>
-                    <Icon name="remove" size={15} color={colors.blue} />
+                    <FontAwesomeIcon
+                      icon={faMinus}
+                      color={colors.blue}
+                      size={15}
+                    />
                   </TouchableOpacity>
                   <View style={styles.qty}>
                     <Text style={styles.qtyText}>{countSeats(seat.name)}</Text>
@@ -207,7 +218,11 @@ const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({
                     activeOpacity={0.8}
                     style={styles.qtyButton}
                     onPress={() => addHolders(seat)}>
-                    <Icon name="add" size={15} color={colors.blue} />
+                    <FontAwesomeIcon
+                      icon={faAdd}
+                      color={colors.blue}
+                      size={15}
+                    />
                   </TouchableOpacity>
                 </View>
               ))}
@@ -217,10 +232,10 @@ const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({
                 <Pressable onPress={expandHolders}>
                   <View style={styles.rowHeading}>
                     <Text style={styles.rowTitle}>Holders</Text>
-                    <Icon
-                      name={showHolders ? 'chevron-up' : 'chevron-down'}
-                      size={14}
+                    <FontAwesomeIcon
+                      icon={showHolderModal ? faChevronUp : faChevronDown}
                       color={colors.mainText}
+                      size={textSize.M}
                     />
                   </View>
                 </Pressable>
@@ -252,8 +267,8 @@ const BuyTicketScreen: React.FC<BuyTicketScreenProps> = ({
                 {PAYMENT_METHODS.map(method => (
                   <View key={method.id}>
                     {selectedPayment === method.id ? (
-                      <Icon
-                        name="checkbox"
+                      <FontAwesomeIcon
+                        icon={faCheckSquare}
                         size={18}
                         color={colors.green}
                         style={styles.selectedPayment}

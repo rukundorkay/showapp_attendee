@@ -13,6 +13,8 @@ import FIcon from 'react-native-vector-icons/Feather';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {CompositeNavigationProp} from '@react-navigation/native';
 import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faSearch} from '@fortawesome/free-solid-svg-icons';
 
 import {RootStackParamList} from '../../../types';
 import {MainBottomTabParamList} from '../Home/MainBottomTabParams';
@@ -84,7 +86,7 @@ const TicketsScreen: React.FC<TicketsScreenProps> = ({navigation}) => {
             style={styles.inputSearch}
             returnKeyType="search"
           />
-          <FIcon name="search" size={30} color={colors.blue} />
+          <FontAwesomeIcon icon={faSearch} size={30} color={colors.blue} />
         </View>
       </View>
       <View style={styles.tabs}>
@@ -127,7 +129,7 @@ const TicketsScreen: React.FC<TicketsScreenProps> = ({navigation}) => {
       {selectedItem ? (
         <View style={styles.buttonView}>
           {activeTab === 'active' ? (
-            <Button type="primary" title="Share" />
+            <Button onPress={() => {}} type="primary" title="Share" />
           ) : (
             <Button
               type="primary"
