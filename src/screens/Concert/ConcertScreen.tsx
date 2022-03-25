@@ -7,7 +7,11 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {ScrollView} from 'react-native-gesture-handler';
 import IconHolder from '../../components/IconHolder';
 import {formatDate} from '../../utils/dateFormat';
-import { faCalendar, faDollar, faLocation } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCalendar,
+  faDollar,
+  faLocation,
+} from '@fortawesome/free-solid-svg-icons';
 
 const ConcertScreen = ({route, navigation}: any) => {
   const {concert, img} = route.params;
@@ -16,6 +20,11 @@ const ConcertScreen = ({route, navigation}: any) => {
     require('../../assets/images/2.png'),
     require('../../assets/images/3.png'),
     require('../../assets/images/4.png'),
+    require('../../assets/images/5.png'),
+    require('../../assets/images/6.png'),
+    require('../../assets/images/7.png'),
+    require('../../assets/images/8.png'),
+    require('../../assets/images/9.png'),
   ];
   return (
     <SafeAreaView>

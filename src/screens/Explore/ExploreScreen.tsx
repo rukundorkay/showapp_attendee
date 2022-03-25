@@ -51,7 +51,7 @@ const EXploreScreen = () => {
         <Text style={styles.eventTitle}>Events</Text>
       </View>
       <FlatList
-        renderItem={item => <ExploreEventCard event={item.item} />}
+        renderItem={item => <ExploreEventCard event={item} id={item.index} />}
         keyExtractor={item => item.id.toString()}
         data={Data}
         showsVerticalScrollIndicator={false}

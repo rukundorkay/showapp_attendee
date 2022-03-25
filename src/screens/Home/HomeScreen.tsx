@@ -194,7 +194,7 @@ const HomeEvents = () => {
           <View>
             <Pressable onPress={() => setLocationModal(false)}>
               <View style={styles.searchLocationClose}>
-                <View style={styles.searchLocationBody}></View>
+                <View style={styles.searchLocationBody} />
                 <Text style={styles.searchLocationTitle}>Location</Text>
               </View>
               <View style={styles.searchLocationScroll}>
@@ -208,17 +208,6 @@ const HomeEvents = () => {
                   ))}
                 </ScrollView>
               </View>
-              {/* <FlatList
-                data={locations}
-                renderItem={item => {
-                  return (
-                    <Pressable>
-                      <Text>{item.item}</Text>
-                    </Pressable>
-                  );
-                }}
-                keyExtractor={(_, id: number) => id}
-              /> */}
             </Pressable>
           </View>
         </View>
