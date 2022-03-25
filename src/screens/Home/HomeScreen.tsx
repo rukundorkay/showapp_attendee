@@ -84,6 +84,20 @@ type HomeScreenProp = CompositeNavigationProp<
   BottomTabNavigationProp<MainBottomTabParamList, 'HomeScreen'>
 >;
 
+const locations = [
+  'Kigali',
+  'Nyamaseke',
+  'Rubavu',
+  'Kibuye',
+  'Nyaruguru',
+  'Nyamagabe',
+  'Karongi',
+  'Nyanza',
+  'Nyagatare',
+  'Rusizi',
+  'More...',
+];
+
 const HomeEvents = () => {
   const [events, setEvents] = useState<any>([]);
   const [loading, setLoading] = useState(false);
@@ -178,10 +192,33 @@ const HomeEvents = () => {
       <Modal animationType="slide" visible={LocationModal} transparent={true}>
         <View style={styles.searchLocationModal}>
           <View>
-            <Pressable
-              style={styles.searchLocationClose}
-              onPress={() => setLocationModal(false)}>
-              <View style={styles.searchLocationBody}></View>
+            <Pressable onPress={() => setLocationModal(false)}>
+              <View style={styles.searchLocationClose}>
+                <View style={styles.searchLocationBody}></View>
+                <Text style={styles.searchLocationTitle}>Location</Text>
+              </View>
+              <View style={styles.searchLocationScroll}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                  {locations.map(loc => (
+                    <Pressable onPress={() => setLocationModal(false)}>
+                      <Text key={loc} style={styles.searchLocationItem}>
+                        {loc}
+                      </Text>
+                    </Pressable>
+                  ))}
+                </ScrollView>
+              </View>
+              {/* <FlatList
+                data={locations}
+                renderItem={item => {
+                  return (
+                    <Pressable>
+                      <Text>{item.item}</Text>
+                    </Pressable>
+                  );
+                }}
+                keyExtractor={(_, id: number) => id}
+              /> */}
             </Pressable>
           </View>
         </View>
