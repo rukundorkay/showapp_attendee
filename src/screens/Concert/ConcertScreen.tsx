@@ -15,6 +15,11 @@ const ConcertScreen = ({route, navigation}: any) => {
     require('../../assets/images/2.png'),
     require('../../assets/images/3.png'),
     require('../../assets/images/4.png'),
+    require('../../assets/images/5.png'),
+    require('../../assets/images/6.png'),
+    require('../../assets/images/7.png'),
+    require('../../assets/images/8.png'),
+    require('../../assets/images/9.png'),
   ];
   return (
     <View style={styles.body}>
@@ -25,9 +30,9 @@ const ConcertScreen = ({route, navigation}: any) => {
       <View style={styles.header}>
         <Image source={pics[img]} style={styles.headerImage} />
         <View style={styles.headerTextWrapper}>
-          <Text numberOfLines={1} style={styles.concertTitle}>{concert.title}</Text>
-          <Text numberOfLines={1} style={styles.concertOraganizer}>
-            {concert.organization.name}
+          <Text numberOfLines={1} style={styles.concertTitle}>{concert?.title}</Text>
+          <Text numberOfLines={1} style={styles?.concertOraganizer}>
+            {concert?.organization?.name}
           </Text>
         </View>
       </View>
@@ -39,7 +44,7 @@ const ConcertScreen = ({route, navigation}: any) => {
               <IconHolder  name={faCalendarAlt} />
               <View>
                 <Text style={styles.aboutDate}>
-                  {formatDate(concert.startDate)}
+                  {formatDate(concert?.startDate)}
                 </Text>
                 <Text style={styles.aboutTime}>10:00-14:00</Text>
               </View>
@@ -47,14 +52,14 @@ const ConcertScreen = ({route, navigation}: any) => {
             <View style={styles.aboutItem}>
               <IconHolder name={faLocation} />
               <View>
-                <Text style={styles.aboutDate}>{concert.venue}</Text>
+                <Text style={styles.aboutDate}>{concert?.venue}</Text>
               </View>
             </View>
             <View style={styles.aboutItem}>
               <IconHolder name={faDollar} />
               <View>
                 <Text style={{color: colors.primary}}>
-                  {concert.standard.price} Rwf
+                  {concert?.standard?.price} Rwf
                 </Text>
               </View>
             </View>
@@ -62,15 +67,15 @@ const ConcertScreen = ({route, navigation}: any) => {
         </View>
         <View style={styles.descriptionWrapper}>
           <Text style={styles.title}>Description</Text>
-          <Text style={styles.aboutDescription}>{concert.description}</Text>
+          <Text style={styles.aboutDescription}>{concert?.description}</Text>
         </View>
-        <View style={styles.mapWrapper}>
+        {/* <View style={styles.mapWrapper}>
           <Text style={styles.title}>Map</Text>
           <Image
             source={require('../../assets/images/map.jpg')}
             style={styles.map}
           />
-        </View>
+        </View> */}
       </ScrollView>
       <View style={styles.button}>
         <Button

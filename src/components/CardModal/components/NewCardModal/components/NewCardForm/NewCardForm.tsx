@@ -17,7 +17,6 @@ const NewCardForm = ({card}: any) => {
         type: card.title,
       }}
       onSubmit={values => storeCard(values)}>
-      {/* onSubmit={values => console.log(values)}> */}
       {({handleChange, handleBlur, handleSubmit, values}) => (
         <View>
           <Text style={styles.label}>Phone Information</Text>
@@ -61,7 +60,6 @@ const NewCardForm = ({card}: any) => {
         type: card.title,
       }}
       onSubmit={values => storeCard(values)}>
-      {/* onSubmit={values => console.log(values)}> */}
       {({handleChange, handleBlur, handleSubmit, values}) => (
         <View>
           <Text style={styles.label}>Card Information</Text>

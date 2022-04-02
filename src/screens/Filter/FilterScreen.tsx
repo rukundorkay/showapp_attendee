@@ -112,9 +112,6 @@ const Filter = ({visible, close}: {visible: Boolean; close: any}) => {
                 step={5}
                 showStepLabels={true}
                 markerStyle={styles.markerStyle}
-                onValuesChange={val => console.log(val)}
-                // onValuesChangeStart={(val: any) => console.log(val)}
-                // onValuesChangeFinish={(val: any) => console.log(val)}
               />
             </View>
           </View>

@@ -58,7 +58,7 @@ export const styles = StyleSheet.create({
     secondaryText:{
       fontFamily: fonts.Regular,
       color:colors.mutedText,
-      marginBottom: Spacing/2
+      marginVertical: Spacing/2
     },
     title:{
       fontFamily: fonts.Bold,

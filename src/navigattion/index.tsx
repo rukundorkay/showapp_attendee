@@ -32,7 +32,7 @@ export default () => {
       <Stack.Navigator screenOptions={options}>
         {isAuth ? (
           <>        
-            <Stack.Screen name="home" listeners={({ navigation })=>({
+            <Stack.Screen name="authHome" listeners={({ navigation })=>({
               focus: () => { if(!isAuth) navigation.navigate('welcome') }
             })} component={HomeScreen} />
             <Stack.Screen name="Profile" component={ProfileScreen} />

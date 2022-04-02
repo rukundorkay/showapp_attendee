@@ -17,7 +17,6 @@ import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
   faChevronLeft,
   faCog,
-  // faCogs,
   faCreditCard,
   faSignOut,
   faStore,
@@ -28,21 +27,8 @@ import {retrieveCards} from '../../utils/storage';
 const ProfileScreen = () => {
   const navigation = useNavigation<RootStackParamList>();
   const {authInfo, handlerUser} = useContextMode();
-  //   const {values, handleChange, handleBlur, handleSubmit, touched, errors} =
-  //     useFormik<formValues>({
-  //       initialValues: {
-  //         name: authInfo?.name || '',
-  //         phone: authInfo?.phone?.toString() || '',
-  //         email: authInfo?.email || ' ',
-  //       },
-  //       validationSchema: FormValidationSchema,
-  //       onSubmit: formValues => {
-  //         handlerUser('update', formValues);
-  //       },
-  //     });
-  const [edit, setEdit] = useState(false);
   const [modal, setModal] = useState(false);
-
+  const [edit, setEdit] = useState(false);
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -53,7 +39,7 @@ const ProfileScreen = () => {
     <View style={style.container}>
       <ScrollView style={{flex:1}} showsVerticalScrollIndicator={false} >
         <SafeAreaView style={style.header}>
-          <Pressable onPress={() => navigation.navigate('home')}>
+          <Pressable onPress={() => navigation.navigate('authHome')}>
             <FontAwesomeIcon icon={faChevronLeft} size={25} />
           </Pressable>
         </SafeAreaView>
@@ -194,7 +180,6 @@ const ProfileScreen = () => {
           <IconHolder name={faCog} />
           <Text style={style.title}>Settings</Text>
         </View>
-        {/* <Pressable onPress={() => console.log('hello')}> */}
         <Pressable
           onPress={() =>
             handlerUser('delete', {name: '', phone: '', email: ''})

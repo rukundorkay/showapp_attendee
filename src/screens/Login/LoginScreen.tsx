@@ -1,13 +1,13 @@
 import { Keyboard, Pressable, Text, View, TextInput as TX, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { styles } from './LoginScreen.styles'
-import { Button, TextInput } from '../../components'
+import { Button, IconHolder, TextInput } from '../../components'
 import { useFormik } from 'formik'
 import { colors, globalStyles, height, textSize, width } from '../../constants'
 import { useNavigation } from '@react-navigation/native'
 import { RootStackParamList } from '../../../types'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { UserLogin } from '../../API/auth'
 import EncryptedStorage from 'react-native-encrypted-storage';
 import { useContextMode } from '../../context/useContext'
@@ -61,6 +61,7 @@ const LoginScreen = () => {
       </View>
       <ScrollView style={styles.screen}>
         { height > 700 &&  <View style={globalStyles.spacer} />}
+        <IconHolder onPress={()=> navigation.goBack()} name={faChevronLeft}  />
         <View>
           <Text style={styles.mainText}>Login First</Text>
           <Text style={styles.secondaryText}>

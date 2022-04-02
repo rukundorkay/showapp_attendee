@@ -18,7 +18,6 @@ const EXploreScreen = () => {
   useEffect(() => {
     Fetcher(undefined, '/events', 'GET').then(res => setData(res.data));
   }, []);
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
@@ -48,7 +47,7 @@ const EXploreScreen = () => {
           <Text style={styles.eventTitle}>Events</Text>
         </View>
         <FlatList
-          renderItem={({ item }) => <ExploreEventCard event={item} />}
+          renderItem={({ item,index }) => <ExploreEventCard event={item} id={index} />}
           keyExtractor={item => item.id.toString()}
           data={Data}
           showsVerticalScrollIndicator={false}

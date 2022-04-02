@@ -4,6 +4,7 @@ import {Ticket} from './src/interfaces/ticket.interfaces';
 export type RootStackParamList = {
   welcome: undefined;
   home: undefined;
+  authHome: undefined;
   welcome: undefined;
   register: undefined;
   verification: undefined;
@@ -24,6 +25,7 @@ export type RootStackParamList = {
 interface ContextParams {
   authInfo?: User | null;
   isAuth: boolean;
+  userToken: string | null;
   handlerUser: UsercontextHandler;
   handleInterests: UserInterestshandler;
   UserInterests: Interest[];

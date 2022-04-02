@@ -77,23 +77,48 @@ export const styles = StyleSheet.create({
     padding:10
   },
   searchLocationModal: {
-    backgroundColor: 'green',
+    backgroundColor: '#fff',
     height: 500,
     position: 'absolute',
     bottom: 0,
-    borderTopRightRadius: 10,
-    borderTopLeftRadius: 10,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
     width: '100%',
+    elevation: 5,
+    shadowColor: '#efefef',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 0.8,
+    shadowRadius: 1,
   },
   searchLocationClose: {
-    flex: 1,
+    height: 80,
+    width: '100%',
+    justifyContent: 'center',
     alignItems: 'center',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    borderBottomColor: '#ccc',
+    borderBottomWidth: 1,
+    position: 'absolute',
+    top: 0,
+    zIndex: 10,
+  },
+  searchLocationScroll: {position: 'relative', marginTop: 85},
+  searchLocationTitle: {
+    fontWeight: 'bold',
+    padding: 10,
+    width: '90%',
   },
   searchLocationBody: {
     backgroundColor: '#00000029',
     width: 60,
     height: 6,
     borderRadius: 6,
+  },
+  searchLocationItem: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#efefef',
   },
   // Event card style
   eventCardWrapper: {
@@ -115,7 +140,7 @@ export const styles = StyleSheet.create({
     borderBottomLeftRadius:5,
     shadowColor: 'black',
     shadowRadius: 5,
-    shadowOpacity: 1,
+    shadowOpacity: Platform.OS === 'ios' ? .3 : 1,
     paddingHorizontal:Spacing/2
   },
   eventTitle: {

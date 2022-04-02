@@ -1,13 +1,14 @@
 import { Pressable, SafeAreaView, StyleSheet, Text, View, Modal, Keyboard } from 'react-native'
 import React, { useState } from 'react'
 import { styles } from './ForgotPassword.styles'
-import { Button, TextInput } from '../../components'
+import { Button, IconHolder, TextInput } from '../../components'
 import { useFormik } from 'formik'
 import { globalStyles } from '../../constants'
 import ModedModal from '../../components/ModedModal/ModedModal'
 import { useNavigation } from '@react-navigation/native'
 import { RootStackParamList } from '../../../types'
 import { UserForgotPassword } from '../../API/auth'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 const initialValues = { email:"",password:'' }
 
@@ -43,7 +44,7 @@ const ForgotPassword = () => {
           <View style={styles.bigCircle} />
           <View style={styles.smallCircle} />
         </View>
-        <View style={globalStyles.spacer} />
+        <IconHolder onPress={()=> navigation.goBack()} name={faChevronLeft}  />
         <View>
           <Text style={styles.mainText}>Forgot Password</Text>
           <Text style={styles.secondaryText}>

@@ -103,6 +103,7 @@ const locations = [
 const HomeEvents = () => {
   const [events, setEvents] = useState<any>([]);
   const [loading, setLoading] = useState(false);
+  const [ currentLocation, setCurrentLocation ] = useState('Kigali');
   const navigation = useNavigation<HomeScreenProp>();
   const [LocationModal, setLocationModal] = useState(false);
   const {handleEvents} = useContextMode();
@@ -151,7 +152,7 @@ const HomeEvents = () => {
             <Pressable
               style={styles.findEventsButton}
               onPress={() => setLocationModal(val => !val)}>
-              <Text style={styles.location}>Kigali</Text>
+              <Text style={styles.location}>{currentLocation}</Text>
               <Text>
                 <FontAwesomeIcon
                   icon={faChevronDown}
@@ -195,13 +196,19 @@ const HomeEvents = () => {
           <View>
             <Pressable onPress={() => setLocationModal(false)}>
               <View style={styles.searchLocationClose}>
-                <View style={styles.searchLocationBody}></View>
+                <View style={styles.searchLocationBody} />
                 <Text style={styles.searchLocationTitle}>Location</Text>
               </View>
               <View style={styles.searchLocationScroll}>
                 <ScrollView showsVerticalScrollIndicator={false}>
-                  {locations.map(loc => (
-                    <Pressable onPress={() => setLocationModal(false)}>
+                  {locations && locations.map((loc,index) => (
+                    <Pressable 
+                      key={index} 
+                      onPress={() => {
+                        setLocationModal(false);
+                        setCurrentLocation(loc)
+                      }}
+                    >
                       <Text key={loc} style={styles.searchLocationItem}>
                         {loc}
                       </Text>
@@ -209,17 +216,6 @@ const HomeEvents = () => {
                   ))}
                 </ScrollView>
               </View>
-              {/* <FlatList
-                data={locations}
-                renderItem={item => {
-                  return (
-                    <Pressable>
-                      <Text>{item.item}</Text>
-                    </Pressable>
-                  );
-                }}
-                keyExtractor={(_, id: number) => id}
-              /> */}
             </Pressable>
           </View>
         </View>
